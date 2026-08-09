@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "tongxuemo/moonbit-modbus"
+package "qyt1234567/moonbit-modbus"
 
 // Values
 pub fn ascii_mode() -> Mode

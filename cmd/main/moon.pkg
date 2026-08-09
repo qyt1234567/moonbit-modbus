@@ -1,5 +1,5 @@
 import {
-  "tongxuemo/moonbit-modbus",
+  "qyt1234567/moonbit-modbus",
 }
 
 options(

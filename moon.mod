@@ -9,13 +9,13 @@
 //   "moonbitlang/x@0.4.6",
 // }
 
-name = "tongxuemo/moonbit-modbus"
+name = "qyt1234567/moonbit-modbus"
 
 version = "0.1.0"
 
 readme = "README.mbt.md"
 
-repository = ""
+repository = "https://github.com/qyt1234567/moonbit-modbus"
 
 license = "Apache-2.0"
 
@@ -23,4 +23,4 @@ keywords = [ ]
 
 preferred_target = "wasm-gc"
 
-description = ""
+description = "A portable Modbus RTU, ASCII, and TCP protocol core for MoonBit."
