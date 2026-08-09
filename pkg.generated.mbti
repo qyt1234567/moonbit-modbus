@@ -1,0 +1,80 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "tongxuemo/moonbit-modbus"
+
+// Values
+pub fn ascii_mode() -> Mode
+
+pub fn crc16(Array[Byte]) -> UInt16
+
+pub fn crc_bytes(Array[Byte]) -> Array[Byte]
+
+pub fn decode_ascii(Array[Byte]) -> Result[Frame, ModbusError]
+
+pub fn decode_rtu(Array[Byte]) -> Result[Frame, ModbusError]
+
+pub fn decode_tcp(Array[Byte]) -> Result[(UInt16, Frame), ModbusError]
+
+pub fn encode_ascii(Frame) -> Array[Byte]
+
+pub fn encode_rtu(Frame) -> Array[Byte]
+
+pub fn encode_tcp(UInt16, Frame) -> Array[Byte]
+
+pub fn float_words(UInt16, UInt16) -> UInt64
+
+pub fn lrc(Array[Byte]) -> Byte
+
+pub fn parse_hex_byte(Byte, Byte) -> Result[Byte, ModbusError]
+
+pub fn read_holding(Byte, UInt16, UInt16) -> Frame
+
+pub fn registers(Frame) -> Result[Array[UInt16], ModbusError]
+
+pub fn rtu_mode() -> Mode
+
+pub fn signed_register(UInt16) -> Int
+
+pub fn tcp_mode() -> Mode
+
+pub fn write_single_register(Byte, UInt16, UInt16) -> Frame
+
+// Errors
+
+// Types and methods
+pub(all) struct Frame {
+  unit_id : Byte
+  pdu : Pdu
+}
+
+pub struct IncrementalParser {
+  mode : Mode
+  buffer : Array[Byte]
+  max_frame : Int
+}
+pub fn IncrementalParser::buffered(Self) -> Int
+pub fn IncrementalParser::feed(Self, Array[Byte]) -> Result[Array[Frame], ModbusError]
+pub fn IncrementalParser::new(Mode, max_frame? : Int) -> Self
+
+pub enum ModbusError {
+  Incomplete
+  InvalidLength
+  InvalidChecksum
+  InvalidAscii
+  InvalidMbap
+}
+
+pub enum Mode {
+  Rtu
+  Ascii
+  Tcp
+}
+
+pub(all) struct Pdu {
+  function : Byte
+  data : Array[Byte]
+}
+
+// Type aliases
+
+// Traits
+
