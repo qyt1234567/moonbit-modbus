@@ -4,6 +4,8 @@ package "tongxuemo/moonbit-modbus"
 // Values
 pub fn ascii_mode() -> Mode
 
+pub fn base_function(Frame) -> Byte
+
 pub fn crc16(Array[Byte]) -> UInt16
 
 pub fn crc_bytes(Array[Byte]) -> Array[Byte]
@@ -20,13 +22,21 @@ pub fn encode_rtu(Frame) -> Array[Byte]
 
 pub fn encode_tcp(UInt16, Frame) -> Array[Byte]
 
+pub fn exception_response(Byte, Byte, Byte) -> Frame
+
 pub fn float_words(UInt16, UInt16) -> UInt64
+
+pub fn is_exception(Frame) -> Bool
 
 pub fn lrc(Array[Byte]) -> Byte
 
 pub fn parse_hex_byte(Byte, Byte) -> Result[Byte, ModbusError]
 
+pub fn read_coils(Byte, UInt16, UInt16) -> Result[Frame, ModbusError]
+
 pub fn read_holding(Byte, UInt16, UInt16) -> Frame
+
+pub fn read_input_registers(Byte, UInt16, UInt16) -> Result[Frame, ModbusError]
 
 pub fn registers(Frame) -> Result[Array[UInt16], ModbusError]
 
@@ -35,6 +45,8 @@ pub fn rtu_mode() -> Mode
 pub fn signed_register(UInt16) -> Int
 
 pub fn tcp_mode() -> Mode
+
+pub fn write_multiple_registers(Byte, UInt16, Array[UInt16]) -> Result[Frame, ModbusError]
 
 pub fn write_single_register(Byte, UInt16, UInt16) -> Frame
 

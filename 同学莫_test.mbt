@@ -45,3 +45,24 @@ test "register mapping" {
     Err(_) => fail("registers should decode")
   }
 }
+
+///|
+test "extended function builders" {
+  match read_coils(1, 0, 8) {
+    Ok(frame) => {
+      inspect(frame.pdu.function.to_int(), content="1")
+      inspect(frame.pdu.data.length(), content="4")
+    }
+    Err(_) => fail("valid coil request should build")
+  }
+  match write_multiple_registers(1, 4, [10, 20]) {
+    Ok(frame) => {
+      inspect(frame.pdu.function.to_int(), content="16")
+      inspect(frame.pdu.data[4].to_int(), content="4")
+    }
+    Err(_) => fail("valid write request should build")
+  }
+  let error = exception_response(1, 3, 2)
+  inspect(is_exception(error), content="true")
+  inspect(base_function(error).to_int(), content="3")
+}
