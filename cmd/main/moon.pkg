@@ -1,0 +1,7 @@
+import {
+  "tongxuemo/moonbit-modbus",
+}
+
+options(
+  "is-main": true,
+)
