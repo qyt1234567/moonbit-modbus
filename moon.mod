@@ -11,7 +11,7 @@
 
 name = "qyt1234567/moonbit-modbus"
 
-version = "0.1.0"
+version = "0.2.0"
 
 readme = "README.mbt.md"
 
@@ -19,8 +19,8 @@ repository = "https://github.com/qyt1234567/moonbit-modbus"
 
 license = "Apache-2.0"
 
-keywords = [ ]
+keywords = [ "modbus", "industrial", "protocol", "rtu", "ascii", "tcp", "plc" ]
 
-preferred_target = "wasm-gc"
+preferred_target = "native"
 
-description = "A portable Modbus RTU, ASCII, and TCP protocol core for MoonBit."
+description = "A portable Modbus RTU, ASCII, and TCP protocol stack with device simulation and gateway primitives for MoonBit."

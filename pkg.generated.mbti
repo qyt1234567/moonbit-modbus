@@ -1,92 +1,1572 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "qyt1234567/moonbit-modbus"
 
+import {
+  "moonbitlang/core/debug",
+}
+
 // Values
+pub fn accepts_broadcast(Mode) -> Bool
+
+pub fn address_bytes(UInt16) -> Array[Byte]
+
+pub fn append_u16_be(Array[Byte], UInt16) -> Unit
+
+pub fn append_u32_be(Array[Byte], UInt) -> Unit
+
+pub fn ascii_boundary(Array[Byte]) -> Int?
+
 pub fn ascii_mode() -> Mode
 
 pub fn base_function(Frame) -> Byte
 
+pub fn batch_completed(Array[BatchResult]) -> Int
+
+pub fn batch_failed(Array[BatchResult]) -> Int
+
+pub fn batch_register_values(Array[BatchResult]) -> Result[Array[UInt16], ModbusError]
+
+pub fn benchmark_crc(Int) -> Result[BenchmarkResult, ModbusError]
+
+pub fn benchmark_device_reads(Int) -> Result[BenchmarkResult, ModbusError]
+
+pub fn benchmark_rtu_round_trip(Int) -> Result[BenchmarkResult, ModbusError]
+
+pub fn benchmark_suite(Int) -> Result[Array[BenchmarkResult], ModbusError]
+
+pub fn benchmark_tcp_round_trip(Int) -> Result[BenchmarkResult, ModbusError]
+
+pub fn boundary_vectors(Frame) -> Array[ConformanceVector]
+
+pub fn byte_sum(Array[Byte]) -> Byte
+
+pub fn byte_xor(Array[Byte]) -> Byte
+
+pub fn bytes_equal(Array[Byte], Array[Byte]) -> Bool
+
+pub fn bytes_to_hex_string(Array[Byte]) -> String
+
+pub fn bytes_to_register(Array[Byte], Int, RegisterByteOrder) -> Result[UInt16, ModbusError]
+
+pub fn bytes_to_registers(Array[Byte], RegisterByteOrder) -> Result[Array[UInt16], ModbusError]
+
+pub fn capabilities(Mode) -> TransportCapabilities
+
+pub fn chunk_bytes(Array[Byte], Int) -> Result[Array[Array[Byte]], ModbusError]
+
+pub fn clamp_int(Int, Int, Int) -> Result[Int, ModbusError]
+
+pub fn client_result(Frame) -> ClientResult
+
+pub fn conformance_failed(Array[ConformanceResult]) -> Int
+
+pub fn conformance_passed(Array[ConformanceResult]) -> Int
+
+pub fn copy_bytes(Array[Byte]) -> Array[Byte]
+
+pub fn copy_range(Array[Byte], Int, Int) -> Result[Array[Byte], ModbusError]
+
+pub fn count_bits(Array[Byte]) -> Int
+
 pub fn crc16(Array[Byte]) -> UInt16
+
+pub fn crc16_range(Array[Byte], Int, Int) -> Result[UInt16, ModbusError]
+
+pub fn crc16_update(UInt16, Byte) -> UInt16
 
 pub fn crc_bytes(Array[Byte]) -> Array[Byte]
 
 pub fn decode_ascii(Array[Byte]) -> Result[Frame, ModbusError]
 
+pub fn decode_bits_response(Frame, Frame) -> Result[Array[Bool], ModbusError]
+
+pub fn decode_comm_event_counter(Frame, Frame) -> Result[(UInt16, UInt16), ModbusError]
+
+pub fn decode_device_identification(Frame, Frame) -> Result[DeviceIdentification, ModbusError]
+
+pub fn decode_diagnostics(Frame, Frame) -> Result[(UInt16, Array[Byte]), ModbusError]
+
+pub fn decode_exception_status(Frame, Frame) -> Result[Byte, ModbusError]
+
+pub fn decode_fifo_queue(Frame, Frame) -> Result[Array[UInt16], ModbusError]
+
+pub fn decode_file_record_response(Frame, Frame) -> Result[Array[Array[UInt16]], ModbusError]
+
+pub fn decode_file_record_write_response(Frame, Frame) -> Result[Unit, ModbusError]
+
+pub fn decode_hex(Array[Byte]) -> Result[Array[Byte], ModbusError]
+
+pub fn decode_mask_write(Frame, Frame) -> Result[(UInt16, UInt16), ModbusError]
+
+pub fn decode_mode(Mode, Array[Byte]) -> Result[Frame, ModbusError]
+
+pub fn decode_multiple_write(Frame, Frame) -> Result[(UInt16, UInt16), ModbusError]
+
+pub fn decode_read_write_response(Frame, Frame) -> Result[Array[UInt16], ModbusError]
+
+pub fn decode_register_response(Frame, Frame) -> Result[Array[UInt16], ModbusError]
+
+pub fn decode_response(Frame, Frame) -> Result[ResponseValue, ModbusError]
+
 pub fn decode_rtu(Array[Byte]) -> Result[Frame, ModbusError]
+
+pub fn decode_server_id(Frame, Frame) -> Result[Array[Byte], ModbusError]
 
 pub fn decode_tcp(Array[Byte]) -> Result[(UInt16, Frame), ModbusError]
 
+pub fn decode_transaction(Mode, Array[Byte]) -> Result[(UInt16, Frame), ModbusError]
+
+pub fn decode_write_single_coil(Frame, Frame) -> Result[Bool, ModbusError]
+
+pub fn decode_write_single_register(Frame, Frame) -> Result[UInt16, ModbusError]
+
+pub fn default_client_config() -> ClientConfig
+
+pub fn default_frame_limit(Mode) -> Int
+
+pub fn default_limits() -> ProtocolLimits
+
+pub fn default_queue_limit(Mode) -> Int
+
+pub fn default_server_config(Mode) -> ServerConfig
+
+pub fn device_id_category(Byte) -> DeviceIdCategory
+
+pub fn diagnostics(Byte, UInt16, Array[Byte]) -> Result[Frame, ModbusError]
+
+pub fn diagnostics_return_query_data(Byte, Array[Byte]) -> Result[Frame, ModbusError]
+
+pub fn encapsulated_interface(Byte, Byte, Array[Byte]) -> Result[Frame, ModbusError]
+
 pub fn encode_ascii(Frame) -> Array[Byte]
+
+pub fn encode_device_identification(Byte, DeviceIdCategory, Byte, Bool, Byte, Array[DeviceIdObject]) -> Result[Frame, ModbusError]
+
+pub fn encode_hex(Array[Byte]) -> Array[Byte]
+
+pub fn encode_mode(Mode, Frame) -> Array[Byte]
 
 pub fn encode_rtu(Frame) -> Array[Byte]
 
 pub fn encode_tcp(UInt16, Frame) -> Array[Byte]
 
+pub fn encoded_length(Mode, Frame) -> Int
+
+pub fn endpoint_health(Device, ProtocolMetrics) -> EndpointHealth
+
+pub fn endpoint_health_summary(EndpointHealth) -> String
+
+pub fn endpoint_score(EndpointHealth) -> Int
+
+pub fn error_name(ModbusError) -> String
+
+pub fn error_or_unit(Result[Unit, ModbusError]) -> String
+
+pub fn error_response(Frame, ModbusError) -> Frame
+
+pub fn exception_code(Byte) -> ExceptionCode
+
+pub fn exception_for_error(ModbusError) -> ExceptionCode
+
+pub fn exception_from_frame(Frame) -> Result[ExceptionCode, ModbusError]
+
 pub fn exception_response(Byte, Byte, Byte) -> Frame
+
+pub fn expected_response_function(Frame) -> Byte
+
+pub fn expected_tcp_length(Array[Byte]) -> Result[Int, ModbusError]
+
+pub fn f32_to_registers(Float, RegisterWordOrder) -> Array[UInt16]
+
+pub fn fault_mode_name(FaultMode) -> String
+
+pub fn fits_mode_limit(Mode, Frame) -> Bool
+
+pub fn fits_queue_budget(Array[Frame], Mode, Int) -> Bool
+
+pub fn fleet_score(Array[EndpointHealth]) -> Int
 
 pub fn float_words(UInt16, UInt16) -> UInt64
 
+pub fn format_error(ModbusError) -> String
+
+pub fn format_frame(Frame) -> String
+
+pub fn format_wire_frame(Mode, UInt16, Frame) -> String
+
+pub fn frame_budget_available(Mode, Frame, Int) -> Bool
+
+pub fn frame_count_for_coils(Int) -> Result[Int, ModbusError]
+
+pub fn frame_count_for_registers(Int) -> Result[Int, ModbusError]
+
+pub fn frame_data_copy(Frame) -> Array[Byte]
+
+pub fn frame_is_empty(Frame) -> Bool
+
+pub fn frame_is_valid(Frame) -> Bool
+
+pub fn frame_with_data_copy(Frame, Array[Byte]) -> Frame
+
+pub fn frames_equal(Frame, Frame) -> Bool
+
+pub fn function_catalog() -> Array[FunctionDescriptor]
+
+pub fn function_code(Byte) -> FunctionCode
+
+pub fn function_descriptor(Byte) -> FunctionDescriptor?
+
+pub fn function_name(Byte) -> String
+
+pub fn gateway_function_supported(Byte) -> Bool
+
+pub fn get_bit(Array[Byte], Int) -> Result[Bool, ModbusError]
+
+pub fn get_comm_event_counter(Byte) -> Result[Frame, ModbusError]
+
+pub fn get_comm_event_log(Byte) -> Result[Frame, ModbusError]
+
+pub fn hex_string_to_bytes(String) -> Result[Array[Byte], ModbusError]
+
+pub fn i32_to_registers(Int, RegisterWordOrder) -> Array[UInt16]
+
+pub fn is_broadcast(Byte) -> Bool
+
+pub fn is_client_input_error(ModbusError) -> Bool
+
 pub fn is_exception(Frame) -> Bool
+
+pub fn is_read_function(Byte) -> Bool
+
+pub fn is_retryable(ModbusError) -> Bool
+
+pub fn is_supported_mode(Mode) -> Bool
+
+pub fn is_transport_error(ModbusError) -> Bool
+
+pub fn is_valid_unit_id(Byte, broadcast? : Bool) -> Bool
+
+pub fn is_write_echo(Frame, Frame) -> Bool
+
+pub fn is_write_function(Byte) -> Bool
+
+pub fn join_chunks(Array[Array[Byte]], Int) -> Result[Array[Byte], ModbusError]
+
+pub fn least_healthy(Array[EndpointHealth]) -> EndpointHealth?
+
+pub fn limits_for(Mode) -> ProtocolLimits
 
 pub fn lrc(Array[Byte]) -> Byte
 
+pub fn lrc_from_sum(Byte) -> Byte
+
+pub fn lrc_with_sum(Array[Byte]) -> (Byte, Byte)
+
+pub fn mask_write_register(Byte, UInt16, UInt16, UInt16) -> Result[Frame, ModbusError]
+
+pub fn max_request_adu(Mode, Byte) -> Int
+
+pub fn minimum_frame_length(Mode) -> Int
+
+pub fn mode_description(Mode) -> String
+
+pub fn mode_name(Mode) -> String
+
+pub fn mode_payload_capacity(Mode) -> Int
+
+pub fn offset_frame_address(Frame, Int) -> Result[Frame, ModbusError]
+
+pub fn ordinary_function(Byte) -> Byte
+
+pub fn pack_bits(Array[Bool]) -> Array[Byte]
+
 pub fn parse_hex_byte(Byte, Byte) -> Result[Byte, ModbusError]
+
+pub fn parse_wire_frame(Mode, String) -> Result[(UInt16, Frame), ModbusError]
+
+pub fn parser_load(IncrementalParser) -> Int
+
+pub fn payload_is_bounded(Mode, Int) -> Bool
+
+pub fn pdu_bytes(Frame) -> Array[Byte]
+
+pub fn pdus_equal(Pdu, Pdu) -> Bool
+
+pub fn plan_read_coils(Byte, UInt16, Int, discrete? : Bool) -> Result[Array[PlannedRequest], ModbusError]
+
+pub fn plan_read_registers(Byte, UInt16, Int, function? : Byte) -> Result[Array[PlannedRequest], ModbusError]
+
+pub fn plan_write_registers(Byte, UInt16, Array[UInt16]) -> Result[Array[PlannedRequest], ModbusError]
+
+pub fn preflight_device(PreflightReport, Device) -> Unit
+
+pub fn preflight_frame(PreflightReport, Mode, Frame) -> Unit
+
+pub fn preflight_plan(PreflightReport, PollPlan, Mode) -> Unit
+
+pub fn preflight_server(Server) -> PreflightReport
+
+pub fn preflight_summary(PreflightReport) -> String
+
+pub fn quantity_bytes_checked(UInt16) -> Array[Byte]
 
 pub fn read_coils(Byte, UInt16, UInt16) -> Result[Frame, ModbusError]
 
+pub fn read_device_identification(Byte, DeviceIdCategory, Byte) -> Result[Frame, ModbusError]
+
+pub fn read_discrete_inputs(Byte, UInt16, UInt16) -> Result[Frame, ModbusError]
+
+pub fn read_exception_status(Byte) -> Result[Frame, ModbusError]
+
+pub fn read_fifo_queue(Byte, UInt16) -> Result[Frame, ModbusError]
+
+pub fn read_file_record(Byte, Array[FileRecordReference]) -> Result[Frame, ModbusError]
+
 pub fn read_holding(Byte, UInt16, UInt16) -> Frame
+
+pub fn read_holding_checked(Byte, UInt16, UInt16) -> Result[Frame, ModbusError]
+
+pub fn read_holding_registers(Byte, UInt16, UInt16) -> Result[Frame, ModbusError]
 
 pub fn read_input_registers(Byte, UInt16, UInt16) -> Result[Frame, ModbusError]
 
+pub fn read_quantity_limit(Byte) -> Int
+
+pub fn read_u16_be(Array[Byte], Int) -> Result[UInt16, ModbusError]
+
+pub fn read_u32_be(Array[Byte], Int) -> Result[UInt, ModbusError]
+
+pub fn read_write_multiple_registers(Byte, UInt16, UInt16, UInt16, Array[UInt16]) -> Result[Frame, ModbusError]
+
+pub fn recommended_parser_role(Byte) -> ParserRole
+
+pub fn register_byte_order_name(RegisterByteOrder) -> String
+
+pub fn register_to_bytes(UInt16, RegisterByteOrder) -> Array[Byte]
+
+pub fn register_value_name(RegisterValue) -> String
+
+pub fn register_word_order_name(RegisterWordOrder) -> String
+
 pub fn registers(Frame) -> Result[Array[UInt16], ModbusError]
+
+pub fn registers_to_bytes(Array[UInt16], RegisterByteOrder) -> Array[Byte]
+
+pub fn registers_to_f32(Array[UInt16], RegisterWordOrder) -> Result[Float, ModbusError]
+
+pub fn registers_to_i32(Array[UInt16], RegisterWordOrder) -> Result[Int, ModbusError]
+
+pub fn registers_to_u32(Array[UInt16], RegisterWordOrder) -> Result[UInt, ModbusError]
+
+pub fn registers_to_u64(Array[UInt16], RegisterWordOrder) -> Result[UInt64, ModbusError]
+
+pub fn replace_frame_unit(Frame, Byte) -> Result[Frame, ModbusError]
+
+pub fn report_server_id(Byte) -> Result[Frame, ModbusError]
+
+pub fn response_frame(Frame, Array[Byte]) -> Frame
+
+pub fn response_payload_length(Frame) -> Int
+
+pub fn response_quality(Frame, Frame) -> String
+
+pub fn response_timeout_hint(Mode) -> Int
+
+pub fn response_value(Frame) -> ResponseValue
+
+pub fn retry_limit_for(Mode) -> Int
+
+pub fn reverse_registers(Array[UInt16]) -> Array[UInt16]
+
+pub fn round_trip_all_modes(Frame) -> Result[Array[Frame], ModbusError]
+
+pub fn round_trip_vectors(Frame) -> Array[ConformanceVector]
 
 pub fn rtu_mode() -> Mode
 
+pub fn rtu_payload(Frame) -> Array[Byte]
+
+pub fn safe_address(UInt16, Int) -> Result[Unit, ModbusError]
+
+pub fn safe_byte_at(Array[Byte], Int) -> Result[Byte, ModbusError]
+
+pub fn safe_quantity(UInt16, Int) -> Result[Int, ModbusError]
+
+pub fn set_bit(Array[Byte], Int, Bool) -> Result[Unit, ModbusError]
+
+pub fn should_retry(Mode, ModbusError) -> Bool
+
 pub fn signed_register(UInt16) -> Int
+
+pub fn simulation_failures(Array[SimulationResult]) -> Int
+
+pub fn simulation_successes(Array[SimulationResult]) -> Int
+
+pub fn summarize(Frame) -> FrameSummary
+
+pub fn summarize_plan(Array[PlannedRequest]) -> PlanSummary
+
+pub fn supported_function(Byte) -> Bool
+
+pub fn swap_register_bytes(Array[UInt16]) -> Array[UInt16]
 
 pub fn tcp_mode() -> Mode
 
+pub fn transport_is_network(Mode) -> Bool
+
+pub fn transport_is_serial(Mode) -> Bool
+
+pub fn transport_kind_mode(TransportKind) -> Mode
+
+pub fn transport_kind_name(TransportKind) -> String
+
+pub fn try_encode_ascii(Frame) -> Result[Array[Byte], ModbusError]
+
+pub fn try_encode_mode(Mode, UInt16, Frame) -> Result[Array[Byte], ModbusError]
+
+pub fn try_encode_rtu(Frame) -> Result[Array[Byte], ModbusError]
+
+pub fn try_encode_tcp(UInt16, Frame) -> Result[Array[Byte], ModbusError]
+
+pub fn typed_exception_response(Byte, Byte, ExceptionCode) -> Frame
+
+pub fn u32_to_registers(UInt, RegisterWordOrder) -> Array[UInt16]
+
+pub fn u64_to_registers(UInt64, RegisterWordOrder) -> Array[UInt16]
+
+pub fn unpack_bits(Array[Byte], Int) -> Result[Array[Bool], ModbusError]
+
+pub fn valid_address_range(UInt16, Int) -> Bool
+
+pub fn validate_catalog_request(Frame) -> Result[Unit, ModbusError]
+
+pub fn validate_endpoint(EndpointConfig) -> Result[Unit, ModbusError]
+
+pub fn validate_endpoint_health(EndpointHealth) -> Result[Unit, ModbusError]
+
+pub fn validate_frame(Frame, Bool) -> Result[Unit, ModbusError]
+
+pub fn validate_mode_payload(Mode, Int) -> Result[Unit, ModbusError]
+
+pub fn validate_pdu(Pdu) -> Result[Unit, ModbusError]
+
+pub fn validate_plan_order(Array[PlannedRequest]) -> Result[Unit, ModbusError]
+
+pub fn validate_poll_plan(PollPlan) -> Result[Unit, ModbusError]
+
+pub fn validate_response_header(Frame, Frame) -> Result[Unit, ModbusError]
+
+pub fn validate_server_config(ServerConfig) -> Result[Unit, ModbusError]
+
+pub fn validate_unit(Byte, Bool) -> Result[Unit, ModbusError]
+
+pub fn validate_wire_frame(Frame, Bool) -> Result[Unit, ModbusError]
+
+pub fn validate_write_shape(Byte, Int) -> Result[Unit, ModbusError]
+
+pub fn variable_response_function_names() -> Array[String]
+
+pub fn verify_crc16(Array[Byte]) -> Result[Unit, ModbusError]
+
+pub fn verify_lrc(Array[Byte]) -> Result[Unit, ModbusError]
+
+pub fn with_data(Frame, Array[Byte]) -> Frame
+
+pub fn with_function(Frame, Byte) -> Frame
+
+pub fn with_unit(Frame, Byte) -> Frame
+
+pub fn writable_function_names() -> Array[String]
+
+pub fn write_file_record(Byte, Array[FileRecordWrite]) -> Result[Frame, ModbusError]
+
+pub fn write_multiple_coils(Byte, UInt16, Array[Bool]) -> Result[Frame, ModbusError]
+
 pub fn write_multiple_registers(Byte, UInt16, Array[UInt16]) -> Result[Frame, ModbusError]
 
+pub fn write_quantity_limit(Byte) -> Int
+
+pub fn write_single_coil(Byte, UInt16, Bool) -> Result[Frame, ModbusError]
+
 pub fn write_single_register(Byte, UInt16, UInt16) -> Frame
+
+pub fn write_single_register_checked(Byte, UInt16, UInt16) -> Result[Frame, ModbusError]
 
 // Errors
 
 // Types and methods
+pub struct AddressAllocator {
+  capacity : Int
+  used : Array[AddressRange]
+}
+pub fn AddressAllocator::allocate(Self, Int) -> Result[AddressRange, ModbusError]
+pub fn AddressAllocator::free_capacity(Self) -> Int
+pub fn AddressAllocator::new(Int) -> Result[Self, ModbusError]
+pub fn AddressAllocator::release(Self, AddressRange) -> Result[Unit, ModbusError]
+pub fn AddressAllocator::snapshot(Self) -> Array[AddressRange]
+pub fn AddressAllocator::used_capacity(Self) -> Int
+pub fn AddressAllocator::used_count(Self) -> Int
+
+pub(all) struct AddressRange {
+  start : UInt16
+  length : Int
+}
+pub fn AddressRange::contains(Self, UInt16) -> Bool
+pub fn AddressRange::contains_range(Self, Self) -> Bool
+pub fn AddressRange::end_exclusive(Self) -> Int
+pub fn AddressRange::length(Self) -> Int
+pub fn AddressRange::new(UInt16, Int) -> Result[Self, ModbusError]
+pub fn AddressRange::offset(Self, UInt16) -> Result[Int, ModbusError]
+pub fn AddressRange::overlaps(Self, Self) -> Bool
+pub fn AddressRange::slice(Self, Int, Int) -> Result[Self, ModbusError]
+pub fn AddressRange::split(Self, Int) -> Result[Array[Self], ModbusError]
+pub fn AddressRange::start(Self) -> UInt16
+
+pub(all) struct AlarmMonitor {
+  threshold : Threshold
+  mut state : ThresholdState
+  mut transitions : Int
+  mut last_value : Int?
+}
+pub fn AlarmMonitor::last_value(Self) -> Int?
+pub fn AlarmMonitor::new(Threshold) -> Self
+pub fn AlarmMonitor::observe(Self, Int) -> ThresholdState
+pub fn AlarmMonitor::reset(Self) -> Unit
+pub fn AlarmMonitor::state(Self) -> ThresholdState
+pub fn AlarmMonitor::threshold(Self) -> Threshold
+pub fn AlarmMonitor::transitions(Self) -> Int
+
+pub(all) struct AuditEntry {
+  sequence : Int
+  direction : String
+  mode : Mode
+  transaction_id : UInt16
+  summary : FrameSummary
+  outcome : String
+}
+
+pub struct AuditLog {
+  entries : Array[AuditEntry]
+  max_entries : Int
+  mut next_sequence : Int
+}
+pub fn AuditLog::clear(Self) -> Unit
+pub fn AuditLog::length(Self) -> Int
+pub fn AuditLog::new(max_entries? : Int) -> Result[Self, ModbusError]
+pub fn AuditLog::record(Self, String, Mode, UInt16, Frame, String) -> Unit
+pub fn AuditLog::snapshot(Self) -> Array[AuditEntry]
+
+pub(all) struct BatchItem {
+  id : Int
+  request : Frame
+}
+pub fn BatchItem::new(Int, Frame) -> Result[Self, ModbusError]
+
+pub struct BatchPlan {
+  items : Array[BatchItem]
+  max_items : Int
+}
+pub fn BatchPlan::add(Self, BatchItem) -> Result[Unit, ModbusError]
+pub fn BatchPlan::execute(Self, Device) -> Array[BatchResult]
+pub fn BatchPlan::item(Self, Int) -> Result[BatchItem, ModbusError]
+pub fn BatchPlan::length(Self) -> Int
+pub fn BatchPlan::new(max_items? : Int) -> Result[Self, ModbusError]
+pub fn BatchPlan::snapshot(Self) -> Array[BatchItem]
+
+pub(all) enum BatchResult {
+  Completed(Int, Frame)
+  Failed(Int, ModbusError)
+}
+
+pub(all) struct BenchmarkResult {
+  name : String
+  iterations : Int
+  successful : Int
+  failed : Int
+  bytes : Int
+}
+pub fn BenchmarkResult::operations(Self) -> Int
+pub fn BenchmarkResult::success_rate(Self) -> Float
+pub fn BenchmarkResult::summary(Self) -> String
+
+pub(all) struct BitVector {
+  length : Int
+  storage : Array[Byte]
+}
+pub fn BitVector::bit_and(Self, Self) -> Result[Self, ModbusError]
+pub fn BitVector::byte_length(Self) -> Int
+pub fn BitVector::copy(Self) -> Self
+pub fn BitVector::count(Self) -> Int
+pub fn BitVector::equal(Self, Self) -> Bool
+pub fn BitVector::fill(Self, Bool) -> Unit
+pub fn BitVector::from_bits(Array[Bool]) -> Self
+pub fn BitVector::get(Self, Int) -> Result[Bool, ModbusError]
+pub fn BitVector::length(Self) -> Int
+pub fn BitVector::new(Int) -> Result[Self, ModbusError]
+pub fn BitVector::not(Self) -> Self
+pub fn BitVector::or(Self, Self) -> Result[Self, ModbusError]
+pub fn BitVector::pack_range(Self, Int, Int) -> Result[Array[Byte], ModbusError]
+pub fn BitVector::set(Self, Int, Bool) -> Result[Unit, ModbusError]
+pub fn BitVector::shift_left(Self, Int) -> Result[Self, ModbusError]
+pub fn BitVector::shift_right(Self, Int) -> Result[Self, ModbusError]
+pub fn BitVector::to_bits(Self) -> Array[Bool]
+pub fn BitVector::to_bytes(Self) -> Array[Byte]
+pub fn BitVector::unpack_into(Self, Int, Int, Array[Byte]) -> Result[Unit, ModbusError]
+
+pub struct ByteQueue {
+  data : Array[Byte]
+  max_length : Int
+}
+pub fn ByteQueue::clear(Self) -> Unit
+pub fn ByteQueue::contains_sequence(Self, Array[Byte]) -> Bool
+pub fn ByteQueue::find(Self, Byte) -> Int?
+pub fn ByteQueue::is_empty(Self) -> Bool
+pub fn ByteQueue::length(Self) -> Int
+pub fn ByteQueue::new(max_length? : Int) -> Result[Self, ModbusError]
+pub fn ByteQueue::peek(Self, Int) -> Result[Byte, ModbusError]
+pub fn ByteQueue::push(Self, Array[Byte]) -> Result[Unit, ModbusError]
+pub fn ByteQueue::push_byte(Self, Byte) -> Result[Unit, ModbusError]
+pub fn ByteQueue::remaining(Self) -> Int
+pub fn ByteQueue::snapshot(Self) -> Array[Byte]
+pub fn ByteQueue::take(Self, Int) -> Result[Array[Byte], ModbusError]
+pub fn ByteQueue::take_all(Self) -> Array[Byte]
+
+pub struct Client {
+  mode : Mode
+  config : ClientConfig
+  mut next_transaction : UInt16
+  pending : Array[PendingExchange]
+}
+pub fn Client::accept(Self, ClientRequest, Array[Byte]) -> Result[Frame, ModbusError]
+pub fn Client::accept_frame(Self, ClientRequest, UInt16, Frame) -> Result[Frame, ModbusError]
+pub fn Client::allocate_transaction(Self) -> UInt16
+pub fn Client::attempts(Self, UInt16) -> Int
+pub fn Client::begin(Self, Frame) -> Result[ClientRequest, ModbusError]
+pub fn Client::begin_at(Self, Frame, Int) -> Result[ClientRequest, ModbusError]
+pub fn Client::cancel(Self, UInt16) -> Result[Unit, ModbusError]
+pub fn Client::completed_count(Self) -> Int
+pub fn Client::config(Self) -> ClientConfig
+pub fn Client::expire(Self, Int) -> Array[UInt16]
+pub fn Client::failed_count(Self) -> Int
+pub fn Client::mode(Self) -> Mode
+pub fn Client::new(Mode, config? : ClientConfig) -> Self
+pub fn Client::next_transaction(Self) -> UInt16
+pub fn Client::pending_active(Self) -> Int
+pub fn Client::pending_request(Self, UInt16) -> PendingExchange?
+pub fn Client::pending_snapshot(Self) -> Array[PendingExchange]
+pub fn Client::retry_due(Self, Int) -> Array[UInt16]
+
+pub(all) struct ClientConfig {
+  timeout_ticks : Int
+  retries : Int
+  max_pending : Int
+  strict_unit : Bool
+}
+
+pub(all) struct ClientRequest {
+  transaction_id : UInt16
+  frame : Frame
+  bytes : Array[Byte]
+}
+pub fn ClientRequest::encoded_length(Self) -> Int
+
+pub(all) enum ClientResult {
+  Success(Frame)
+  Exception(ExceptionCode)
+}
+
+pub(all) struct CoilBank {
+  start : UInt16
+  bits : BitVector
+  writable : Bool
+}
+pub fn CoilBank::clear(Self) -> Unit
+pub fn CoilBank::contains(Self, UInt16, Int) -> Bool
+pub fn CoilBank::fill(Self, Bool) -> Unit
+pub fn CoilBank::get(Self, UInt16) -> Result[Bool, ModbusError]
+pub fn CoilBank::is_writable(Self) -> Bool
+pub fn CoilBank::length(Self) -> Int
+pub fn CoilBank::new(UInt16, Int, writable? : Bool) -> Result[Self, ModbusError]
+pub fn CoilBank::read(Self, UInt16, Int) -> Result[Array[Bool], ModbusError]
+pub fn CoilBank::set(Self, UInt16, Bool) -> Result[Unit, ModbusError]
+pub fn CoilBank::snapshot(Self) -> Array[Bool]
+pub fn CoilBank::snapshot_bytes(Self) -> Array[Byte]
+pub fn CoilBank::start(Self) -> UInt16
+pub fn CoilBank::write(Self, UInt16, Array[Bool]) -> Result[Unit, ModbusError]
+
+pub(all) struct ConformanceResult {
+  name : String
+  passed : Bool
+  detail : String
+}
+
+pub struct ConformanceSuite {
+  vectors : Array[ConformanceVector]
+}
+pub fn ConformanceSuite::add(Self, ConformanceVector) -> Unit
+pub fn ConformanceSuite::length(Self) -> Int
+pub fn ConformanceSuite::new() -> Self
+pub fn ConformanceSuite::run(Self) -> Array[ConformanceResult]
+
+pub(all) struct ConformanceVector {
+  name : String
+  mode : Mode
+  bytes : Array[Byte]
+  expected_function : Byte?
+  expected_error : ModbusError?
+}
+pub fn ConformanceVector::invalid(String, Mode, Array[Byte], ModbusError) -> Self
+pub fn ConformanceVector::valid(String, Mode, Array[Byte], Byte) -> Self
+
+pub(all) struct Counter {
+  name : String
+  mut value : Int
+}
+pub fn Counter::add(Self, Int) -> Result[Unit, ModbusError]
+pub fn Counter::inc(Self) -> Unit
+pub fn Counter::name(Self) -> String
+pub fn Counter::new(String) -> Self
+pub fn Counter::reset(Self) -> Unit
+pub fn Counter::value(Self) -> Int
+
+pub(all) struct Crc16State {
+  mut value : UInt16
+}
+pub fn Crc16State::finalize(Self) -> UInt16
+pub fn Crc16State::finalize_bytes(Self) -> Array[Byte]
+pub fn Crc16State::new() -> Self
+pub fn Crc16State::update(Self, Array[Byte]) -> Unit
+pub fn Crc16State::update_byte(Self, Byte) -> Unit
+
+pub struct Device {
+  unit_id : Byte
+  memory : DeviceMemory
+  file_store : FileRecordStore
+  mut server_id : Array[Byte]
+  mut event_count : UInt16
+  mut busy : Bool
+  mut exception_count : Int
+}
+pub fn Device::event_count(Self) -> UInt16
+pub fn Device::exception_count(Self) -> Int
+pub fn Device::file_store(Self) -> FileRecordStore
+pub fn Device::handle(Self, Frame) -> Result[Frame, ModbusError]
+pub fn Device::health(Self) -> DeviceHealth
+pub fn Device::is_busy(Self) -> Bool
+pub fn Device::memory(Self) -> DeviceMemory
+pub fn Device::new(Byte, coil_capacity? : Int, register_capacity? : Int) -> Result[Self, ModbusError]
+pub fn Device::serve(Self, Frame) -> Result[DeviceResponse, ModbusError]
+pub fn Device::server_id(Self) -> Array[Byte]
+pub fn Device::set_busy(Self, Bool) -> Unit
+pub fn Device::set_server_id(Self, Array[Byte]) -> Result[Unit, ModbusError]
+pub fn Device::unit_id(Self) -> Byte
+
+pub(all) struct DeviceHealth {
+  unit_id : Byte
+  event_count : UInt16
+  exception_count : Int
+  busy : Bool
+}
+
+pub(all) enum DeviceIdCategory {
+  Basic
+  Regular
+  Extended
+  Individual(Byte)
+} derive(Eq, @debug.Debug)
+pub fn DeviceIdCategory::to_byte(Self) -> Byte
+
+pub(all) struct DeviceIdObject {
+  object_id : Byte
+  value : String
+}
+pub fn DeviceIdObject::new(Byte, String) -> Result[Self, ModbusError]
+
+pub(all) struct DeviceIdentification {
+  category : DeviceIdCategory
+  conformity : Byte
+  more_follows : Bool
+  next_object_id : Byte
+  objects : Array[DeviceIdObject]
+}
+
+pub struct DeviceIdentityCatalog {
+  category : DeviceIdCategory
+  objects : Array[DeviceIdObject]
+  mut conformity : Byte
+}
+pub fn DeviceIdentityCatalog::add(Self, DeviceIdObject) -> Result[Unit, ModbusError]
+pub fn DeviceIdentityCatalog::length(Self) -> Int
+pub fn DeviceIdentityCatalog::new(category? : DeviceIdCategory) -> Self
+pub fn DeviceIdentityCatalog::objects(Self) -> Array[DeviceIdObject]
+pub fn DeviceIdentityCatalog::response(Self, Frame) -> Result[Frame, ModbusError]
+pub fn DeviceIdentityCatalog::set_conformity(Self, Byte) -> Unit
+
+pub(all) struct DeviceMemory {
+  coils : CoilBank
+  discrete_inputs : CoilBank
+  input_registers : RegisterBank
+  holding_registers : RegisterBank
+}
+pub fn DeviceMemory::clear(Self) -> Unit
+pub fn DeviceMemory::coils(Self) -> CoilBank
+pub fn DeviceMemory::discrete_inputs(Self) -> CoilBank
+pub fn DeviceMemory::holding_registers(Self) -> RegisterBank
+pub fn DeviceMemory::input_registers(Self) -> RegisterBank
+pub fn DeviceMemory::load_discrete(Self, UInt16, Array[Bool]) -> Result[Unit, ModbusError]
+pub fn DeviceMemory::load_holding(Self, UInt16, Array[UInt16]) -> Result[Unit, ModbusError]
+pub fn DeviceMemory::load_input(Self, UInt16, Array[UInt16]) -> Result[Unit, ModbusError]
+pub fn DeviceMemory::new(coil_capacity? : Int, register_capacity? : Int) -> Result[Self, ModbusError]
+
+pub(all) enum DeviceResponse {
+  Reply(Frame)
+  NoReply
+}
+
+pub(all) struct EncodedAdu {
+  mode : Mode
+  transaction_id : UInt16
+  bytes : Array[Byte]
+}
+pub fn EncodedAdu::bytes(Self) -> Array[Byte]
+pub fn EncodedAdu::decode(Self) -> Result[Frame, ModbusError]
+pub fn EncodedAdu::mode(Self) -> Mode
+pub fn EncodedAdu::new(Mode, UInt16, Frame) -> Result[Self, ModbusError]
+pub fn EncodedAdu::transaction_id(Self) -> UInt16
+
+pub(all) enum EndpointConfig {
+  Serial(SerialConfig)
+  Tcp(TcpConfig)
+}
+pub fn EndpointConfig::mode(Self) -> Mode
+pub fn EndpointConfig::name(Self) -> String
+
+pub(all) struct EndpointHealth {
+  unit_id : Byte
+  ready : Bool
+  event_count : UInt16
+  exceptions : Int
+  requests : Int
+  responses : Int
+  errors : Int
+}
+
+pub(all) struct EndpointRuntime {
+  config : EndpointConfig
+  mut state : EndpointState
+  mut opened_at : Int
+  mut last_error : ModbusError?
+  mut reconnects : Int
+  mut frames_in : Int
+  mut frames_out : Int
+}
+pub fn EndpointRuntime::backoff(Self) -> Unit
+pub fn EndpointRuntime::close(Self) -> Unit
+pub fn EndpointRuntime::config(Self) -> EndpointConfig
+pub fn EndpointRuntime::fail(Self, ModbusError) -> Unit
+pub fn EndpointRuntime::frames_in(Self) -> Int
+pub fn EndpointRuntime::frames_out(Self) -> Int
+pub fn EndpointRuntime::last_error(Self) -> ModbusError?
+pub fn EndpointRuntime::new(EndpointConfig) -> Result[Self, ModbusError]
+pub fn EndpointRuntime::open(Self, Int) -> Result[Unit, ModbusError]
+pub fn EndpointRuntime::reconnects(Self) -> Int
+pub fn EndpointRuntime::record_in(Self) -> Result[Unit, ModbusError]
+pub fn EndpointRuntime::record_out(Self) -> Result[Unit, ModbusError]
+pub fn EndpointRuntime::state(Self) -> EndpointState
+pub fn EndpointRuntime::uptime(Self, Int) -> Int
+
+pub(all) enum EndpointState {
+  Closed
+  Connecting
+  Ready
+  Backoff
+  Faulted
+} derive(Eq, @debug.Debug)
+
+pub(all) enum ExceptionCode {
+  IllegalFunction
+  IllegalDataAddress
+  IllegalDataValue
+  ServerDeviceFailure
+  Acknowledge
+  ServerDeviceBusy
+  NegativeAcknowledge
+  MemoryParityError
+  GatewayPathUnavailable
+  GatewayTargetFailedToRespond
+  UnknownException(Byte)
+} derive(Eq, @debug.Debug)
+pub fn ExceptionCode::to_byte(Self) -> Byte
+
+pub(all) struct ExchangeEnvelope {
+  source : String
+  destination : String
+  adu : EncodedAdu
+}
+pub fn ExchangeEnvelope::new(String, String, EncodedAdu) -> Self
+pub fn ExchangeEnvelope::size(Self) -> Int
+
+pub(all) enum ExchangeState {
+  Pending
+  Completed
+  Failed
+  Cancelled
+} derive(Eq, @debug.Debug)
+
+pub(all) enum FaultMode {
+  NoFault
+  DropResponse
+  CorruptCrc
+  CorruptLrc
+  WrongTransaction
+  BusyDevice
+  InvalidFunction
+} derive(Eq, @debug.Debug)
+
+pub(all) struct FileRecordReference {
+  reference_type : Byte
+  file_number : UInt16
+  record_number : UInt16
+  record_length : UInt16
+}
+pub fn FileRecordReference::encoded_length(Self) -> Int
+pub fn FileRecordReference::new(UInt16, UInt16, UInt16, reference_type? : Byte) -> Result[Self, ModbusError]
+
+pub(all) struct FileRecordStore {
+  records : Array[FileRecordWrite]
+  max_records : Int
+}
+pub fn FileRecordStore::clear(Self) -> Unit
+pub fn FileRecordStore::get(Self, FileRecordReference) -> Result[Array[UInt16], ModbusError]
+pub fn FileRecordStore::length(Self) -> Int
+pub fn FileRecordStore::new(max_records? : Int) -> Result[Self, ModbusError]
+pub fn FileRecordStore::put(Self, FileRecordWrite) -> Result[Unit, ModbusError]
+
+pub(all) struct FileRecordWrite {
+  reference : FileRecordReference
+  values : Array[UInt16]
+}
+pub fn FileRecordWrite::new(FileRecordReference, Array[UInt16]) -> Result[Self, ModbusError]
+
 pub(all) struct Frame {
   unit_id : Byte
   pdu : Pdu
 }
+pub fn Frame::data_length(Self) -> Int
+pub fn Frame::function_code(Self) -> FunctionCode
+pub fn Frame::is_exception(Self) -> Bool
+pub fn Frame::new(Byte, Byte, Array[Byte]) -> Self
+
+pub struct FrameSequence {
+  frames : Array[Frame]
+  max_frames : Int
+}
+pub fn FrameSequence::encoded_bytes(Self, Mode) -> Int
+pub fn FrameSequence::filter_function(Self, Byte) -> Array[Frame]
+pub fn FrameSequence::filter_unit(Self, Byte) -> Array[Frame]
+pub fn FrameSequence::get(Self, Int) -> Result[Frame, ModbusError]
+pub fn FrameSequence::length(Self) -> Int
+pub fn FrameSequence::new(max_frames? : Int) -> Result[Self, ModbusError]
+pub fn FrameSequence::push(Self, Frame) -> Result[Unit, ModbusError]
+pub fn FrameSequence::snapshot(Self) -> Array[Frame]
+pub fn FrameSequence::validate(Self, Bool) -> Result[Unit, ModbusError]
+
+pub struct FrameStream {
+  mode : Mode
+  parser : IncrementalParser
+  queue : ByteQueue
+  mut chunks : Int
+  mut frames : Int
+}
+pub fn FrameStream::chunks(Self) -> Int
+pub fn FrameStream::finish(Self) -> Result[Frame, ModbusError]
+pub fn FrameStream::frames(Self) -> Int
+pub fn FrameStream::mode(Self) -> Mode
+pub fn FrameStream::new(Mode, role? : ParserRole, max_buffer? : Int, max_frame? : Int) -> Result[Self, ModbusError]
+pub fn FrameStream::push(Self, Array[Byte]) -> Result[Array[Frame], ModbusError]
+pub fn FrameStream::reset(Self) -> Unit
+
+pub(all) struct FrameSummary {
+  unit_id : Byte
+  function : Byte
+  data_length : Int
+  exception : Bool
+}
+
+pub struct FrameTextLog {
+  entries : Array[String]
+  max_entries : Int
+}
+pub fn FrameTextLog::clear(Self) -> Unit
+pub fn FrameTextLog::length(Self) -> Int
+pub fn FrameTextLog::lines(Self) -> Array[String]
+pub fn FrameTextLog::new(max_entries? : Int) -> Result[Self, ModbusError]
+pub fn FrameTextLog::push(Self, String) -> Unit
+pub fn FrameTextLog::record(Self, String, Frame) -> Unit
+pub fn FrameTextLog::record_wire(Self, String, Mode, UInt16, Frame) -> Unit
+
+pub(all) enum FunctionCode {
+  ReadCoils
+  ReadDiscreteInputs
+  ReadHoldingRegisters
+  ReadInputRegisters
+  WriteSingleCoil
+  WriteSingleRegister
+  ReadExceptionStatus
+  Diagnostics
+  GetCommEventCounter
+  GetCommEventLog
+  ReportServerId
+  WriteMultipleCoils
+  WriteMultipleRegisters
+  ReportServerIdExtended
+  ReadFileRecord
+  WriteFileRecord
+  MaskWriteRegister
+  ReadWriteMultipleRegisters
+  ReadFifoQueue
+  EncapsulatedInterface
+  Unknown(Byte)
+} derive(Eq, @debug.Debug)
+pub fn FunctionCode::to_byte(Self) -> Byte
+
+pub(all) struct FunctionDescriptor {
+  function : Byte
+  name : String
+  request_min : Int
+  request_max : Int
+  response_variable : Bool
+  writable : Bool
+  description : String
+}
+pub fn FunctionDescriptor::description(Self) -> String
+pub fn FunctionDescriptor::function(Self) -> Byte
+pub fn FunctionDescriptor::is_write(Self) -> Bool
+pub fn FunctionDescriptor::name(Self) -> String
+pub fn FunctionDescriptor::supports_request(Self, Int) -> Bool
+
+pub struct Gateway {
+  rules : Array[GatewayRule]
+  mut forwarded : Int
+  mut rejected : Int
+  mut translated : Int
+}
+pub fn Gateway::add_rule(Self, GatewayRule) -> Result[Unit, ModbusError]
+pub fn Gateway::forwarded_count(Self) -> Int
+pub fn Gateway::new() -> Self
+pub fn Gateway::rejected_count(Self) -> Int
+pub fn Gateway::reset_metrics(Self) -> Unit
+pub fn Gateway::reverse(Self, Frame, Frame) -> Result[Frame, ModbusError]
+pub fn Gateway::rule_count(Self) -> Int
+pub fn Gateway::rules(Self) -> Array[GatewayRule]
+pub fn Gateway::translate(Self, Frame) -> Result[Frame, ModbusError]
+pub fn Gateway::translated_count(Self) -> Int
+
+pub(all) struct GatewayRoute {
+  name : String
+  gateway : Gateway
+  device : Device
+  client : Client
+}
+pub fn GatewayRoute::add_rule(Self, GatewayRule) -> Result[Unit, ModbusError]
+pub fn GatewayRoute::exchange(Self, Frame) -> Result[Frame, ModbusError]
+pub fn GatewayRoute::metrics(Self) -> (Int, Int, Int)
+pub fn GatewayRoute::name(Self) -> String
+pub fn GatewayRoute::new(String, Mode, Device) -> Self
+
+pub(all) struct GatewayRule {
+  source_unit : Byte
+  target_unit : Byte
+  function : Byte
+  source_start : UInt16
+  target_start : UInt16
+  span : Int
+  mut enabled : Bool
+}
+pub fn GatewayRule::enable(Self, Bool) -> Unit
+pub fn GatewayRule::matches(Self, Frame) -> Bool
+pub fn GatewayRule::new(Byte, Byte, Byte, UInt16, UInt16, Int) -> Result[Self, ModbusError]
 
 pub struct IncrementalParser {
   mode : Mode
+  role : ParserRole
   buffer : Array[Byte]
-  max_frame : Int
+  mut max_frame : Int
+  mut frames_seen : Int
+  mut errors_seen : Int
 }
 pub fn IncrementalParser::buffered(Self) -> Int
+pub fn IncrementalParser::errors_seen(Self) -> Int
 pub fn IncrementalParser::feed(Self, Array[Byte]) -> Result[Array[Frame], ModbusError]
-pub fn IncrementalParser::new(Mode, max_frame? : Int) -> Self
+pub fn IncrementalParser::feed_byte(Self, Byte) -> Result[Array[Frame], ModbusError]
+pub fn IncrementalParser::finish(Self) -> Result[Frame, ModbusError]
+pub fn IncrementalParser::frames_seen(Self) -> Int
+pub fn IncrementalParser::max_frame(Self) -> Int
+pub fn IncrementalParser::mode(Self) -> Mode
+pub fn IncrementalParser::new(Mode, max_frame? : Int, role? : ParserRole) -> Self
+pub fn IncrementalParser::reset(Self) -> Unit
+pub fn IncrementalParser::role(Self) -> ParserRole
+pub fn IncrementalParser::set_max_frame(Self, Int) -> Result[Unit, ModbusError]
+pub fn IncrementalParser::take_buffer(Self) -> Array[Byte]
 
-pub enum ModbusError {
+pub(all) struct LatencyHistogram {
+  bounds : Array[Int]
+  counts : Array[Int]
+  mut total : Int
+  mut sum : Int
+}
+pub fn LatencyHistogram::bucket_counts(Self) -> Array[Int]
+pub fn LatencyHistogram::mean(Self) -> Float
+pub fn LatencyHistogram::new(Array[Int]) -> Result[Self, ModbusError]
+pub fn LatencyHistogram::observe(Self, Int) -> Result[Unit, ModbusError]
+pub fn LatencyHistogram::sum(Self) -> Int
+pub fn LatencyHistogram::total(Self) -> Int
+
+pub(all) enum ModbusError {
   Incomplete
   InvalidLength
   InvalidChecksum
   InvalidAscii
   InvalidMbap
-}
+  InvalidUnitId
+  InvalidFunction
+  InvalidAddress
+  InvalidQuantity
+  InvalidByteCount
+  InvalidData
+  InvalidTransaction
+  Unsupported
+  UnitMismatch
+  CapacityExceeded
+  NoResponse
+  Busy
+} derive(Eq, @debug.Debug)
 
-pub enum Mode {
+pub(all) enum Mode {
   Rtu
   Ascii
   Tcp
-}
+} derive(Eq, @debug.Debug)
+
+pub(all) enum ParserRole {
+  Request
+  Response
+  Either
+} derive(Eq, @debug.Debug)
 
 pub(all) struct Pdu {
   function : Byte
   data : Array[Byte]
 }
+pub fn Pdu::data_length(Self) -> Int
+pub fn Pdu::function_code(Self) -> FunctionCode
+pub fn Pdu::is_exception(Self) -> Bool
+pub fn Pdu::new(Byte, Array[Byte]) -> Self
+
+pub(all) struct PendingExchange {
+  transaction_id : UInt16
+  frame : Frame
+  mut attempts : Int
+  created_at : Int
+  mut last_sent_at : Int
+  mut state : ExchangeState
+}
+
+pub(all) struct PlanSummary {
+  requests : Int
+  total_registers : Int
+  total_coils : Int
+  total_bytes : Int
+}
+
+pub(all) struct PlannedRequest {
+  id : Int
+  frame : Frame
+  address : AddressRange
+}
+
+pub(all) struct PollJob {
+  id : Int
+  name : String
+  request : Frame
+  interval : Int
+  timeout : Int
+  retries : Int
+  mut next_due : Int
+  mut attempts : Int
+  mut runs : Int
+  mut failures : Int
+  mut last_response : Frame?
+}
+pub fn PollJob::is_due(Self, Int) -> Bool
+pub fn PollJob::mark_failure(Self, Int) -> Unit
+pub fn PollJob::mark_success(Self, Int, Frame) -> Unit
+pub fn PollJob::new(Int, String, Frame, interval? : Int, timeout? : Int, retries? : Int) -> Result[Self, ModbusError]
+pub fn PollJob::success_rate(Self) -> Float
+
+pub struct PollPlan {
+  jobs : Array[PollJob]
+  max_jobs : Int
+}
+pub fn PollPlan::add(Self, PollJob) -> Result[Unit, ModbusError]
+pub fn PollPlan::due(Self, Int) -> Array[PollJob]
+pub fn PollPlan::job(Self, Int) -> PollJob?
+pub fn PollPlan::length(Self) -> Int
+pub fn PollPlan::mark_failure(Self, Int, Int) -> Result[Unit, ModbusError]
+pub fn PollPlan::mark_success(Self, Int, Int, Frame) -> Result[Unit, ModbusError]
+pub fn PollPlan::new(max_jobs? : Int) -> Result[Self, ModbusError]
+pub fn PollPlan::remove(Self, Int) -> Result[Unit, ModbusError]
+pub fn PollPlan::run_once(Self, Device, Int) -> PollReport
+pub fn PollPlan::snapshot(Self) -> Array[PollJob]
+
+pub(all) struct PollReport {
+  now : Int
+  attempted : Int
+  succeeded : Int
+  failed : Int
+  responses : Array[Frame]
+}
+
+pub struct PollScheduler {
+  plan : PollPlan
+  device : Device
+  mode : Mode
+  mut last_report : PollReport?
+}
+pub fn PollScheduler::last_report(Self) -> PollReport?
+pub fn PollScheduler::mode(Self) -> Mode
+pub fn PollScheduler::new(PollPlan, Device, Mode) -> Self
+pub fn PollScheduler::plan(Self) -> PollPlan
+pub fn PollScheduler::tick(Self, Int) -> PollReport
+
+pub(all) struct PreflightReport {
+  errors : Array[String]
+  warnings : Array[String]
+  mut checked_frames : Int
+  mut checked_devices : Int
+}
+pub fn PreflightReport::error_count(Self) -> Int
+pub fn PreflightReport::errors(Self) -> Array[String]
+pub fn PreflightReport::new() -> Self
+pub fn PreflightReport::ok(Self) -> Bool
+pub fn PreflightReport::warning_count(Self) -> Int
+pub fn PreflightReport::warnings(Self) -> Array[String]
+
+pub(all) struct ProtocolLimits {
+  max_adu : Int
+  max_pdu : Int
+  max_registers : Int
+  max_coils : Int
+  max_buffer : Int
+}
+
+pub(all) struct ProtocolMetrics {
+  mut requests : Int
+  mut responses : Int
+  mut exceptions : Int
+  mut errors : Int
+  mut bytes_in : Int
+  mut bytes_out : Int
+  mut active : Int
+  latency : LatencyHistogram
+}
+pub fn ProtocolMetrics::active(Self) -> Int
+pub fn ProtocolMetrics::errors(Self) -> Int
+pub fn ProtocolMetrics::exceptions(Self) -> Int
+pub fn ProtocolMetrics::new() -> Result[Self, ModbusError]
+pub fn ProtocolMetrics::record_error(Self) -> Unit
+pub fn ProtocolMetrics::record_request(Self, Int) -> Result[Unit, ModbusError]
+pub fn ProtocolMetrics::record_response(Self, Int, Int, Bool) -> Result[Unit, ModbusError]
+pub fn ProtocolMetrics::requests(Self) -> Int
+pub fn ProtocolMetrics::responses(Self) -> Int
+pub fn ProtocolMetrics::throughput(Self, Int) -> Float
+
+pub(all) struct RegisterBank {
+  start : UInt16
+  values : Array[UInt16]
+  writable : Bool
+}
+pub fn RegisterBank::clear(Self) -> Unit
+pub fn RegisterBank::contains(Self, UInt16, Int) -> Bool
+pub fn RegisterBank::end_exclusive(Self) -> Int
+pub fn RegisterBank::fill(Self, UInt16) -> Unit
+pub fn RegisterBank::get(Self, UInt16) -> Result[UInt16, ModbusError]
+pub fn RegisterBank::is_writable(Self) -> Bool
+pub fn RegisterBank::length(Self) -> Int
+pub fn RegisterBank::new(UInt16, Int, writable? : Bool) -> Result[Self, ModbusError]
+pub fn RegisterBank::read(Self, UInt16, Int) -> Result[Array[UInt16], ModbusError]
+pub fn RegisterBank::set(Self, UInt16, UInt16) -> Result[Unit, ModbusError]
+pub fn RegisterBank::snapshot(Self) -> Array[UInt16]
+pub fn RegisterBank::start(Self) -> UInt16
+pub fn RegisterBank::write(Self, UInt16, Array[UInt16]) -> Result[Unit, ModbusError]
+pub fn RegisterBank::write_mask(Self, UInt16, UInt16, UInt16) -> Result[UInt16, ModbusError]
+
+pub(all) enum RegisterByteOrder {
+  BigEndian
+  LittleEndian
+} derive(Eq, @debug.Debug)
+
+pub(all) struct RegisterCursor {
+  values : Array[UInt16]
+  mut position : Int
+}
+pub fn RegisterCursor::at_end(Self) -> Bool
+pub fn RegisterCursor::new(Array[UInt16]) -> Self
+pub fn RegisterCursor::position(Self) -> Int
+pub fn RegisterCursor::read_f32(Self, RegisterWordOrder) -> Result[Float, ModbusError]
+pub fn RegisterCursor::read_i16(Self) -> Result[Int, ModbusError]
+pub fn RegisterCursor::read_i32(Self, RegisterWordOrder) -> Result[Int, ModbusError]
+pub fn RegisterCursor::read_u16(Self) -> Result[UInt16, ModbusError]
+pub fn RegisterCursor::read_u32(Self, RegisterWordOrder) -> Result[UInt, ModbusError]
+pub fn RegisterCursor::read_u64(Self, RegisterWordOrder) -> Result[UInt64, ModbusError]
+pub fn RegisterCursor::remaining(Self) -> Int
+pub fn RegisterCursor::seek(Self, Int) -> Result[Unit, ModbusError]
+pub fn RegisterCursor::skip(Self, Int) -> Result[Unit, ModbusError]
+
+pub(all) struct RegisterField {
+  name : String
+  address : UInt16
+  kind : RegisterFieldKind
+  writable : Bool
+  scale : Float
+}
+pub fn RegisterField::address(Self) -> UInt16
+pub fn RegisterField::is_writable(Self) -> Bool
+pub fn RegisterField::kind(Self) -> RegisterFieldKind
+pub fn RegisterField::name(Self) -> String
+pub fn RegisterField::new(String, UInt16, RegisterFieldKind, writable? : Bool, scale? : Float) -> Result[Self, ModbusError]
+pub fn RegisterField::scale(Self) -> Float
+pub fn RegisterField::width(Self) -> Int
+
+pub(all) enum RegisterFieldKind {
+  Unsigned16
+  Signed16
+  Unsigned32
+  Signed32
+  Float32
+  Unsigned64
+  BitField(Int)
+} derive(Eq, @debug.Debug)
+pub fn RegisterFieldKind::name(Self) -> String
+pub fn RegisterFieldKind::width(Self) -> Int
+
+pub struct RegisterSchema {
+  fields : Array[RegisterField]
+  max_fields : Int
+}
+pub fn RegisterSchema::add(Self, RegisterField) -> Result[Unit, ModbusError]
+pub fn RegisterSchema::field(Self, String) -> RegisterField?
+pub fn RegisterSchema::fields(Self) -> Array[RegisterField]
+pub fn RegisterSchema::length(Self) -> Int
+pub fn RegisterSchema::new(max_fields? : Int) -> Result[Self, ModbusError]
+pub fn RegisterSchema::read(Self, String, RegisterBank) -> Result[RegisterValue, ModbusError]
+pub fn RegisterSchema::read_all(Self, RegisterBank) -> Result[Array[(String, RegisterValue)], ModbusError]
+pub fn RegisterSchema::validate_against(Self, RegisterBank) -> Result[Unit, ModbusError]
+pub fn RegisterSchema::write(Self, String, RegisterValue, RegisterBank) -> Result[Unit, ModbusError]
+
+pub(all) enum RegisterValue {
+  U16(UInt16)
+  I16(Int)
+  U32(UInt)
+  I32(Int)
+  F32(Float)
+  U64(UInt64)
+  Bits(Array[Bool])
+}
+
+pub(all) enum RegisterWordOrder {
+  HighWordFirst
+  LowWordFirst
+} derive(Eq, @debug.Debug)
+
+pub(all) struct RegisterWriter {
+  values : Array[UInt16]
+  capacity : Int
+}
+pub fn RegisterWriter::length(Self) -> Int
+pub fn RegisterWriter::new(Int) -> Result[Self, ModbusError]
+pub fn RegisterWriter::push(Self, UInt16) -> Result[Unit, ModbusError]
+pub fn RegisterWriter::push_f32(Self, Float, RegisterWordOrder) -> Result[Unit, ModbusError]
+pub fn RegisterWriter::push_i16(Self, Int) -> Result[Unit, ModbusError]
+pub fn RegisterWriter::push_u32(Self, UInt, RegisterWordOrder) -> Result[Unit, ModbusError]
+pub fn RegisterWriter::push_u64(Self, UInt64, RegisterWordOrder) -> Result[Unit, ModbusError]
+pub fn RegisterWriter::remaining(Self) -> Int
+pub fn RegisterWriter::to_array(Self) -> Array[UInt16]
+
+pub(all) enum ResponseValue {
+  Normal(Frame)
+  Exception(Frame, ExceptionCode)
+}
+
+pub(all) struct Scenario {
+  name : String
+  requests : Array[Frame]
+  mode : Mode
+}
+pub fn Scenario::add(Self, Frame) -> Result[Unit, ModbusError]
+pub fn Scenario::length(Self) -> Int
+pub fn Scenario::mode(Self) -> Mode
+pub fn Scenario::name(Self) -> String
+pub fn Scenario::new(String, Mode) -> Self
+pub fn Scenario::run(Self, Simulation) -> Array[SimulationResult]
+
+pub(all) struct SerialConfig {
+  path : String
+  baud : Int
+  data_bits : Int
+  stop_bits : Int
+  parity : Byte
+  mode : Mode
+}
+pub fn SerialConfig::new(String, Int, Mode, data_bits? : Int, stop_bits? : Int, parity? : Byte) -> Result[Self, ModbusError]
+pub fn SerialConfig::parity_name(Self) -> String
+
+pub struct Server {
+  config : ServerConfig
+  devices : Array[Device]
+  parser : IncrementalParser
+  metrics : ProtocolMetrics
+  audit : AuditLog
+}
+pub fn Server::add_device(Self, Device) -> Result[Unit, ModbusError]
+pub fn Server::audit(Self) -> AuditLog
+pub fn Server::broadcast(Self, Frame) -> Array[Frame]
+pub fn Server::config(Self) -> ServerConfig
+pub fn Server::device(Self, Byte) -> Device?
+pub fn Server::device_count(Self) -> Int
+pub fn Server::handle(Self, Frame) -> Result[Frame, ModbusError]
+pub fn Server::handle_adu(Self, Array[Byte]) -> Result[Array[Byte], ModbusError]
+pub fn Server::metrics(Self) -> ProtocolMetrics
+pub fn Server::mode(Self) -> Mode
+pub fn Server::new(ServerConfig) -> Result[Self, ModbusError]
+pub fn Server::parser(Self) -> IncrementalParser
+pub fn Server::remove_device(Self, Byte) -> Result[Unit, ModbusError]
+
+pub(all) struct ServerConfig {
+  mode : Mode
+  max_devices : Int
+  max_frame : Int
+  allow_broadcast : Bool
+  max_pending_bytes : Int
+}
+
+pub struct Simulation {
+  device : Device
+  mode : Mode
+  mut fault : FaultMode
+  mut clock : Int
+  metrics : ProtocolMetrics
+  audit : AuditLog
+}
+pub fn Simulation::advance(Self, Int) -> Result[Unit, ModbusError]
+pub fn Simulation::audit(Self) -> AuditLog
+pub fn Simulation::clock(Self) -> Int
+pub fn Simulation::device(Self) -> Device
+pub fn Simulation::fault(Self) -> FaultMode
+pub fn Simulation::metrics(Self) -> ProtocolMetrics
+pub fn Simulation::mode(Self) -> Mode
+pub fn Simulation::new(Device, Mode) -> Result[Self, ModbusError]
+pub fn Simulation::request(Self, UInt16, Frame) -> SimulationResult
+pub fn Simulation::reset(Self) -> Unit
+pub fn Simulation::set_fault(Self, FaultMode) -> Unit
+
+pub(all) enum SimulationResult {
+  Delivered(Frame)
+  Dropped
+  Rejected(ModbusError)
+}
+
+pub(all) struct TcpConfig {
+  host : String
+  port : Int
+  connect_timeout : Int
+  keep_alive : Bool
+}
+pub fn TcpConfig::address(Self) -> String
+pub fn TcpConfig::new(String, Int, connect_timeout? : Int, keep_alive? : Bool) -> Result[Self, ModbusError]
+
+pub(all) struct TelemetryRing {
+  values : Array[Int]
+  capacity : Int
+  mut cursor : Int
+  mut count : Int
+}
+pub fn TelemetryRing::at(Self, Int) -> Result[Int, ModbusError]
+pub fn TelemetryRing::average(Self) -> Float
+pub fn TelemetryRing::capacity(Self) -> Int
+pub fn TelemetryRing::clear(Self) -> Unit
+pub fn TelemetryRing::delta(Self) -> Result[Int, ModbusError]
+pub fn TelemetryRing::is_full(Self) -> Bool
+pub fn TelemetryRing::latest(Self) -> Result[Int, ModbusError]
+pub fn TelemetryRing::length(Self) -> Int
+pub fn TelemetryRing::maximum(Self) -> Result[Int, ModbusError]
+pub fn TelemetryRing::minimum(Self) -> Result[Int, ModbusError]
+pub fn TelemetryRing::new(Int) -> Result[Self, ModbusError]
+pub fn TelemetryRing::previous(Self) -> Result[Int, ModbusError]
+pub fn TelemetryRing::record(Self, Int) -> Unit
+pub fn TelemetryRing::snapshot(Self) -> Array[Int]
+pub fn TelemetryRing::sum(Self) -> Int
+
+pub(all) struct Threshold {
+  low : Int
+  high : Int
+}
+pub fn Threshold::classify(Self, Int) -> ThresholdState
+pub fn Threshold::high(Self) -> Int
+pub fn Threshold::low(Self) -> Int
+pub fn Threshold::new(Int, Int) -> Result[Self, ModbusError]
+
+pub(all) enum ThresholdState {
+  Below
+  Within
+  Above
+} derive(Eq, @debug.Debug)
+
+pub(all) struct TransactionFrame {
+  transaction_id : UInt16
+  request : Frame
+  response : Frame?
+}
+pub fn TransactionFrame::complete(Self, Frame) -> Self
+pub fn TransactionFrame::is_complete(Self) -> Bool
+pub fn TransactionFrame::new(UInt16, Frame) -> Self
+
+pub(all) struct TransportCapabilities {
+  mode : Mode
+  max_adu : Int
+  supports_broadcast : Bool
+  preserves_transaction_id : Bool
+}
+
+pub(all) enum TransportKind {
+  SerialRtu
+  SerialAscii
+  ModbusTcp
+} derive(Eq, @debug.Debug)
+
+pub struct VirtualLink {
+  mode : Mode
+  max_queue : Int
+  master_to_device : Array[Array[Byte]]
+  device_to_master : Array[Array[Byte]]
+  mut sent : Int
+  mut received : Int
+  mut dropped : Int
+}
+pub fn VirtualLink::clear(Self) -> Unit
+pub fn VirtualLink::dropped_count(Self) -> Int
+pub fn VirtualLink::mode(Self) -> Mode
+pub fn VirtualLink::new(Mode, max_queue? : Int) -> Result[Self, ModbusError]
+pub fn VirtualLink::queued_requests(Self) -> Int
+pub fn VirtualLink::queued_responses(Self) -> Int
+pub fn VirtualLink::receive_request(Self) -> Result[Frame, ModbusError]
+pub fn VirtualLink::receive_response(Self) -> Result[Array[Byte], ModbusError]
+pub fn VirtualLink::received_count(Self) -> Int
+pub fn VirtualLink::round_trip(Self, Device, UInt16, Frame) -> Result[DeviceResponse, ModbusError]
+pub fn VirtualLink::send_request(Self, UInt16, Frame) -> Result[Unit, ModbusError]
+pub fn VirtualLink::send_response(Self, UInt16, Frame) -> Result[Unit, ModbusError]
+pub fn VirtualLink::sent_count(Self) -> Int
 
 // Type aliases
 
 // Traits
-

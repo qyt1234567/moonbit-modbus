@@ -4,3 +4,7 @@ target/
 target
 .mooncakes/
 .moonagent/
+coverage/
+*.log
+*.trace
+profile.json
