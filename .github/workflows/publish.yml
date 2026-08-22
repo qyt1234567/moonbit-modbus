@@ -36,6 +36,14 @@ jobs:
           moon info
           git diff --exit-code
 
+      - name: Configure Mooncakes credentials
+        env:
+          MOONCAKES_TOKEN: ${{ secrets.MOONCAKES_TOKEN }}
+        shell: bash
+        run: |
+          mkdir -p "$HOME/.moon"
+          node -e 'const fs = require("fs"); fs.writeFileSync(process.env.HOME + "/.moon/credentials.json", JSON.stringify({ username: "qyt1234567", token: process.env.MOONCAKES_TOKEN }) + "\n")'
+
       - name: Publish
         env:
           MOONCAKES_TOKEN: ${{ secrets.MOONCAKES_TOKEN }}
