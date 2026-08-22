@@ -8,7 +8,23 @@ import {
 // Values
 pub fn accepts_broadcast(Mode) -> Bool
 
+pub fn access_operation_name(AccessOperation) -> String
+
+pub fn access_role_rank(AccessRole) -> Int
+
 pub fn address_bytes(UInt16) -> Array[Byte]
+
+pub fn aggregation_name(Aggregation) -> String
+
+pub fn alarm_condition_name(AlarmCondition) -> String
+
+pub fn alarm_severity_name(AlarmSeverity) -> String
+
+pub fn alarm_state_name(AlarmState) -> String
+
+pub fn analytics_report(AnalyticsWindow, AnalyticsRule, ValueHistogram) -> Result[AnalyticsReport, ModbusError]
+
+pub fn anomaly_kind_name(AnomalyKind) -> String
 
 pub fn append_u16_be(Array[Byte], UInt16) -> Unit
 
@@ -38,6 +54,10 @@ pub fn benchmark_tcp_round_trip(Int) -> Result[BenchmarkResult, ModbusError]
 
 pub fn boundary_vectors(Frame) -> Array[ConformanceVector]
 
+pub fn bridge_action_name(BridgeAction) -> String
+
+pub fn bucket_samples(Array[TagSample], Int, Int) -> Result[Array[HistoryBucket], ModbusError]
+
 pub fn byte_sum(Array[Byte]) -> Byte
 
 pub fn byte_xor(Array[Byte]) -> Byte
@@ -52,15 +72,31 @@ pub fn bytes_to_registers(Array[Byte], RegisterByteOrder) -> Result[Array[UInt16
 
 pub fn capabilities(Mode) -> TransportCapabilities
 
+pub fn capacity_resource_name(CapacityResource) -> String
+
+pub fn capture_direction_name(CaptureDirection) -> String
+
+pub fn capture_status_name(CaptureStatus) -> String
+
 pub fn chunk_bytes(Array[Byte], Int) -> Result[Array[Array[Byte]], ModbusError]
 
 pub fn clamp_int(Int, Int, Int) -> Result[Int, ModbusError]
 
 pub fn client_result(Frame) -> ClientResult
 
+pub fn config_diff(Array[ConfigEntry], Array[ConfigEntry]) -> Array[ConfigOperation]
+
+pub fn config_kind_name(ConfigKind) -> String
+
+pub fn config_schema_summary(ConfigSchema) -> String
+
+pub fn config_values_equal(ConfigValue, ConfigValue) -> Bool
+
 pub fn conformance_failed(Array[ConformanceResult]) -> Int
 
 pub fn conformance_passed(Array[ConformanceResult]) -> Int
+
+pub fn contract_result_name(ContractResult) -> String
 
 pub fn copy_bytes(Array[Byte]) -> Array[Byte]
 
@@ -128,9 +164,29 @@ pub fn default_limits() -> ProtocolLimits
 
 pub fn default_queue_limit(Mode) -> Int
 
+pub fn default_retry_policy() -> RetryPolicy
+
+pub fn default_server_capabilities() -> CapabilitySet
+
 pub fn default_server_config(Mode) -> ServerConfig
 
+pub fn device_command_kind_name(DeviceCommandKind) -> String
+
+pub fn device_command_state_name(DeviceCommandState) -> String
+
 pub fn device_id_category(Byte) -> DeviceIdCategory
+
+pub fn device_service_kind_name(DeviceServiceKind) -> String
+
+pub fn device_service_state_name(DeviceServiceState) -> String
+
+pub fn diagnose_capability_gap(CapabilitySet, Array[Byte]) -> DiagnosticReport
+
+pub fn diagnose_frames(Array[Frame]) -> DiagnosticReport
+
+pub fn diagnostic_category_name(DiagnosticCategory) -> String
+
+pub fn diagnostic_severity_name(DiagnosticSeverity) -> String
 
 pub fn diagnostics(Byte, UInt16, Array[Byte]) -> Result[Frame, ModbusError]
 
@@ -158,11 +214,15 @@ pub fn endpoint_health_summary(EndpointHealth) -> String
 
 pub fn endpoint_score(EndpointHealth) -> Int
 
+pub fn engineering_unit_name(EngineeringUnit) -> String
+
 pub fn error_name(ModbusError) -> String
 
 pub fn error_or_unit(Result[Unit, ModbusError]) -> String
 
 pub fn error_response(Frame, ModbusError) -> Frame
+
+pub fn evaluate_access(AccessPolicy, AccessRole, AccessOperation, String, Frame, Int, Int) -> Result[SecurityAudit, ModbusError]
 
 pub fn exception_code(Byte) -> ExceptionCode
 
@@ -183,6 +243,14 @@ pub fn fault_mode_name(FaultMode) -> String
 pub fn fits_mode_limit(Mode, Frame) -> Bool
 
 pub fn fits_queue_budget(Array[Frame], Mode, Int) -> Bool
+
+pub fn fleet_health_from_inventory(FleetHealthRollup, DeviceInventory, Int, Int) -> Result[Unit, ModbusError]
+
+pub fn fleet_health_from_reliability(Int, ReliabilityFleetSummary) -> Result[FleetHealthRollup, ModbusError]
+
+pub fn fleet_health_from_services(FleetHealthRollup, DeviceServiceRegistry) -> Result[Unit, ModbusError]
+
+pub fn fleet_health_state_name(FleetHealthState) -> String
 
 pub fn fleet_score(Array[EndpointHealth]) -> Int
 
@@ -226,9 +294,15 @@ pub fn get_comm_event_counter(Byte) -> Result[Frame, ModbusError]
 
 pub fn get_comm_event_log(Byte) -> Result[Frame, ModbusError]
 
+pub fn guard_decision_name(GuardDecision) -> String
+
+pub fn guard_reason_name(GuardReason) -> String
+
 pub fn hex_string_to_bytes(String) -> Result[Array[Byte], ModbusError]
 
 pub fn i32_to_registers(Int, RegisterWordOrder) -> Array[UInt16]
+
+pub fn inventory_state_name(InventoryState) -> String
 
 pub fn is_broadcast(Byte) -> Bool
 
@@ -250,7 +324,13 @@ pub fn is_write_echo(Frame, Frame) -> Bool
 
 pub fn is_write_function(Byte) -> Bool
 
+pub fn job_priority_rank(JobPriority) -> Int
+
+pub fn job_state_name(JobState) -> String
+
 pub fn join_chunks(Array[Array[Byte]], Int) -> Result[Array[Byte], ModbusError]
+
+pub fn lease_state_name(LeaseState) -> String
 
 pub fn least_healthy(Array[EndpointHealth]) -> EndpointHealth?
 
@@ -262,9 +342,21 @@ pub fn lrc_from_sum(Byte) -> Byte
 
 pub fn lrc_with_sum(Array[Byte]) -> (Byte, Byte)
 
+pub fn maintenance_kind_name(MaintenanceKind) -> String
+
+pub fn maintenance_priority_name(MaintenancePriority) -> String
+
 pub fn mask_write_register(Byte, UInt16, UInt16, UInt16) -> Result[Frame, ModbusError]
 
 pub fn max_request_adu(Mode, Byte) -> Int
+
+pub fn metric_kind_name(MetricKind) -> String
+
+pub fn metrics_transport_name(MetricsTransport) -> String
+
+pub fn migration_operation_name(MigrationOperation) -> String
+
+pub fn migration_state_name(MigrationState) -> String
 
 pub fn minimum_frame_length(Mode) -> Int
 
@@ -298,6 +390,10 @@ pub fn plan_read_registers(Byte, UInt16, Int, function? : Byte) -> Result[Array[
 
 pub fn plan_write_registers(Byte, UInt16, Array[UInt16]) -> Result[Array[PlannedRequest], ModbusError]
 
+pub fn poll_area_function(PollArea) -> Byte
+
+pub fn poll_area_name(PollArea) -> String
+
 pub fn preflight_device(PreflightReport, Device) -> Unit
 
 pub fn preflight_frame(PreflightReport, Mode, Frame) -> Unit
@@ -307,6 +403,18 @@ pub fn preflight_plan(PreflightReport, PollPlan, Mode) -> Unit
 pub fn preflight_server(Server) -> PreflightReport
 
 pub fn preflight_summary(PreflightReport) -> String
+
+pub fn profile_area_name(ProfileArea) -> String
+
+pub fn profile_contiguous_points(Array[ProfilePoint], ProfileArea) -> Array[ProfilePoint]
+
+pub fn profile_encoding_name(ProfileEncoding) -> String
+
+pub fn profile_point_value_from_registers(ProfilePoint, Array[UInt16]) -> Result[ProfileValue, ModbusError]
+
+pub fn quality_decision_name(QualityDecision) -> String
+
+pub fn quality_test_name(QualityTest) -> String
 
 pub fn quantity_bytes_checked(UInt16) -> Array[Byte]
 
@@ -338,7 +446,15 @@ pub fn read_u32_be(Array[Byte], Int) -> Result[UInt, ModbusError]
 
 pub fn read_write_multiple_registers(Byte, UInt16, UInt16, UInt16, Array[UInt16]) -> Result[Frame, ModbusError]
 
+pub fn reading_quality_name(ReadingQuality) -> String
+
 pub fn recommended_parser_role(Byte) -> ParserRole
+
+pub fn reconcile_snapshots(DeviceSnapshot, DeviceSnapshot) -> Result[Array[ReconciliationDiff], ModbusError]
+
+pub fn reconciliation_kind_name(ReconciliationKind) -> String
+
+pub fn reconciliation_report(String, Array[ReconciliationDiff], Int) -> Result[ReconciliationReport, ModbusError]
 
 pub fn register_byte_order_name(RegisterByteOrder) -> String
 
@@ -359,6 +475,10 @@ pub fn registers_to_i32(Array[UInt16], RegisterWordOrder) -> Result[Int, ModbusE
 pub fn registers_to_u32(Array[UInt16], RegisterWordOrder) -> Result[UInt, ModbusError]
 
 pub fn registers_to_u64(Array[UInt16], RegisterWordOrder) -> Result[UInt64, ModbusError]
+
+pub fn reliability_failure_name(ReliabilityFailure) -> String
+
+pub fn reliability_fleet_summary(Array[DeviceReliability]) -> ReliabilityFleetSummary
 
 pub fn replace_frame_unit(Frame, Byte) -> Result[Frame, ModbusError]
 
@@ -392,6 +512,14 @@ pub fn safe_byte_at(Array[Byte], Int) -> Result[Byte, ModbusError]
 
 pub fn safe_quantity(UInt16, Int) -> Result[Int, ModbusError]
 
+pub fn scenario_boundary_suite(Byte, Byte) -> Result[ModbusScenario, ModbusError]
+
+pub fn scenario_fault_name(ScenarioFault) -> String
+
+pub fn scenario_outcome_name(ScenarioOutcome) -> String
+
+pub fn service_event_kind_name(ServiceEventKind) -> String
+
 pub fn set_bit(Array[Byte], Int, Bool) -> Result[Unit, ModbusError]
 
 pub fn should_retry(Mode, ModbusError) -> Bool
@@ -401,6 +529,8 @@ pub fn signed_register(UInt16) -> Int
 pub fn simulation_failures(Array[SimulationResult]) -> Int
 
 pub fn simulation_successes(Array[SimulationResult]) -> Int
+
+pub fn standard_frame_contracts() -> FrameContractCatalog
 
 pub fn summarize(Frame) -> FrameSummary
 
@@ -412,6 +542,12 @@ pub fn swap_register_bytes(Array[UInt16]) -> Array[UInt16]
 
 pub fn tcp_mode() -> Mode
 
+pub fn topology_health_name(TopologyHealth) -> String
+
+pub fn topology_node_kind_name(TopologyNodeKind) -> String
+
+pub fn transaction_state_name(TransactionState) -> String
+
 pub fn transport_is_network(Mode) -> Bool
 
 pub fn transport_is_serial(Mode) -> Bool
@@ -419,6 +555,8 @@ pub fn transport_is_serial(Mode) -> Bool
 pub fn transport_kind_mode(TransportKind) -> Mode
 
 pub fn transport_kind_name(TransportKind) -> String
+
+pub fn trend_direction_name(TrendDirection) -> String
 
 pub fn try_encode_ascii(Frame) -> Result[Array[Byte], ModbusError]
 
@@ -476,6 +614,8 @@ pub fn with_function(Frame, Byte) -> Frame
 
 pub fn with_unit(Frame, Byte) -> Frame
 
+pub fn work_order_state_name(WorkOrderState) -> String
+
 pub fn writable_function_names() -> Array[String]
 
 pub fn write_file_record(Byte, Array[FileRecordWrite]) -> Result[Frame, ModbusError]
@@ -495,6 +635,53 @@ pub fn write_single_register_checked(Byte, UInt16, UInt16) -> Result[Frame, Modb
 // Errors
 
 // Types and methods
+pub(all) enum AccessOperation {
+  ReadOperation
+  WriteOperation
+  DiagnosticsOperation
+  IdentificationOperation
+} derive(Eq, @debug.Debug)
+
+pub(all) struct AccessPolicy {
+  rules : Array[AccessRule]
+  max_rules : Int
+  mut default_allow : Bool
+}
+pub fn AccessPolicy::add(Self, AccessRule) -> Result[Unit, ModbusError]
+pub fn AccessPolicy::allows(Self, AccessRole, AccessOperation, Frame) -> Bool
+pub fn AccessPolicy::decision(Self, AccessRole, AccessOperation, Frame) -> Result[Unit, ModbusError]
+pub fn AccessPolicy::length(Self) -> Int
+pub fn AccessPolicy::new(default_allow? : Bool, max_rules? : Int) -> Result[Self, ModbusError]
+pub fn AccessPolicy::remove(Self, String) -> Result[AccessRule, ModbusError]
+pub fn AccessPolicy::rules(Self) -> Array[AccessRule]
+pub fn AccessPolicy::set_default(Self, Bool) -> Unit
+pub fn AccessPolicy::summary(Self) -> String
+
+pub(all) enum AccessRole {
+  Observer
+  Operator
+  Engineer
+  Administrator
+} derive(Eq, @debug.Debug)
+
+pub(all) struct AccessRule {
+  name : String
+  role : AccessRole
+  operation : AccessOperation
+  unit_start : Byte
+  unit_end : Byte
+  functions : Array[Byte]
+  mut enabled : Bool
+}
+pub fn AccessRule::enabled(Self) -> Bool
+pub fn AccessRule::matches(Self, AccessRole, AccessOperation, Frame) -> Bool
+pub fn AccessRule::name(Self) -> String
+pub fn AccessRule::new(String, AccessRole, AccessOperation, Byte, Byte, Array[Byte]) -> Result[Self, ModbusError]
+pub fn AccessRule::operation(Self) -> AccessOperation
+pub fn AccessRule::role(Self) -> AccessRole
+pub fn AccessRule::set_enabled(Self, Bool) -> Unit
+pub fn AccessRule::summary(Self) -> String
+
 pub struct AddressAllocator {
   capacity : Int
   used : Array[AddressRange]
@@ -522,6 +709,95 @@ pub fn AddressRange::slice(Self, Int, Int) -> Result[Self, ModbusError]
 pub fn AddressRange::split(Self, Int) -> Result[Array[Self], ModbusError]
 pub fn AddressRange::start(Self) -> UInt16
 
+pub(all) enum Aggregation {
+  LastValue
+  MinimumValue
+  MaximumValue
+  SumValue
+  AverageValue
+  CountValue
+} derive(Eq, @debug.Debug)
+
+pub(all) enum AlarmCondition {
+  Below
+  AtOrBelow
+  Equal
+  NotEqual
+  AtOrAbove
+  Above
+  Outside
+  Inside
+} derive(Eq, @debug.Debug)
+
+pub(all) struct AlarmEngine {
+  instances : Array[AlarmInstance]
+  events : Array[AlarmEvent]
+  max_events : Int
+  mut next_sequence : Int
+}
+pub fn AlarmEngine::acknowledge(Self, String, String, Int) -> Result[AlarmEvent, ModbusError]
+pub fn AlarmEngine::active(Self) -> Array[AlarmInstance]
+pub fn AlarmEngine::active_count(Self) -> Int
+pub fn AlarmEngine::add_rule(Self, AlarmRule) -> Result[Unit, ModbusError]
+pub fn AlarmEngine::clear_events(Self) -> Unit
+pub fn AlarmEngine::evaluate(Self, String, Int, Int) -> Result[Array[AlarmEvent], ModbusError]
+pub fn AlarmEngine::event_count(Self) -> Int
+pub fn AlarmEngine::events(Self) -> Array[AlarmEvent]
+pub fn AlarmEngine::events_for_point(Self, String) -> Array[AlarmEvent]
+pub fn AlarmEngine::instance(Self, String) -> AlarmInstance?
+pub fn AlarmEngine::new(max_events? : Int) -> Result[Self, ModbusError]
+pub fn AlarmEngine::remove_rule(Self, String) -> Result[Unit, ModbusError]
+pub fn AlarmEngine::reset(Self) -> Unit
+pub fn AlarmEngine::rule_count(Self) -> Int
+pub fn AlarmEngine::shelve(Self, String, Int) -> Result[AlarmEvent, ModbusError]
+pub fn AlarmEngine::summary(Self) -> String
+pub fn AlarmEngine::unshelve(Self, String, Int) -> Result[AlarmEvent, ModbusError]
+
+pub(all) struct AlarmEvent {
+  sequence : Int
+  rule_id : String
+  point_id : String
+  state : AlarmState
+  value : Int
+  timestamp : Int
+  severity : AlarmSeverity
+  message : String
+} derive(@debug.Debug)
+pub fn AlarmEvent::message(Self) -> String
+pub fn AlarmEvent::point_id(Self) -> String
+pub fn AlarmEvent::rule_id(Self) -> String
+pub fn AlarmEvent::sequence(Self) -> Int
+pub fn AlarmEvent::severity(Self) -> AlarmSeverity
+pub fn AlarmEvent::state(Self) -> AlarmState
+pub fn AlarmEvent::summary(Self) -> String
+pub fn AlarmEvent::timestamp(Self) -> Int
+pub fn AlarmEvent::value(Self) -> Int
+
+pub(all) struct AlarmInstance {
+  rule : AlarmRule
+  mut state : AlarmState
+  mut pending_since : Int?
+  mut clearing_since : Int?
+  mut last_value : Int
+  mut last_timestamp : Int
+  mut transitions : Int
+  mut acknowledger : String?
+}
+pub fn AlarmInstance::acknowledge(Self, String) -> Result[Unit, ModbusError]
+pub fn AlarmInstance::acknowledger(Self) -> String?
+pub fn AlarmInstance::evaluate(Self, Int, Int, Int) -> AlarmTransition
+pub fn AlarmInstance::id(Self) -> String
+pub fn AlarmInstance::is_active(Self) -> Bool
+pub fn AlarmInstance::last_timestamp(Self) -> Int
+pub fn AlarmInstance::last_value(Self) -> Int
+pub fn AlarmInstance::new(AlarmRule) -> Self
+pub fn AlarmInstance::point_id(Self) -> String
+pub fn AlarmInstance::rule(Self) -> AlarmRule
+pub fn AlarmInstance::shelve(Self) -> Result[Unit, ModbusError]
+pub fn AlarmInstance::state(Self) -> AlarmState
+pub fn AlarmInstance::transitions(Self) -> Int
+pub fn AlarmInstance::unshelve(Self) -> Unit
+
 pub(all) struct AlarmMonitor {
   threshold : Threshold
   mut state : ThresholdState
@@ -535,6 +811,130 @@ pub fn AlarmMonitor::reset(Self) -> Unit
 pub fn AlarmMonitor::state(Self) -> ThresholdState
 pub fn AlarmMonitor::threshold(Self) -> Threshold
 pub fn AlarmMonitor::transitions(Self) -> Int
+
+pub(all) struct AlarmRule {
+  id : String
+  point_id : String
+  condition : AlarmCondition
+  low : Int
+  high : Int
+  severity : AlarmSeverity
+  activation_delay : Int
+  clear_delay : Int
+  hysteresis : Int
+  mut enabled : Bool
+}
+pub fn AlarmRule::activation_delay(Self) -> Int
+pub fn AlarmRule::clear_delay(Self) -> Int
+pub fn AlarmRule::clear_matches(Self, Int) -> Bool
+pub fn AlarmRule::condition(Self) -> AlarmCondition
+pub fn AlarmRule::enabled(Self) -> Bool
+pub fn AlarmRule::high(Self) -> Int
+pub fn AlarmRule::hysteresis(Self) -> Int
+pub fn AlarmRule::id(Self) -> String
+pub fn AlarmRule::low(Self) -> Int
+pub fn AlarmRule::matches(Self, Int) -> Bool
+pub fn AlarmRule::new(String, String, AlarmCondition, Int, Int, AlarmSeverity, activation_delay? : Int, clear_delay? : Int, hysteresis? : Int) -> Result[Self, ModbusError]
+pub fn AlarmRule::point_id(Self) -> String
+pub fn AlarmRule::set_enabled(Self, Bool) -> Unit
+pub fn AlarmRule::severity(Self) -> AlarmSeverity
+pub fn AlarmRule::summary(Self) -> String
+
+pub(all) enum AlarmSeverity {
+  Informational
+  Warning
+  Critical
+} derive(Eq, @debug.Debug)
+
+pub(all) enum AlarmState {
+  Normal
+  Pending
+  Active
+  Acknowledged
+  Clearing
+  Shelved
+} derive(Eq, @debug.Debug)
+
+pub(all) enum AlarmTransition {
+  Unchanged(AlarmState)
+  Changed(AlarmEvent)
+} derive(@debug.Debug)
+
+pub(all) struct AnalyticsReport {
+  direction : TrendDirection
+  average : Int
+  minimum : Int
+  maximum : Int
+  slope : Int
+  anomalies : Int
+  p95 : Int
+}
+pub fn AnalyticsReport::anomalies(Self) -> Int
+pub fn AnalyticsReport::average(Self) -> Int
+pub fn AnalyticsReport::direction(Self) -> TrendDirection
+pub fn AnalyticsReport::maximum(Self) -> Int
+pub fn AnalyticsReport::minimum(Self) -> Int
+pub fn AnalyticsReport::p95(Self) -> Int
+pub fn AnalyticsReport::slope(Self) -> Int
+
+pub(all) struct AnalyticsRule {
+  id : String
+  lower : Int?
+  upper : Int?
+  spike_delta : Int
+  flatline_delta : Int
+  flatline_count : Int
+}
+pub fn AnalyticsRule::evaluate(Self, AnalyticsWindow) -> Array[ValueAnomaly]
+pub fn AnalyticsRule::flatline_count(Self) -> Int
+pub fn AnalyticsRule::flatline_delta(Self) -> Int
+pub fn AnalyticsRule::id(Self) -> String
+pub fn AnalyticsRule::lower(Self) -> Int?
+pub fn AnalyticsRule::new(String, lower? : Int, upper? : Int, spike_delta? : Int, flatline_delta? : Int, flatline_count? : Int) -> Result[Self, ModbusError]
+pub fn AnalyticsRule::spike_delta(Self) -> Int
+pub fn AnalyticsRule::upper(Self) -> Int?
+
+pub(all) struct AnalyticsSample {
+  timestamp : Int
+  value : Int
+  quality : ReadingQuality
+}
+pub fn AnalyticsSample::new(Int, Int, quality? : ReadingQuality) -> Result[Self, ModbusError]
+pub fn AnalyticsSample::quality(Self) -> ReadingQuality
+pub fn AnalyticsSample::timestamp(Self) -> Int
+pub fn AnalyticsSample::usable(Self) -> Bool
+pub fn AnalyticsSample::value(Self) -> Int
+
+pub(all) struct AnalyticsWindow {
+  id : String
+  capacity : Int
+  samples : Array[AnalyticsSample]
+  mut dropped : Int
+}
+pub fn AnalyticsWindow::append(Self, AnalyticsSample) -> Result[Unit, ModbusError]
+pub fn AnalyticsWindow::at(Self, Int) -> Result[AnalyticsSample, ModbusError]
+pub fn AnalyticsWindow::average(Self) -> Result[Int, ModbusError]
+pub fn AnalyticsWindow::capacity(Self) -> Int
+pub fn AnalyticsWindow::direction(Self, Int) -> Result[TrendDirection, ModbusError]
+pub fn AnalyticsWindow::dropped(Self) -> Int
+pub fn AnalyticsWindow::first(Self) -> AnalyticsSample?
+pub fn AnalyticsWindow::id(Self) -> String
+pub fn AnalyticsWindow::last(Self) -> AnalyticsSample?
+pub fn AnalyticsWindow::length(Self) -> Int
+pub fn AnalyticsWindow::maximum(Self) -> Result[Int, ModbusError]
+pub fn AnalyticsWindow::minimum(Self) -> Result[Int, ModbusError]
+pub fn AnalyticsWindow::new(String, capacity? : Int) -> Result[Self, ModbusError]
+pub fn AnalyticsWindow::range(Self) -> Result[Int, ModbusError]
+pub fn AnalyticsWindow::slope(Self) -> Result[Int, ModbusError]
+pub fn AnalyticsWindow::usable_values(Self) -> Array[Int]
+
+pub(all) enum AnomalyKind {
+  UpperLimitAnomaly
+  LowerLimitAnomaly
+  SpikeAnomaly
+  FlatlineAnomaly
+  RateAnomaly
+} derive(Eq, @debug.Debug)
 
 pub(all) struct AuditEntry {
   sequence : Int
@@ -613,6 +1013,29 @@ pub fn BitVector::to_bits(Self) -> Array[Bool]
 pub fn BitVector::to_bytes(Self) -> Array[Byte]
 pub fn BitVector::unpack_into(Self, Int, Int, Array[Byte]) -> Result[Unit, ModbusError]
 
+pub(all) enum BridgeAction {
+  ForwardBridge
+  RewriteBridge
+  DenyBridge
+  AuditBridge
+  RateLimitBridge
+} derive(Eq, @debug.Debug)
+
+pub(all) struct BridgeDecision {
+  rule_id : String?
+  action : BridgeAction
+  frame : Frame?
+  reason : String
+  matched : Bool
+}
+pub fn BridgeDecision::action(Self) -> BridgeAction
+pub fn BridgeDecision::frame(Self) -> Frame?
+pub fn BridgeDecision::matched(ServiceBridgeRule, BridgeAction, Frame?, String) -> Self
+pub fn BridgeDecision::matched_rule(Self) -> Bool
+pub fn BridgeDecision::new(BridgeAction, String) -> Self
+pub fn BridgeDecision::reason(Self) -> String
+pub fn BridgeDecision::rule_id(Self) -> String?
+
 pub struct ByteQueue {
   data : Array[Byte]
   max_length : Int
@@ -630,6 +1053,218 @@ pub fn ByteQueue::remaining(Self) -> Int
 pub fn ByteQueue::snapshot(Self) -> Array[Byte]
 pub fn ByteQueue::take(Self, Int) -> Result[Array[Byte], ModbusError]
 pub fn ByteQueue::take_all(Self) -> Array[Byte]
+
+pub(all) struct CalibrationCurve {
+  samples : Array[CalibrationSample]
+  max_samples : Int
+  clamp : Bool
+}
+pub fn CalibrationCurve::add(Self, CalibrationSample) -> Result[Unit, ModbusError]
+pub fn CalibrationCurve::convert(Self, Int) -> Result[Int, ModbusError]
+pub fn CalibrationCurve::convert_many(Self, Array[Int]) -> Result[Array[Int], ModbusError]
+pub fn CalibrationCurve::length(Self) -> Int
+pub fn CalibrationCurve::new(max_samples? : Int, clamp? : Bool) -> Result[Self, ModbusError]
+pub fn CalibrationCurve::raw_max(Self) -> Result[Int, ModbusError]
+pub fn CalibrationCurve::raw_min(Self) -> Result[Int, ModbusError]
+pub fn CalibrationCurve::sample(Self, Int) -> Result[CalibrationSample, ModbusError]
+pub fn CalibrationCurve::snapshot(Self) -> Array[CalibrationSample]
+
+pub(all) struct CalibrationSample {
+  raw : Int
+  engineering : Int
+}
+pub fn CalibrationSample::engineering(Self) -> Int
+pub fn CalibrationSample::new(Int, Int) -> Self
+pub fn CalibrationSample::raw(Self) -> Int
+
+pub(all) struct CapabilitySet {
+  functions : Array[Byte]
+  modes : Array[Mode]
+  max_pdu : Int
+  broadcasts : Bool
+}
+pub fn CapabilitySet::add_function(Self, Byte) -> Result[Unit, ModbusError]
+pub fn CapabilitySet::add_mode(Self, Mode) -> Unit
+pub fn CapabilitySet::broadcasts(Self) -> Bool
+pub fn CapabilitySet::coverage(Self, Array[Byte]) -> Int
+pub fn CapabilitySet::functions(Self) -> Array[Byte]
+pub fn CapabilitySet::max_pdu(Self) -> Int
+pub fn CapabilitySet::modes(Self) -> Array[Mode]
+pub fn CapabilitySet::new(max_pdu? : Int, broadcasts? : Bool) -> Result[Self, ModbusError]
+pub fn CapabilitySet::supports_function(Self, Byte) -> Bool
+pub fn CapabilitySet::supports_mode(Self, Mode) -> Bool
+pub fn CapabilitySet::validate_frame(Self, Frame) -> Result[Unit, ModbusError]
+
+pub(all) struct CapacityLedger {
+  limits : Array[CapacityLimit]
+  reservations : Array[CapacityReservation]
+  max_reservations : Int
+  mut sequence : Int
+}
+pub fn CapacityLedger::add_limit(Self, CapacityLimit) -> Result[Unit, ModbusError]
+pub fn CapacityLedger::expire(Self, Int, Int) -> Result[Int, ModbusError]
+pub fn CapacityLedger::export_lines(Self) -> Array[String]
+pub fn CapacityLedger::limit(Self, CapacityResource) -> CapacityLimit?
+pub fn CapacityLedger::limit_count(Self) -> Int
+pub fn CapacityLedger::new(max_reservations? : Int) -> Result[Self, ModbusError]
+pub fn CapacityLedger::pressure(Self) -> Array[CapacityResource]
+pub fn CapacityLedger::release(Self, String) -> Result[Unit, ModbusError]
+pub fn CapacityLedger::reservation_count(Self) -> Int
+pub fn CapacityLedger::reserve(Self, CapacityResource, Int, Int) -> Result[CapacityReservation, ModbusError]
+pub fn CapacityLedger::reset(Self) -> Unit
+
+pub(all) struct CapacityLimit {
+  resource : CapacityResource
+  name : String
+  soft_limit : Int
+  hard_limit : Int
+  mut used : Int
+}
+pub fn CapacityLimit::available(Self) -> Int
+pub fn CapacityLimit::hard_limit(Self) -> Int
+pub fn CapacityLimit::name(Self) -> String
+pub fn CapacityLimit::new(CapacityResource, String, Int, Int) -> Result[Self, ModbusError]
+pub fn CapacityLimit::over_hard(Self) -> Bool
+pub fn CapacityLimit::over_soft(Self) -> Bool
+pub fn CapacityLimit::release(Self, Int) -> Result[Unit, ModbusError]
+pub fn CapacityLimit::reserve(Self, Int) -> Result[Unit, ModbusError]
+pub fn CapacityLimit::reset(Self) -> Unit
+pub fn CapacityLimit::resource(Self) -> CapacityResource
+pub fn CapacityLimit::soft_limit(Self) -> Int
+pub fn CapacityLimit::used(Self) -> Int
+
+pub(all) struct CapacityReservation {
+  id : String
+  resource : CapacityResource
+  amount : Int
+  created_at : Int
+  mut released : Bool
+}
+pub fn CapacityReservation::amount(Self) -> Int
+pub fn CapacityReservation::created_at(Self) -> Int
+pub fn CapacityReservation::id(Self) -> String
+pub fn CapacityReservation::mark_released(Self) -> Result[Unit, ModbusError]
+pub fn CapacityReservation::new(String, CapacityResource, Int, Int) -> Result[Self, ModbusError]
+pub fn CapacityReservation::released(Self) -> Bool
+pub fn CapacityReservation::resource(Self) -> CapacityResource
+
+pub(all) enum CapacityResource {
+  InFlightRequests
+  PollRegisters
+  CaptureBytes
+  CommandQueue
+  HistorianSamples
+  AlarmEvents
+} derive(Eq, @debug.Debug)
+
+pub(all) enum CaptureDirection {
+  Received
+  Transmitted
+  Internal
+} derive(Eq, @debug.Debug)
+
+pub(all) struct CaptureFilter {
+  mode : Mode?
+  unit_id : Byte?
+  function : Byte?
+  direction : CaptureDirection?
+  status : CaptureStatus?
+  start_time : Int?
+  end_time : Int?
+}
+pub fn CaptureFilter::between(Self, Int, Int) -> Result[Self, ModbusError]
+pub fn CaptureFilter::matches(Self, CaptureRecord) -> Bool
+pub fn CaptureFilter::new() -> Self
+pub fn CaptureFilter::with_direction(Self, CaptureDirection) -> Self
+pub fn CaptureFilter::with_function(Self, Byte) -> Self
+pub fn CaptureFilter::with_mode(Self, Mode) -> Self
+pub fn CaptureFilter::with_status(Self, CaptureStatus) -> Self
+pub fn CaptureFilter::with_unit(Self, Byte) -> Self
+
+pub(all) struct CaptureRecord {
+  id : Int
+  timestamp : Int
+  mode : Mode
+  transaction_id : UInt16
+  direction : CaptureDirection
+  bytes : Array[Byte]
+  frame : Frame?
+  status : CaptureStatus
+  note : String
+}
+pub fn CaptureRecord::bytes(Self) -> Array[Byte]
+pub fn CaptureRecord::direction(Self) -> CaptureDirection
+pub fn CaptureRecord::frame(Self) -> Frame?
+pub fn CaptureRecord::from_frame(Int, Int, Mode, UInt16, CaptureDirection, Frame, note? : String) -> Result[Self, ModbusError]
+pub fn CaptureRecord::function(Self) -> Byte?
+pub fn CaptureRecord::id(Self) -> Int
+pub fn CaptureRecord::is_valid(Self) -> Bool
+pub fn CaptureRecord::mode(Self) -> Mode
+pub fn CaptureRecord::new(Int, Int, Mode, UInt16, CaptureDirection, Array[Byte], note? : String) -> Result[Self, ModbusError]
+pub fn CaptureRecord::note(Self) -> String
+pub fn CaptureRecord::status(Self) -> CaptureStatus
+pub fn CaptureRecord::summary(Self) -> String
+pub fn CaptureRecord::timestamp(Self) -> Int
+pub fn CaptureRecord::transaction_id(Self) -> UInt16
+pub fn CaptureRecord::unit_id(Self) -> Byte?
+
+pub(all) struct CaptureRing {
+  records : Array[CaptureRecord]
+  max_records : Int
+  mut next_id : Int
+  mut lost : Int
+}
+pub fn CaptureRing::byte_count(Self) -> Int
+pub fn CaptureRing::capacity(Self) -> Int
+pub fn CaptureRing::clear(Self) -> Unit
+pub fn CaptureRing::corrupt_count(Self) -> Int
+pub fn CaptureRing::decoded_count(Self) -> Int
+pub fn CaptureRing::get(Self, Int) -> Result[CaptureRecord, ModbusError]
+pub fn CaptureRing::latest(Self) -> CaptureRecord?
+pub fn CaptureRing::length(Self) -> Int
+pub fn CaptureRing::lost(Self) -> Int
+pub fn CaptureRing::new(max_records? : Int) -> Result[Self, ModbusError]
+pub fn CaptureRing::push(Self, Int, Mode, UInt16, CaptureDirection, Array[Byte], note? : String) -> Result[CaptureRecord, ModbusError]
+pub fn CaptureRing::push_frame(Self, Int, Mode, UInt16, CaptureDirection, Frame, note? : String) -> Result[CaptureRecord, ModbusError]
+pub fn CaptureRing::query(Self, CaptureFilter) -> Array[CaptureRecord]
+pub fn CaptureRing::snapshot(Self) -> Array[CaptureRecord]
+pub fn CaptureRing::summary(Self) -> String
+
+pub(all) enum CaptureStatus {
+  Decoded
+  Undecoded
+  Corrupt
+  Truncated
+} derive(Eq, @debug.Debug)
+
+pub(all) struct CircuitGuard {
+  name : String
+  failure_threshold : Int
+  recovery_after : Int
+  probe_limit : Int
+  mut state : CircuitGuardState
+  mut consecutive_failures : Int
+  mut opened_at : Int?
+  mut probes : Int
+}
+pub fn CircuitGuard::allow(Self, Int) -> Result[Bool, ModbusError]
+pub fn CircuitGuard::consecutive_failures(Self) -> Int
+pub fn CircuitGuard::failure_threshold(Self) -> Int
+pub fn CircuitGuard::force_close(Self) -> Unit
+pub fn CircuitGuard::force_open(Self, Int) -> Result[Unit, ModbusError]
+pub fn CircuitGuard::name(Self) -> String
+pub fn CircuitGuard::new(String, Int, Int, probe_limit? : Int) -> Result[Self, ModbusError]
+pub fn CircuitGuard::opened_at(Self) -> Int?
+pub fn CircuitGuard::record_failure(Self, Int) -> Result[Unit, ModbusError]
+pub fn CircuitGuard::record_success(Self) -> Unit
+pub fn CircuitGuard::recovery_after(Self) -> Int
+pub fn CircuitGuard::state(Self) -> CircuitGuardState
+
+pub(all) enum CircuitGuardState {
+  ClosedCircuit
+  OpenCircuit
+  HalfOpenCircuit
+} derive(Eq, @debug.Debug)
 
 pub struct Client {
   mode : Mode
@@ -694,6 +1329,150 @@ pub fn CoilBank::snapshot_bytes(Self) -> Array[Byte]
 pub fn CoilBank::start(Self) -> UInt16
 pub fn CoilBank::write(Self, UInt16, Array[Bool]) -> Result[Unit, ModbusError]
 
+pub(all) struct CommandArgument {
+  key : String
+  value : String
+}
+pub fn CommandArgument::as_bool(Self) -> Result[Bool, ModbusError]
+pub fn CommandArgument::as_int(Self) -> Result[Int, ModbusError]
+pub fn CommandArgument::key(Self) -> String
+pub fn CommandArgument::new(String, String) -> Result[Self, ModbusError]
+pub fn CommandArgument::value(Self) -> String
+
+pub(all) struct CommandAuditEntry {
+  sequence : Int
+  command_id : String
+  principal : String
+  device_id : String
+  operation : String
+  state : DeviceCommandState
+  timestamp : Int
+  detail : String
+}
+pub fn CommandAuditEntry::command_id(Self) -> String
+pub fn CommandAuditEntry::detail(Self) -> String
+pub fn CommandAuditEntry::device_id(Self) -> String
+pub fn CommandAuditEntry::new(Int, DeviceCommand, DeviceCommandState, Int, detail? : String) -> Result[Self, ModbusError]
+pub fn CommandAuditEntry::operation(Self) -> String
+pub fn CommandAuditEntry::principal(Self) -> String
+pub fn CommandAuditEntry::sequence(Self) -> Int
+pub fn CommandAuditEntry::state(Self) -> DeviceCommandState
+pub fn CommandAuditEntry::timestamp(Self) -> Int
+
+pub(all) struct CommandCenter {
+  queue : Array[DeviceCommand]
+  completed : Array[CommandExecution]
+  audit : Array[CommandAuditEntry]
+  max_queue : Int
+  max_audit : Int
+  mut sequence : Int
+}
+pub fn CommandCenter::audit_count(Self) -> Int
+pub fn CommandCenter::cancel(Self, String, Int) -> Result[Unit, ModbusError]
+pub fn CommandCenter::completed_count(Self) -> Int
+pub fn CommandCenter::find_audit(Self, String) -> Array[CommandAuditEntry]
+pub fn CommandCenter::finish(Self, DeviceCommand, CommandExecution) -> Result[Unit, ModbusError]
+pub fn CommandCenter::new(max_queue? : Int, max_audit? : Int) -> Result[Self, ModbusError]
+pub fn CommandCenter::next(Self, Int) -> Result[DeviceCommand, ModbusError]
+pub fn CommandCenter::queue_count(Self) -> Int
+pub fn CommandCenter::recent(Self, Int) -> Result[Array[CommandAuditEntry], ModbusError]
+pub fn CommandCenter::state_counts(Self) -> Array[Int]
+pub fn CommandCenter::submit(Self, DeviceCommand, Int) -> Result[Unit, ModbusError]
+
+pub(all) struct CommandExecution {
+  command_id : String
+  state : DeviceCommandState
+  started_at : Int
+  finished_at : Int
+  response : Frame?
+  error : ModbusError?
+  message : String
+}
+pub fn CommandExecution::command_id(Self) -> String
+pub fn CommandExecution::duration(Self) -> Int
+pub fn CommandExecution::error(Self) -> ModbusError?
+pub fn CommandExecution::finished_at(Self) -> Int
+pub fn CommandExecution::message(Self) -> String
+pub fn CommandExecution::new(String, DeviceCommandState, Int, Int, response? : Frame, error? : ModbusError, message? : String) -> Result[Self, ModbusError]
+pub fn CommandExecution::response(Self) -> Frame?
+pub fn CommandExecution::started_at(Self) -> Int
+pub fn CommandExecution::state(Self) -> DeviceCommandState
+
+pub(all) struct ConfigEntry {
+  key : String
+  value : ConfigValue
+  source : String
+  revision : Int
+}
+pub fn ConfigEntry::display(Self, redact? : Bool) -> String
+pub fn ConfigEntry::key(Self) -> String
+pub fn ConfigEntry::new(String, ConfigValue, source? : String, revision? : Int) -> Result[Self, ModbusError]
+pub fn ConfigEntry::revision(Self) -> Int
+pub fn ConfigEntry::source(Self) -> String
+pub fn ConfigEntry::value(Self) -> ConfigValue
+
+pub(all) enum ConfigKind {
+  Text
+  Integer
+  Boolean
+  ModeValue
+  ByteSequence
+} derive(Eq, @debug.Debug)
+
+pub(all) enum ConfigOperation {
+  SetValue(String, ConfigValue)
+  RemoveValue(String)
+} derive(@debug.Debug)
+
+pub(all) struct ConfigSchema {
+  specs : Array[ConfigSpec]
+  max_specs : Int
+}
+pub fn ConfigSchema::add(Self, ConfigSpec) -> Result[Unit, ModbusError]
+pub fn ConfigSchema::find(Self, String) -> ConfigSpec?
+pub fn ConfigSchema::get(Self, Int) -> Result[ConfigSpec, ModbusError]
+pub fn ConfigSchema::length(Self) -> Int
+pub fn ConfigSchema::new(max_specs? : Int) -> Result[Self, ModbusError]
+pub fn ConfigSchema::snapshot(Self) -> Array[ConfigSpec]
+pub fn ConfigSchema::validate_values(Self, Array[ConfigEntry]) -> Result[Unit, ModbusError]
+
+pub(all) struct ConfigSpec {
+  key : String
+  kind : ConfigKind
+  required : Bool
+  default_value : ConfigValue?
+  min_integer : Int?
+  max_integer : Int?
+  min_length : Int
+  max_length : Int
+  secret : Bool
+  description : String
+}
+pub fn ConfigSpec::default_value(Self) -> ConfigValue?
+pub fn ConfigSpec::description(Self) -> String
+pub fn ConfigSpec::key(Self) -> String
+pub fn ConfigSpec::kind(Self) -> ConfigKind
+pub fn ConfigSpec::new(String, ConfigKind, required? : Bool, default_value? : ConfigValue, min_integer? : Int, max_integer? : Int, min_length? : Int, max_length? : Int, secret? : Bool, description? : String) -> Result[Self, ModbusError]
+pub fn ConfigSpec::required(Self) -> Bool
+pub fn ConfigSpec::secret(Self) -> Bool
+pub fn ConfigSpec::summary(Self) -> String
+pub fn ConfigSpec::validate(Self, ConfigValue) -> Result[Unit, ModbusError]
+
+pub(all) enum ConfigValue {
+  TextValue(String)
+  IntegerValue(Int)
+  BooleanValue(Bool)
+  ModeValue(Mode)
+  ByteSequenceValue(Array[Byte])
+} derive(@debug.Debug)
+pub fn ConfigValue::as_boolean(Self) -> Result[Bool, ModbusError]
+pub fn ConfigValue::as_bytes(Self) -> Result[Array[Byte], ModbusError]
+pub fn ConfigValue::as_integer(Self) -> Result[Int, ModbusError]
+pub fn ConfigValue::as_mode(Self) -> Result[Mode, ModbusError]
+pub fn ConfigValue::as_text(Self) -> Result[String, ModbusError]
+pub fn ConfigValue::display(Self, redact? : Bool) -> String
+pub fn ConfigValue::kind(Self) -> ConfigKind
+
 pub(all) struct ConformanceResult {
   name : String
   passed : Bool
@@ -717,6 +1496,15 @@ pub(all) struct ConformanceVector {
 }
 pub fn ConformanceVector::invalid(String, Mode, Array[Byte], ModbusError) -> Self
 pub fn ConformanceVector::valid(String, Mode, Array[Byte], Byte) -> Self
+
+pub(all) enum ContractResult {
+  ContractPass
+  ContractUnitMismatch
+  ContractFunctionMismatch
+  ContractLengthMismatch
+  ContractDataMismatch
+  ContractException
+} derive(Eq, @debug.Debug)
 
 pub(all) struct Counter {
   name : String
@@ -761,6 +1549,65 @@ pub fn Device::set_busy(Self, Bool) -> Unit
 pub fn Device::set_server_id(Self, Array[Byte]) -> Result[Unit, ModbusError]
 pub fn Device::unit_id(Self) -> Byte
 
+pub(all) struct DeviceCommand {
+  id : String
+  device_id : String
+  unit_id : Byte
+  kind : DeviceCommandKind
+  function : Byte
+  address : UInt16
+  quantity : Int
+  arguments : Array[CommandArgument]
+  principal : String
+  reason : String
+  timeout : Int
+  mut state : DeviceCommandState
+  mut created_at : Int
+}
+pub fn DeviceCommand::add_argument(Self, CommandArgument) -> Result[Unit, ModbusError]
+pub fn DeviceCommand::address(Self) -> UInt16
+pub fn DeviceCommand::argument(Self, String) -> CommandArgument?
+pub fn DeviceCommand::argument_count(Self) -> Int
+pub fn DeviceCommand::created_at(Self) -> Int
+pub fn DeviceCommand::device_id(Self) -> String
+pub fn DeviceCommand::function(Self) -> Byte
+pub fn DeviceCommand::id(Self) -> String
+pub fn DeviceCommand::is_terminal(Self) -> Bool
+pub fn DeviceCommand::is_write(Self) -> Bool
+pub fn DeviceCommand::kind(Self) -> DeviceCommandKind
+pub fn DeviceCommand::new(String, String, Byte, DeviceCommandKind, Byte, UInt16, Int, String, String, Int, timeout? : Int) -> Result[Self, ModbusError]
+pub fn DeviceCommand::principal(Self) -> String
+pub fn DeviceCommand::quantity(Self) -> Int
+pub fn DeviceCommand::reason(Self) -> String
+pub fn DeviceCommand::request(Self) -> Result[Frame, ModbusError]
+pub fn DeviceCommand::set_state(Self, DeviceCommandState) -> Result[Unit, ModbusError]
+pub fn DeviceCommand::state(Self) -> DeviceCommandState
+pub fn DeviceCommand::timeout(Self) -> Int
+pub fn DeviceCommand::unit_id(Self) -> Byte
+pub fn DeviceCommand::verify_address(Self) -> Bool
+
+pub(all) enum DeviceCommandKind {
+  WriteCoilCommand
+  WriteRegisterCommand
+  WriteCoilsCommand
+  WriteRegistersCommand
+  ReadVerificationCommand
+  ClearAlarmCommand
+  RestartDeviceCommand
+  CustomCommand
+} derive(Eq, @debug.Debug)
+
+pub(all) enum DeviceCommandState {
+  Queued
+  Validating
+  Dispatched
+  Acknowledged
+  Rejected
+  TimedOut
+  FailedCommand
+  CancelledCommand
+} derive(Eq, @debug.Debug)
+
 pub(all) struct DeviceHealth {
   unit_id : Byte
   event_count : UInt16
@@ -802,6 +1649,23 @@ pub fn DeviceIdentityCatalog::objects(Self) -> Array[DeviceIdObject]
 pub fn DeviceIdentityCatalog::response(Self, Frame) -> Result[Frame, ModbusError]
 pub fn DeviceIdentityCatalog::set_conformity(Self, Byte) -> Unit
 
+pub(all) struct DeviceInventory {
+  devices : Array[InventoryDevice]
+  max_devices : Int
+  mut revision : Int
+}
+pub fn DeviceInventory::add(Self, InventoryDevice) -> Result[Unit, ModbusError]
+pub fn DeviceInventory::by_state(Self, InventoryState) -> Array[String]
+pub fn DeviceInventory::by_tag(Self, String) -> Array[String]
+pub fn DeviceInventory::by_vendor(Self, String) -> Array[String]
+pub fn DeviceInventory::count(Self) -> Int
+pub fn DeviceInventory::export_lines(Self) -> Array[String]
+pub fn DeviceInventory::get(Self, String) -> InventoryDevice?
+pub fn DeviceInventory::mark_stale(Self, Int, Int) -> Result[Int, ModbusError]
+pub fn DeviceInventory::new(max_devices? : Int) -> Result[Self, ModbusError]
+pub fn DeviceInventory::remove(Self, String) -> Result[InventoryDevice, ModbusError]
+pub fn DeviceInventory::revision(Self) -> Int
+
 pub(all) struct DeviceMemory {
   coils : CoilBank
   discrete_inputs : CoilBank
@@ -818,10 +1682,196 @@ pub fn DeviceMemory::load_holding(Self, UInt16, Array[UInt16]) -> Result[Unit, M
 pub fn DeviceMemory::load_input(Self, UInt16, Array[UInt16]) -> Result[Unit, ModbusError]
 pub fn DeviceMemory::new(coil_capacity? : Int, register_capacity? : Int) -> Result[Self, ModbusError]
 
+pub(all) struct DeviceProfile {
+  name : String
+  model : String
+  unit_id : Byte
+  revision : String
+  points : Array[ProfilePoint]
+  max_points : Int
+}
+pub fn DeviceProfile::add_point(Self, ProfilePoint) -> Result[Unit, ModbusError]
+pub fn DeviceProfile::find(Self, String) -> ProfilePoint?
+pub fn DeviceProfile::model(Self) -> String
+pub fn DeviceProfile::name(Self) -> String
+pub fn DeviceProfile::new(String, String, Byte, revision? : String, max_points? : Int) -> Result[Self, ModbusError]
+pub fn DeviceProfile::point(Self, Int) -> Result[ProfilePoint, ModbusError]
+pub fn DeviceProfile::point_count(Self) -> Int
+pub fn DeviceProfile::points(Self) -> Array[ProfilePoint]
+pub fn DeviceProfile::points_in_area(Self, ProfileArea) -> Array[ProfilePoint]
+pub fn DeviceProfile::read_requests(Self) -> Result[Array[Frame], ModbusError]
+pub fn DeviceProfile::remove_point(Self, String) -> Result[ProfilePoint, ModbusError]
+pub fn DeviceProfile::revision(Self) -> String
+pub fn DeviceProfile::summary(Self) -> String
+pub fn DeviceProfile::unit_id(Self) -> Byte
+pub fn DeviceProfile::validate(Self) -> Result[Unit, ModbusError]
+pub fn DeviceProfile::writable_points(Self) -> Array[ProfilePoint]
+
+pub(all) struct DeviceReliability {
+  device_id : String
+  window : ReliabilityWindow
+  circuit : CircuitGuard
+  mut last_seen : Int?
+  mut total_requests : Int
+  mut total_successes : Int
+}
+pub fn DeviceReliability::allow_request(Self, Int) -> Result[Bool, ModbusError]
+pub fn DeviceReliability::average_latency(Self) -> Int
+pub fn DeviceReliability::device_id(Self) -> String
+pub fn DeviceReliability::failure_breakdown(Self) -> Array[Int]
+pub fn DeviceReliability::health_score(Self, Int) -> Result[Int, ModbusError]
+pub fn DeviceReliability::last_seen(Self) -> Int?
+pub fn DeviceReliability::new(String, Int, Int, Int) -> Result[Self, ModbusError]
+pub fn DeviceReliability::record(Self, ReliabilitySample) -> Result[Unit, ModbusError]
+pub fn DeviceReliability::state(Self) -> CircuitGuardState
+pub fn DeviceReliability::success_rate(Self) -> Int
+pub fn DeviceReliability::total_requests(Self) -> Int
+pub fn DeviceReliability::total_successes(Self) -> Int
+
 pub(all) enum DeviceResponse {
   Reply(Frame)
   NoReply
 }
+
+pub(all) struct DeviceService {
+  id : String
+  device_id : String
+  kind : DeviceServiceKind
+  endpoint : String
+  mut state : DeviceServiceState
+  mut started_at : Int?
+  mut stopped_at : Int?
+  mut restart_count : Int
+  tags : Array[String]
+}
+pub fn DeviceService::add_tag(Self, String) -> Result[Unit, ModbusError]
+pub fn DeviceService::device_id(Self) -> String
+pub fn DeviceService::drain(Self) -> Result[Unit, ModbusError]
+pub fn DeviceService::endpoint(Self) -> String
+pub fn DeviceService::fail(Self, Int) -> Result[Unit, ModbusError]
+pub fn DeviceService::id(Self) -> String
+pub fn DeviceService::kind(Self) -> DeviceServiceKind
+pub fn DeviceService::new(String, String, DeviceServiceKind, String) -> Result[Self, ModbusError]
+pub fn DeviceService::restart(Self, Int) -> Result[Unit, ModbusError]
+pub fn DeviceService::restart_count(Self) -> Int
+pub fn DeviceService::start(Self, Int) -> Result[Unit, ModbusError]
+pub fn DeviceService::started_at(Self) -> Int?
+pub fn DeviceService::state(Self) -> DeviceServiceState
+pub fn DeviceService::stop(Self, Int) -> Result[Unit, ModbusError]
+pub fn DeviceService::stopped_at(Self) -> Int?
+pub fn DeviceService::tag_count(Self) -> Int
+
+pub(all) enum DeviceServiceKind {
+  PollingService
+  CommandService
+  AlarmService
+  HistorianService
+  GatewayService
+  DiagnosticsService
+} derive(Eq, @debug.Debug)
+
+pub(all) struct DeviceServiceRegistry {
+  services : Array[DeviceService]
+  snapshots : Array[DeviceSnapshot]
+  max_services : Int
+  max_snapshots : Int
+}
+pub fn DeviceServiceRegistry::export_summary(Self) -> Array[String]
+pub fn DeviceServiceRegistry::failed(Self) -> Array[String]
+pub fn DeviceServiceRegistry::for_device(Self, String) -> Array[DeviceService]
+pub fn DeviceServiceRegistry::new(max_services? : Int, max_snapshots? : Int) -> Result[Self, ModbusError]
+pub fn DeviceServiceRegistry::put_snapshot(Self, DeviceSnapshot) -> Result[Unit, ModbusError]
+pub fn DeviceServiceRegistry::register(Self, DeviceService) -> Result[Unit, ModbusError]
+pub fn DeviceServiceRegistry::running(Self) -> Array[String]
+pub fn DeviceServiceRegistry::service(Self, String) -> DeviceService?
+pub fn DeviceServiceRegistry::service_count(Self) -> Int
+pub fn DeviceServiceRegistry::snapshot(Self, String) -> DeviceSnapshot?
+pub fn DeviceServiceRegistry::snapshot_count(Self) -> Int
+
+pub(all) enum DeviceServiceState {
+  ServiceCreated
+  ServiceStarting
+  ServiceRunning
+  ServiceDraining
+  ServiceStopped
+  ServiceFailed
+} derive(Eq, @debug.Debug)
+
+pub(all) struct DeviceSnapshot {
+  device_id : String
+  captured_at : Int
+  values : Array[SnapshotValue]
+  sequence : Int
+  mut complete : Bool
+}
+pub fn DeviceSnapshot::add(Self, SnapshotValue) -> Result[Unit, ModbusError]
+pub fn DeviceSnapshot::captured_at(Self) -> Int
+pub fn DeviceSnapshot::complete(Self) -> Bool
+pub fn DeviceSnapshot::device_id(Self) -> String
+pub fn DeviceSnapshot::diff(Self, Self) -> Array[String]
+pub fn DeviceSnapshot::finish(Self, Int) -> Result[Unit, ModbusError]
+pub fn DeviceSnapshot::get(Self, String) -> SnapshotValue?
+pub fn DeviceSnapshot::good_count(Self) -> Int
+pub fn DeviceSnapshot::new(String, Int, Int) -> Result[Self, ModbusError]
+pub fn DeviceSnapshot::quality(Self) -> ReadingQuality
+pub fn DeviceSnapshot::sequence(Self) -> Int
+pub fn DeviceSnapshot::value_count(Self) -> Int
+
+pub(all) enum DiagnosticCategory {
+  Framing
+  Addressing
+  FunctionSupport
+  Payload
+  Timing
+  Capacity
+  Configuration
+  Interoperability
+} derive(Eq, @debug.Debug)
+
+pub(all) struct DiagnosticIssue {
+  code : String
+  category : DiagnosticCategory
+  severity : DiagnosticSeverity
+  message : String
+  context : String
+  suggestion : String
+}
+pub fn DiagnosticIssue::category(Self) -> DiagnosticCategory
+pub fn DiagnosticIssue::code(Self) -> String
+pub fn DiagnosticIssue::context(Self) -> String
+pub fn DiagnosticIssue::message(Self) -> String
+pub fn DiagnosticIssue::new(String, DiagnosticCategory, DiagnosticSeverity, String, context? : String, suggestion? : String) -> Result[Self, ModbusError]
+pub fn DiagnosticIssue::severity(Self) -> DiagnosticSeverity
+pub fn DiagnosticIssue::suggestion(Self) -> String
+pub fn DiagnosticIssue::summary(Self) -> String
+
+pub(all) struct DiagnosticReport {
+  name : String
+  issues : Array[DiagnosticIssue]
+  max_issues : Int
+  mut inspected : Int
+}
+pub fn DiagnosticReport::add(Self, DiagnosticIssue) -> Result[Unit, ModbusError]
+pub fn DiagnosticReport::clear(Self) -> Unit
+pub fn DiagnosticReport::count_category(Self, DiagnosticCategory) -> Int
+pub fn DiagnosticReport::count_severity(Self, DiagnosticSeverity) -> Int
+pub fn DiagnosticReport::has_errors(Self) -> Bool
+pub fn DiagnosticReport::has_warnings(Self) -> Bool
+pub fn DiagnosticReport::inspect_one(Self, Frame) -> Result[Unit, ModbusError]
+pub fn DiagnosticReport::inspect_wire(Self, Mode, Array[Byte]) -> Unit
+pub fn DiagnosticReport::inspected(Self) -> Int
+pub fn DiagnosticReport::issues(Self) -> Array[DiagnosticIssue]
+pub fn DiagnosticReport::length(Self) -> Int
+pub fn DiagnosticReport::name(Self) -> String
+pub fn DiagnosticReport::new(name? : String, max_issues? : Int) -> Result[Self, ModbusError]
+pub fn DiagnosticReport::ok(Self) -> Bool
+pub fn DiagnosticReport::summary(Self) -> String
+
+pub(all) enum DiagnosticSeverity {
+  Note
+  WarningFinding
+  ErrorFinding
+} derive(Eq, @debug.Debug)
 
 pub(all) struct EncodedAdu {
   mode : Mode
@@ -882,6 +1932,41 @@ pub(all) enum EndpointState {
   Backoff
   Faulted
 } derive(Eq, @debug.Debug)
+
+pub(all) enum EngineeringUnit {
+  Unitless
+  Percent
+  Celsius
+  Fahrenheit
+  Pascal
+  Kilopascal
+  Volt
+  Ampere
+  Hertz
+  Rpm
+  Meter
+  Millimeter
+  LiterPerMinute
+} derive(Eq, @debug.Debug)
+
+pub(all) enum EventDelivery {
+  EventPending
+  EventDelivered
+  EventFailed
+  EventDeadLetter
+} derive(Eq, @debug.Debug)
+
+pub(all) struct EventSubscription {
+  id : String
+  source : String?
+  kind : ServiceEventKind?
+  mut enabled : Bool
+}
+pub fn EventSubscription::enabled(Self) -> Bool
+pub fn EventSubscription::id(Self) -> String
+pub fn EventSubscription::matches(Self, ServiceEvent) -> Bool
+pub fn EventSubscription::new(String, source? : String, kind? : ServiceEventKind) -> Result[Self, ModbusError]
+pub fn EventSubscription::set_enabled(Self, Bool) -> Unit
 
 pub(all) enum ExceptionCode {
   IllegalFunction
@@ -948,6 +2033,42 @@ pub(all) struct FileRecordWrite {
 }
 pub fn FileRecordWrite::new(FileRecordReference, Array[UInt16]) -> Result[Self, ModbusError]
 
+pub(all) struct FirmwareConstraint {
+  vendor : String
+  model : String
+  minimum : String
+  recommended : String
+}
+pub fn FirmwareConstraint::matches(Self, InventoryDevice) -> Bool
+pub fn FirmwareConstraint::minimum(Self) -> String
+pub fn FirmwareConstraint::new(String, String, String, String) -> Result[Self, ModbusError]
+pub fn FirmwareConstraint::recommended(Self) -> String
+
+pub(all) struct FleetHealthRollup {
+  contributions : Array[HealthContribution]
+  mut score : Int
+  mut state : FleetHealthState
+  timestamp : Int
+}
+pub fn FleetHealthRollup::add(Self, HealthContribution) -> Result[Unit, ModbusError]
+pub fn FleetHealthRollup::contribution(Self, String) -> HealthContribution?
+pub fn FleetHealthRollup::contribution_count(Self) -> Int
+pub fn FleetHealthRollup::contributions(Self) -> Array[HealthContribution]
+pub fn FleetHealthRollup::export_lines(Self) -> Array[String]
+pub fn FleetHealthRollup::new(Int) -> Result[Self, ModbusError]
+pub fn FleetHealthRollup::recalculate(Self) -> Unit
+pub fn FleetHealthRollup::remove(Self, String) -> Result[HealthContribution, ModbusError]
+pub fn FleetHealthRollup::score(Self) -> Int
+pub fn FleetHealthRollup::state(Self) -> FleetHealthState
+pub fn FleetHealthRollup::timestamp(Self) -> Int
+
+pub(all) enum FleetHealthState {
+  FleetHealthy
+  FleetDegraded
+  FleetCritical
+  FleetEmpty
+} derive(Eq, @debug.Debug)
+
 pub(all) struct Frame {
   unit_id : Byte
   pdu : Pdu
@@ -956,6 +2077,49 @@ pub fn Frame::data_length(Self) -> Int
 pub fn Frame::function_code(Self) -> FunctionCode
 pub fn Frame::is_exception(Self) -> Bool
 pub fn Frame::new(Byte, Byte, Array[Byte]) -> Self
+
+pub(all) struct FrameContract {
+  id : String
+  function : Byte
+  request_min : Int
+  request_max : Int
+  response_min : Int
+  response_max : Int
+  require_echo : Bool
+}
+pub fn FrameContract::check(Self, Frame, Frame) -> ContractResult
+pub fn FrameContract::function(Self) -> Byte
+pub fn FrameContract::id(Self) -> String
+pub fn FrameContract::new(String, Byte, Int, Int, Int, Int, require_echo? : Bool) -> Result[Self, ModbusError]
+pub fn FrameContract::request_max(Self) -> Int
+pub fn FrameContract::request_min(Self) -> Int
+pub fn FrameContract::require_echo(Self) -> Bool
+pub fn FrameContract::response_max(Self) -> Int
+pub fn FrameContract::response_min(Self) -> Int
+
+pub(all) struct FrameContractCatalog {
+  contracts : Array[FrameContract]
+  max_contracts : Int
+}
+pub fn FrameContractCatalog::add(Self, FrameContract) -> Result[Unit, ModbusError]
+pub fn FrameContractCatalog::check(Self, Frame, Frame) -> Result[ContractResult, ModbusError]
+pub fn FrameContractCatalog::check_all(Self, Array[(Frame, Frame)]) -> Array[ContractResult]
+pub fn FrameContractCatalog::count(Self) -> Int
+pub fn FrameContractCatalog::find(Self, Byte) -> FrameContract?
+pub fn FrameContractCatalog::new(max_contracts? : Int) -> Result[Self, ModbusError]
+
+pub(all) struct FrameFingerprint {
+  unit_id : Byte
+  function : Byte
+  data_length : Int
+  checksum : Int
+}
+pub fn FrameFingerprint::checksum(Self) -> Int
+pub fn FrameFingerprint::data_length(Self) -> Int
+pub fn FrameFingerprint::from_frame(Frame) -> Self
+pub fn FrameFingerprint::function(Self) -> Byte
+pub fn FrameFingerprint::same(Self, Self) -> Bool
+pub fn FrameFingerprint::unit_id(Self) -> Byte
 
 pub struct FrameSequence {
   frames : Array[Frame]
@@ -1062,6 +2226,17 @@ pub fn Gateway::rules(Self) -> Array[GatewayRule]
 pub fn Gateway::translate(Self, Frame) -> Result[Frame, ModbusError]
 pub fn Gateway::translated_count(Self) -> Int
 
+pub(all) struct GatewayPolicyTable {
+  policies : Array[ServiceGatewayPolicy]
+  max_policies : Int
+}
+pub fn GatewayPolicyTable::add(Self, ServiceGatewayPolicy) -> Result[Unit, ModbusError]
+pub fn GatewayPolicyTable::count(Self) -> Int
+pub fn GatewayPolicyTable::evaluate(Self, String, String, Frame) -> Result[BridgeDecision, ModbusError]
+pub fn GatewayPolicyTable::find(Self, String, String) -> ServiceGatewayPolicy?
+pub fn GatewayPolicyTable::new(max_policies? : Int) -> Result[Self, ModbusError]
+pub fn GatewayPolicyTable::routes(Self) -> Array[String]
+
 pub(all) struct GatewayRoute {
   name : String
   gateway : Gateway
@@ -1087,6 +2262,96 @@ pub fn GatewayRule::enable(Self, Bool) -> Unit
 pub fn GatewayRule::matches(Self, Frame) -> Bool
 pub fn GatewayRule::new(Byte, Byte, Byte, UInt16, UInt16, Int) -> Result[Self, ModbusError]
 
+pub(all) enum GuardDecision {
+  AdmitFrame
+  RejectFrame
+  DeferFrame
+  DuplicateFrame
+  QuotaFrame
+  OversizeFrame
+} derive(Eq, @debug.Debug)
+
+pub(all) struct GuardEvent {
+  sequence : Int
+  timestamp : Int
+  peer : String
+  decision : GuardDecision
+  reason : GuardReason
+  unit_id : Byte
+  function : Byte
+  frame_bytes : Int
+  fingerprint : FrameFingerprint
+}
+pub fn GuardEvent::decision(Self) -> GuardDecision
+pub fn GuardEvent::fingerprint(Self) -> FrameFingerprint
+pub fn GuardEvent::frame_bytes(Self) -> Int
+pub fn GuardEvent::function(Self) -> Byte
+pub fn GuardEvent::new(Int, Int, String, GuardDecision, GuardReason, Frame) -> Result[Self, ModbusError]
+pub fn GuardEvent::peer(Self) -> String
+pub fn GuardEvent::reason(Self) -> GuardReason
+pub fn GuardEvent::sequence(Self) -> Int
+pub fn GuardEvent::timestamp(Self) -> Int
+pub fn GuardEvent::unit_id(Self) -> Byte
+
+pub(all) enum GuardReason {
+  GuardAccepted
+  GuardBadUnit
+  GuardBadFunction
+  GuardBadLength
+  GuardDuplicate
+  GuardRateLimited
+  GuardTooLarge
+  GuardUnknownPeer
+} derive(Eq, @debug.Debug)
+
+pub(all) struct HealthContribution {
+  source : String
+  score : Int
+  weight : Int
+  detail : String
+}
+pub fn HealthContribution::detail(Self) -> String
+pub fn HealthContribution::new(String, Int, Int, String) -> Result[Self, ModbusError]
+pub fn HealthContribution::score(Self) -> Int
+pub fn HealthContribution::source(Self) -> String
+pub fn HealthContribution::weight(Self) -> Int
+
+pub(all) struct Historian {
+  series : Array[TagSeries]
+  max_points : Int
+  per_point_capacity : Int
+}
+pub fn Historian::aggregate(Self, String, Int, Int, Aggregation) -> Result[Int, ModbusError]
+pub fn Historian::append(Self, TagSample) -> Result[Unit, ModbusError]
+pub fn Historian::clear(Self) -> Unit
+pub fn Historian::ensure_point(Self, String) -> Result[Unit, ModbusError]
+pub fn Historian::get(Self, String) -> TagSeries?
+pub fn Historian::new(max_points? : Int, per_point_capacity? : Int) -> Result[Self, ModbusError]
+pub fn Historian::point_count(Self) -> Int
+pub fn Historian::query(Self, String, Int, Int) -> Result[Array[TagSample], ModbusError]
+pub fn Historian::remove(Self, String) -> Result[TagSeries, ModbusError]
+pub fn Historian::series_snapshot(Self) -> Array[TagSeries]
+pub fn Historian::summary(Self) -> String
+pub fn Historian::total_samples(Self) -> Int
+
+pub(all) struct HistoryBucket {
+  start : Int
+  end : Int
+  mut count : Int
+  mut minimum : Int
+  mut maximum : Int
+  mut sum : Int
+}
+pub fn HistoryBucket::add(Self, Int) -> Unit
+pub fn HistoryBucket::average(Self) -> Int
+pub fn HistoryBucket::contains(Self, Int) -> Bool
+pub fn HistoryBucket::count(Self) -> Int
+pub fn HistoryBucket::end(Self) -> Int
+pub fn HistoryBucket::maximum(Self) -> Int
+pub fn HistoryBucket::minimum(Self) -> Int
+pub fn HistoryBucket::new(Int, Int, Int) -> Result[Self, ModbusError]
+pub fn HistoryBucket::start(Self) -> Int
+
 pub struct IncrementalParser {
   mode : Mode
   role : ParserRole
@@ -1109,6 +2374,93 @@ pub fn IncrementalParser::role(Self) -> ParserRole
 pub fn IncrementalParser::set_max_frame(Self, Int) -> Result[Unit, ModbusError]
 pub fn IncrementalParser::take_buffer(Self) -> Array[Byte]
 
+pub(all) struct InventoryDevice {
+  id : String
+  label : String
+  vendor : String
+  model : String
+  serial : String
+  firmware : String
+  unit_id : Byte
+  transport : String
+  mut state : InventoryState
+  mut last_seen : Int?
+  tags : Array[String]
+}
+pub fn InventoryDevice::add_tag(Self, String) -> Result[Unit, ModbusError]
+pub fn InventoryDevice::firmware(Self) -> String
+pub fn InventoryDevice::has_tag(Self, String) -> Bool
+pub fn InventoryDevice::id(Self) -> String
+pub fn InventoryDevice::label(Self) -> String
+pub fn InventoryDevice::last_seen(Self) -> Int?
+pub fn InventoryDevice::mark_seen(Self, Int) -> Result[Unit, ModbusError]
+pub fn InventoryDevice::model(Self) -> String
+pub fn InventoryDevice::new(String, String, String, String, String, String, Byte, String) -> Result[Self, ModbusError]
+pub fn InventoryDevice::serial(Self) -> String
+pub fn InventoryDevice::set_state(Self, InventoryState) -> Unit
+pub fn InventoryDevice::stale(Self, Int, Int) -> Result[Bool, ModbusError]
+pub fn InventoryDevice::state(Self) -> InventoryState
+pub fn InventoryDevice::transport(Self) -> String
+pub fn InventoryDevice::unit_id(Self) -> Byte
+pub fn InventoryDevice::vendor(Self) -> String
+
+pub(all) enum InventoryState {
+  InventoryDiscovered
+  InventoryProvisioned
+  InventoryOnline
+  InventoryOffline
+  InventoryRetired
+} derive(Eq, @debug.Debug)
+
+pub(all) enum JobPriority {
+  Background
+  NormalPriority
+  HighPriority
+  Emergency
+} derive(Eq, @debug.Debug)
+
+pub(all) struct JobScheduler {
+  jobs : Array[ScheduledJob]
+  max_jobs : Int
+  mut now : Int
+  mut dispatched : Int
+  mut completed : Int
+  mut failed : Int
+  mut cancelled : Int
+}
+pub fn JobScheduler::add(Self, ScheduledJob) -> Result[Unit, ModbusError]
+pub fn JobScheduler::cancel(Self, String) -> Result[Unit, ModbusError]
+pub fn JobScheduler::cancelled(Self) -> Int
+pub fn JobScheduler::complete(Self, String, Int) -> Result[Unit, ModbusError]
+pub fn JobScheduler::completed(Self) -> Int
+pub fn JobScheduler::dispatch(Self, Int) -> Result[ScheduledJob, ModbusError]
+pub fn JobScheduler::dispatched(Self) -> Int
+pub fn JobScheduler::due_count(Self, Int) -> Int
+pub fn JobScheduler::fail(Self, String, ModbusError, Int) -> Result[Bool, ModbusError]
+pub fn JobScheduler::failed(Self) -> Int
+pub fn JobScheduler::find(Self, String) -> ScheduledJob?
+pub fn JobScheduler::get(Self, Int) -> Result[ScheduledJob, ModbusError]
+pub fn JobScheduler::length(Self) -> Int
+pub fn JobScheduler::new(max_jobs? : Int) -> Result[Self, ModbusError]
+pub fn JobScheduler::next_due(Self, Int) -> ScheduledJob?
+pub fn JobScheduler::now(Self) -> Int
+pub fn JobScheduler::remove(Self, String) -> Result[ScheduledJob, ModbusError]
+pub fn JobScheduler::reschedule(Self, String, Int) -> Result[Unit, ModbusError]
+pub fn JobScheduler::reset_metrics(Self) -> Unit
+pub fn JobScheduler::snapshot(Self) -> Array[ScheduledJob]
+pub fn JobScheduler::snapshot_metrics(Self) -> SchedulerSnapshot
+pub fn JobScheduler::state_count(Self, JobState) -> Int
+pub fn JobScheduler::summary(Self) -> String
+
+pub(all) enum JobState {
+  Ready
+  InFlight
+  Waiting
+  Completed
+  Failed
+  Cancelled
+} derive(Eq, @debug.Debug)
+
 pub(all) struct LatencyHistogram {
   bounds : Array[Int]
   counts : Array[Int]
@@ -1121,6 +2473,244 @@ pub fn LatencyHistogram::new(Array[Int]) -> Result[Self, ModbusError]
 pub fn LatencyHistogram::observe(Self, Int) -> Result[Unit, ModbusError]
 pub fn LatencyHistogram::sum(Self) -> Int
 pub fn LatencyHistogram::total(Self) -> Int
+
+pub(all) struct LeaseManager {
+  leases : Array[ResourceLease]
+  max_leases : Int
+  default_duration : Int
+  mut sequence : Int
+}
+pub fn LeaseManager::acquire(Self, String, String, Int, priority? : Int) -> Result[ResourceLease, ModbusError]
+pub fn LeaseManager::active_resources(Self, Int) -> Result[Array[String], ModbusError]
+pub fn LeaseManager::compact(Self, Int) -> Result[Int, ModbusError]
+pub fn LeaseManager::count(Self) -> Int
+pub fn LeaseManager::default_duration(Self) -> Int
+pub fn LeaseManager::expire(Self, Int) -> Result[Int, ModbusError]
+pub fn LeaseManager::find(Self, String) -> ResourceLease?
+pub fn LeaseManager::new(max_leases? : Int, default_duration? : Int) -> Result[Self, ModbusError]
+pub fn LeaseManager::owned_by(Self, String, Int) -> Result[Array[String], ModbusError]
+pub fn LeaseManager::release(Self, String, String) -> Result[Unit, ModbusError]
+pub fn LeaseManager::renew(Self, String, String, Int, duration? : Int) -> Result[Unit, ModbusError]
+
+pub(all) enum LeaseState {
+  LeaseAvailable
+  LeaseHeld
+  LeaseExpired
+  LeaseRevoked
+} derive(Eq, @debug.Debug)
+
+pub(all) enum MaintenanceKind {
+  Inspection
+  Calibration
+  Cleaning
+  FirmwareUpdate
+  CableReplacement
+  PreventiveService
+  CorrectiveRepair
+} derive(Eq, @debug.Debug)
+
+pub(all) struct MaintenancePlanner {
+  plans : Array[ServicePlan]
+  records : Array[ServiceRecord]
+  work_orders : Array[MaintenanceWorkOrder]
+  max_records : Int
+  max_orders : Int
+}
+pub fn MaintenancePlanner::add_plan(Self, ServicePlan) -> Result[Unit, ModbusError]
+pub fn MaintenancePlanner::add_record(Self, ServiceRecord) -> Result[Unit, ModbusError]
+pub fn MaintenancePlanner::add_work_order(Self, MaintenanceWorkOrder) -> Result[Unit, ModbusError]
+pub fn MaintenancePlanner::complete_order(Self, String, Int, note? : String) -> Result[Unit, ModbusError]
+pub fn MaintenancePlanner::due_plans(Self, Int) -> Result[Array[String], ModbusError]
+pub fn MaintenancePlanner::generate_due(Self, Int) -> Result[Int, ModbusError]
+pub fn MaintenancePlanner::history_count(Self, String, Int, Int) -> Result[Int, ModbusError]
+pub fn MaintenancePlanner::new(max_records? : Int, max_orders? : Int) -> Result[Self, ModbusError]
+pub fn MaintenancePlanner::open_orders(Self, Int, overdue_only? : Bool) -> Result[Array[String], ModbusError]
+pub fn MaintenancePlanner::plan(Self, String) -> ServicePlan?
+pub fn MaintenancePlanner::plan_count(Self) -> Int
+pub fn MaintenancePlanner::record_count(Self) -> Int
+pub fn MaintenancePlanner::summary(Self, Int) -> Result[MaintenanceSummary, ModbusError]
+pub fn MaintenancePlanner::work_order(Self, String) -> MaintenanceWorkOrder?
+pub fn MaintenancePlanner::work_order_count(Self) -> Int
+
+pub(all) enum MaintenancePriority {
+  Routine
+  Important
+  Urgent
+  Critical
+} derive(Eq, @debug.Debug)
+
+pub(all) struct MaintenanceSummary {
+  plans : Int
+  due : Int
+  overdue : Int
+  completed : Int
+  open : Int
+  records : Int
+}
+pub fn MaintenanceSummary::completed(Self) -> Int
+pub fn MaintenanceSummary::due(Self) -> Int
+pub fn MaintenanceSummary::open(Self) -> Int
+pub fn MaintenanceSummary::overdue(Self) -> Int
+pub fn MaintenanceSummary::plans(Self) -> Int
+pub fn MaintenanceSummary::records(Self) -> Int
+pub fn MaintenanceSummary::summary(Self) -> String
+
+pub(all) struct MaintenanceWorkOrder {
+  id : String
+  asset_id : String
+  plan_id : String?
+  title : String
+  priority : MaintenancePriority
+  mut state : WorkOrderState
+  created_at : Int
+  due_at : Int
+  mut assigned_to : String?
+  mut started_at : Int?
+  mut finished_at : Int?
+  mut note : String
+}
+pub fn MaintenanceWorkOrder::asset_id(Self) -> String
+pub fn MaintenanceWorkOrder::assign(Self, String) -> Result[Unit, ModbusError]
+pub fn MaintenanceWorkOrder::assigned_to(Self) -> String?
+pub fn MaintenanceWorkOrder::block(Self, String) -> Result[Unit, ModbusError]
+pub fn MaintenanceWorkOrder::cancel(Self, String) -> Result[Unit, ModbusError]
+pub fn MaintenanceWorkOrder::complete(Self, Int, note? : String) -> Result[Unit, ModbusError]
+pub fn MaintenanceWorkOrder::continue_work(Self) -> Result[Unit, ModbusError]
+pub fn MaintenanceWorkOrder::created_at(Self) -> Int
+pub fn MaintenanceWorkOrder::due_at(Self) -> Int
+pub fn MaintenanceWorkOrder::duration(Self) -> Int?
+pub fn MaintenanceWorkOrder::id(Self) -> String
+pub fn MaintenanceWorkOrder::is_due(Self, Int) -> Bool
+pub fn MaintenanceWorkOrder::is_overdue(Self, Int) -> Bool
+pub fn MaintenanceWorkOrder::new(String, String, String, MaintenancePriority, Int, Int, plan_id? : String) -> Result[Self, ModbusError]
+pub fn MaintenanceWorkOrder::note(Self) -> String
+pub fn MaintenanceWorkOrder::plan_id(Self) -> String?
+pub fn MaintenanceWorkOrder::priority(Self) -> MaintenancePriority
+pub fn MaintenanceWorkOrder::start(Self, Int) -> Result[Unit, ModbusError]
+pub fn MaintenanceWorkOrder::state(Self) -> WorkOrderState
+pub fn MaintenanceWorkOrder::title(Self) -> String
+
+pub(all) enum MetricKind {
+  CounterMetric
+  GaugeMetric
+  DurationMetric
+  RatioMetric
+  EventMetric
+} derive(Eq, @debug.Debug)
+
+pub(all) struct MetricRegistry {
+  series : Array[MetricSeries]
+  max_series : Int
+  max_samples : Int
+}
+pub fn MetricRegistry::digest(Self) -> ObservabilityDigest
+pub fn MetricRegistry::export_lines(Self) -> Array[String]
+pub fn MetricRegistry::has(Self, String) -> Bool
+pub fn MetricRegistry::latest(Self, String) -> ServiceMetric?
+pub fn MetricRegistry::names(Self) -> Array[String]
+pub fn MetricRegistry::new(max_series? : Int, max_samples? : Int) -> Result[Self, ModbusError]
+pub fn MetricRegistry::range(Self, Int, Int) -> Result[Array[ServiceMetric], ModbusError]
+pub fn MetricRegistry::record(Self, ServiceMetric) -> Result[Unit, ModbusError]
+pub fn MetricRegistry::register(Self, String, MetricKind) -> Result[Unit, ModbusError]
+pub fn MetricRegistry::series(Self, String) -> MetricSeries?
+pub fn MetricRegistry::series_count(Self) -> Int
+
+pub(all) struct MetricSeries {
+  name : String
+  kind : MetricKind
+  capacity : Int
+  samples : Array[ServiceMetric]
+  mut dropped : Int
+}
+pub fn MetricSeries::append(Self, ServiceMetric) -> Result[Unit, ModbusError]
+pub fn MetricSeries::average(Self) -> Int?
+pub fn MetricSeries::between(Self, Int, Int) -> Result[Array[ServiceMetric], ModbusError]
+pub fn MetricSeries::dropped(Self) -> Int
+pub fn MetricSeries::kind(Self) -> MetricKind
+pub fn MetricSeries::latest(Self) -> ServiceMetric?
+pub fn MetricSeries::length(Self) -> Int
+pub fn MetricSeries::maximum(Self) -> Int?
+pub fn MetricSeries::minimum(Self) -> Int?
+pub fn MetricSeries::name(Self) -> String
+pub fn MetricSeries::new(String, MetricKind, capacity? : Int) -> Result[Self, ModbusError]
+pub fn MetricSeries::sum(Self) -> Int
+
+pub(all) enum MetricsTransport {
+  MetricsRtu
+  MetricsAscii
+  MetricsTcp
+  MetricsTls
+  MetricsVirtual
+} derive(Eq, @debug.Debug)
+
+pub(all) enum MigrationOperation {
+  AddSetting
+  RemoveSetting
+  RenameSetting
+  ReplaceSetting
+  ValidateSetting
+} derive(Eq, @debug.Debug)
+
+pub(all) struct MigrationPlan {
+  id : String
+  from_version : Int
+  to_version : Int
+  steps : Array[MigrationStep]
+  max_steps : Int
+  mut state : MigrationState
+}
+pub fn MigrationPlan::add_step(Self, MigrationStep) -> Result[Unit, ModbusError]
+pub fn MigrationPlan::apply(Self, MigrationSnapshot) -> Result[MigrationSnapshot, ModbusError]
+pub fn MigrationPlan::export_lines(Self) -> Array[String]
+pub fn MigrationPlan::from_version(Self) -> Int
+pub fn MigrationPlan::id(Self) -> String
+pub fn MigrationPlan::new(String, Int, Int, max_steps? : Int) -> Result[Self, ModbusError]
+pub fn MigrationPlan::rollback(Self, MigrationSnapshot) -> Result[MigrationSnapshot, ModbusError]
+pub fn MigrationPlan::state(Self) -> MigrationState
+pub fn MigrationPlan::step_count(Self) -> Int
+pub fn MigrationPlan::to_version(Self) -> Int
+
+pub(all) struct MigrationSnapshot {
+  version : Int
+  entries : Array[(String, String)]
+  timestamp : Int
+}
+pub fn MigrationSnapshot::get(Self, String) -> String?
+pub fn MigrationSnapshot::keys(Self) -> Array[String]
+pub fn MigrationSnapshot::length(Self) -> Int
+pub fn MigrationSnapshot::new(Int, Int) -> Result[Self, ModbusError]
+pub fn MigrationSnapshot::put(Self, String, String) -> Result[Unit, ModbusError]
+pub fn MigrationSnapshot::remove(Self, String) -> Result[String, ModbusError]
+pub fn MigrationSnapshot::timestamp(Self) -> Int
+pub fn MigrationSnapshot::version(Self) -> Int
+
+pub(all) enum MigrationState {
+  MigrationPlanned
+  MigrationRunning
+  MigrationApplied
+  MigrationRolledBack
+  MigrationFailed
+} derive(Eq, @debug.Debug)
+
+pub(all) struct MigrationStep {
+  id : String
+  operation : MigrationOperation
+  key : String
+  value : String
+  rollback_value : String?
+  order : Int
+  mut applied : Bool
+}
+pub fn MigrationStep::applied(Self) -> Bool
+pub fn MigrationStep::id(Self) -> String
+pub fn MigrationStep::key(Self) -> String
+pub fn MigrationStep::mark_applied(Self) -> Unit
+pub fn MigrationStep::mark_pending(Self) -> Unit
+pub fn MigrationStep::new(String, MigrationOperation, String, String, Int, rollback_value? : String) -> Result[Self, ModbusError]
+pub fn MigrationStep::operation(Self) -> MigrationOperation
+pub fn MigrationStep::order(Self) -> Int
+pub fn MigrationStep::rollback_value(Self) -> String?
+pub fn MigrationStep::value(Self) -> String
 
 pub(all) enum ModbusError {
   Incomplete
@@ -1142,11 +2732,102 @@ pub(all) enum ModbusError {
   Busy
 } derive(Eq, @debug.Debug)
 
+pub(all) struct ModbusScenario {
+  id : String
+  description : String
+  steps : Array[ScenarioStep]
+  max_steps : Int
+  mut revision : Int
+}
+pub fn ModbusScenario::add(Self, ScenarioStep) -> Result[Unit, ModbusError]
+pub fn ModbusScenario::at(Self, Int) -> Result[ScenarioStep, ModbusError]
+pub fn ModbusScenario::description(Self) -> String
+pub fn ModbusScenario::faults(Self) -> Int
+pub fn ModbusScenario::id(Self) -> String
+pub fn ModbusScenario::new(String, String, max_steps? : Int) -> Result[Self, ModbusError]
+pub fn ModbusScenario::revision(Self) -> Int
+pub fn ModbusScenario::step(Self, String) -> ScenarioStep?
+pub fn ModbusScenario::step_count(Self) -> Int
+pub fn ModbusScenario::steps(Self) -> Array[ScenarioStep]
+
+pub(all) struct ModbusTransaction {
+  id : String
+  unit_id : Byte
+  items : Array[TransactionItem]
+  outcomes : Array[TransactionOutcome]
+  max_items : Int
+  mut state : TransactionState
+  mut next_order : Int
+}
+pub fn ModbusTransaction::acknowledge(Self, String, Frame, Int) -> Result[Unit, ModbusError]
+pub fn ModbusTransaction::add(Self, Frame, compensation? : Frame) -> Result[String, ModbusError]
+pub fn ModbusTransaction::commit(Self) -> Result[Unit, ModbusError]
+pub fn ModbusTransaction::fail(Self, String, ModbusError, Int) -> Result[Unit, ModbusError]
+pub fn ModbusTransaction::id(Self) -> String
+pub fn ModbusTransaction::is_successful(Self) -> Bool
+pub fn ModbusTransaction::item_count(Self) -> Int
+pub fn ModbusTransaction::new(String, Byte, max_items? : Int) -> Result[Self, ModbusError]
+pub fn ModbusTransaction::next_prepared(Self) -> TransactionItem?
+pub fn ModbusTransaction::outcome_count(Self) -> Int
+pub fn ModbusTransaction::outcomes(Self) -> Array[TransactionOutcome]
+pub fn ModbusTransaction::prepare(Self) -> Result[Unit, ModbusError]
+pub fn ModbusTransaction::rollback(Self, Int) -> Result[Array[Frame], ModbusError]
+pub fn ModbusTransaction::state(Self) -> TransactionState
+pub fn ModbusTransaction::unit_id(Self) -> Byte
+
 pub(all) enum Mode {
   Rtu
   Ascii
   Tcp
 } derive(Eq, @debug.Debug)
+
+pub(all) struct MovingAverage {
+  values : Array[Int]
+  max_values : Int
+}
+pub fn MovingAverage::average(Self) -> Result[Int, ModbusError]
+pub fn MovingAverage::clear(Self) -> Unit
+pub fn MovingAverage::length(Self) -> Int
+pub fn MovingAverage::new(Int) -> Result[Self, ModbusError]
+pub fn MovingAverage::push(Self, Int) -> Unit
+pub fn MovingAverage::snapshot(Self) -> Array[Int]
+
+pub(all) struct NetworkTopology {
+  nodes : Array[TopologyNode]
+  links : Array[TopologyLink]
+  max_nodes : Int
+  max_links : Int
+}
+pub fn NetworkTopology::add_link(Self, TopologyLink) -> Result[Unit, ModbusError]
+pub fn NetworkTopology::add_node(Self, TopologyNode) -> Result[Unit, ModbusError]
+pub fn NetworkTopology::busy_links(Self, Int) -> Result[Array[String], ModbusError]
+pub fn NetworkTopology::has_node(Self, String) -> Bool
+pub fn NetworkTopology::link(Self, String) -> TopologyLink?
+pub fn NetworkTopology::link_count(Self) -> Int
+pub fn NetworkTopology::max_links(Self) -> Int
+pub fn NetworkTopology::max_nodes(Self) -> Int
+pub fn NetworkTopology::new(max_nodes? : Int, max_links? : Int) -> Result[Self, ModbusError]
+pub fn NetworkTopology::node(Self, String) -> TopologyNode?
+pub fn NetworkTopology::node_count(Self) -> Int
+pub fn NetworkTopology::remove_node(Self, String) -> Result[TopologyNode, ModbusError]
+pub fn NetworkTopology::route(Self, String, String) -> Result[TopologyRoute, ModbusError]
+pub fn NetworkTopology::set_link_utilization(Self, String, Int) -> Result[Unit, ModbusError]
+pub fn NetworkTopology::set_node_health(Self, String, TopologyHealth) -> Result[Unit, ModbusError]
+pub fn NetworkTopology::unhealthy_nodes(Self) -> Array[String]
+pub fn NetworkTopology::validate(Self) -> Array[ModbusError]
+
+pub(all) struct ObservabilityDigest {
+  metric_series : Int
+  samples : Int
+  counters : Int
+  gauges : Int
+  latest_timestamp : Int
+}
+pub fn ObservabilityDigest::counters(Self) -> Int
+pub fn ObservabilityDigest::gauges(Self) -> Int
+pub fn ObservabilityDigest::latest_timestamp(Self) -> Int
+pub fn ObservabilityDigest::metric_series(Self) -> Int
+pub fn ObservabilityDigest::samples(Self) -> Int
 
 pub(all) enum ParserRole {
   Request
@@ -1162,6 +2843,22 @@ pub fn Pdu::data_length(Self) -> Int
 pub fn Pdu::function_code(Self) -> FunctionCode
 pub fn Pdu::is_exception(Self) -> Bool
 pub fn Pdu::new(Byte, Array[Byte]) -> Self
+
+pub(all) struct PeerGuardState {
+  peer : String
+  timestamps : Array[Int]
+  fingerprints : Array[(FrameFingerprint, Int)]
+  mut accepted : Int
+  mut rejected : Int
+}
+pub fn PeerGuardState::accepted(Self) -> Int
+pub fn PeerGuardState::duplicate(Self, FrameFingerprint, Int, ProtocolGuardPolicy) -> Bool
+pub fn PeerGuardState::frame_count(Self) -> Int
+pub fn PeerGuardState::new(String) -> Result[Self, ModbusError]
+pub fn PeerGuardState::peer(Self) -> String
+pub fn PeerGuardState::prune(Self, Int, ProtocolGuardPolicy) -> Result[Unit, ModbusError]
+pub fn PeerGuardState::record(Self, FrameFingerprint, Int, Bool) -> Unit
+pub fn PeerGuardState::rejected(Self) -> Int
 
 pub(all) struct PendingExchange {
   transaction_id : UInt16
@@ -1184,6 +2881,54 @@ pub(all) struct PlannedRequest {
   frame : Frame
   address : AddressRange
 }
+
+pub(all) enum PollArea {
+  PollCoils
+  PollDiscreteInputs
+  PollHoldingRegisters
+  PollInputRegisters
+} derive(Eq, @debug.Debug)
+
+pub(all) struct PollBudget {
+  max_requests : Int
+  max_registers : Int
+  mut requests : Int
+  mut registers : Int
+  mut rejected : Int
+}
+pub fn PollBudget::accept(Self, PollRequestGroup) -> Bool
+pub fn PollBudget::max_registers(Self) -> Int
+pub fn PollBudget::max_requests(Self) -> Int
+pub fn PollBudget::new(Int, Int) -> Result[Self, ModbusError]
+pub fn PollBudget::registers(Self) -> Int
+pub fn PollBudget::rejected(Self) -> Int
+pub fn PollBudget::remaining_registers(Self) -> Int
+pub fn PollBudget::remaining_requests(Self) -> Int
+pub fn PollBudget::requests(Self) -> Int
+pub fn PollBudget::reset(Self) -> Unit
+
+pub(all) struct PollGroupPlan {
+  points : Array[PollPoint]
+  groups : Array[PollRequestGroup]
+  max_groups : Int
+  merge_gap : Int
+  mut revision : Int
+}
+pub fn PollGroupPlan::add_point(Self, PollPoint) -> Result[Unit, ModbusError]
+pub fn PollGroupPlan::budgeted(Self, PollBudget) -> Array[PollRequestGroup]
+pub fn PollGroupPlan::due_groups(Self, Int, Array[(String, Int)]) -> Result[Array[String], ModbusError]
+pub fn PollGroupPlan::group_count(Self) -> Int
+pub fn PollGroupPlan::groups(Self) -> Array[PollRequestGroup]
+pub fn PollGroupPlan::groups_for(Self, String) -> Array[PollRequestGroup]
+pub fn PollGroupPlan::new(max_groups? : Int, merge_gap? : Int) -> Result[Self, ModbusError]
+pub fn PollGroupPlan::point_count(Self) -> Int
+pub fn PollGroupPlan::points(Self) -> Array[PollPoint]
+pub fn PollGroupPlan::rebuild(Self) -> Unit
+pub fn PollGroupPlan::remove_point(Self, String) -> Result[PollPoint, ModbusError]
+pub fn PollGroupPlan::request_for(Self, String) -> Result[Frame, ModbusError]
+pub fn PollGroupPlan::revision(Self) -> Int
+pub fn PollGroupPlan::stats(Self) -> PollPlanStats
+pub fn PollGroupPlan::validate(Self) -> Array[ModbusError]
 
 pub(all) struct PollJob {
   id : Int
@@ -1219,6 +2964,46 @@ pub fn PollPlan::remove(Self, Int) -> Result[Unit, ModbusError]
 pub fn PollPlan::run_once(Self, Device, Int) -> PollReport
 pub fn PollPlan::snapshot(Self) -> Array[PollJob]
 
+pub(all) struct PollPlanStats {
+  points : Int
+  enabled_points : Int
+  groups : Int
+  merged_points : Int
+  estimated_registers : Int
+  highest_priority : Int
+}
+pub fn PollPlanStats::enabled_points(Self) -> Int
+pub fn PollPlanStats::estimated_registers(Self) -> Int
+pub fn PollPlanStats::groups(Self) -> Int
+pub fn PollPlanStats::highest_priority(Self) -> Int
+pub fn PollPlanStats::merged_points(Self) -> Int
+pub fn PollPlanStats::points(Self) -> Int
+
+pub(all) struct PollPoint {
+  id : String
+  device_id : String
+  unit_id : Byte
+  area : PollArea
+  address : UInt16
+  quantity : Int
+  period : Int
+  priority : Int
+  mut enabled : Bool
+}
+pub fn PollPoint::address(Self) -> UInt16
+pub fn PollPoint::area(Self) -> PollArea
+pub fn PollPoint::device_id(Self) -> String
+pub fn PollPoint::enabled(Self) -> Bool
+pub fn PollPoint::end_exclusive(Self) -> Int
+pub fn PollPoint::id(Self) -> String
+pub fn PollPoint::new(String, String, Byte, PollArea, UInt16, Int, Int, priority? : Int) -> Result[Self, ModbusError]
+pub fn PollPoint::overlaps(Self, Self) -> Bool
+pub fn PollPoint::period(Self) -> Int
+pub fn PollPoint::priority(Self) -> Int
+pub fn PollPoint::quantity(Self) -> Int
+pub fn PollPoint::set_enabled(Self, Bool) -> Unit
+pub fn PollPoint::unit_id(Self) -> Byte
+
 pub(all) struct PollReport {
   now : Int
   attempted : Int
@@ -1226,6 +3011,34 @@ pub(all) struct PollReport {
   failed : Int
   responses : Array[Frame]
 }
+
+pub(all) struct PollRequestGroup {
+  id : String
+  device_id : String
+  unit_id : Byte
+  area : PollArea
+  address : UInt16
+  mut quantity : Int
+  points : Array[String]
+  mut period : Int
+  mut priority : Int
+}
+pub fn PollRequestGroup::address(Self) -> UInt16
+pub fn PollRequestGroup::area(Self) -> PollArea
+pub fn PollRequestGroup::can_merge(Self, PollPoint, Int) -> Bool
+pub fn PollRequestGroup::device_id(Self) -> String
+pub fn PollRequestGroup::end_exclusive(Self) -> Int
+pub fn PollRequestGroup::id(Self) -> String
+pub fn PollRequestGroup::merge(Self, PollPoint) -> Result[Unit, ModbusError]
+pub fn PollRequestGroup::new(String, PollPoint) -> Self
+pub fn PollRequestGroup::period(Self) -> Int
+pub fn PollRequestGroup::point_count(Self) -> Int
+pub fn PollRequestGroup::points(Self) -> Array[String]
+pub fn PollRequestGroup::priority(Self) -> Int
+pub fn PollRequestGroup::quantity(Self) -> Int
+pub fn PollRequestGroup::request(Self) -> Result[Frame, ModbusError]
+pub fn PollRequestGroup::summary(Self) -> String
+pub fn PollRequestGroup::unit_id(Self) -> Byte
 
 pub struct PollScheduler {
   plan : PollPlan
@@ -1251,6 +3064,118 @@ pub fn PreflightReport::new() -> Self
 pub fn PreflightReport::ok(Self) -> Bool
 pub fn PreflightReport::warning_count(Self) -> Int
 pub fn PreflightReport::warnings(Self) -> Array[String]
+
+pub(all) enum ProfileArea {
+  Coils
+  DiscreteInputs
+  HoldingRegisters
+  InputRegisters
+} derive(Eq, @debug.Debug)
+
+pub(all) enum ProfileEncoding {
+  Bit
+  Unsigned16
+  Signed16
+  Unsigned32
+  Signed32
+  Unsigned64
+  RawWords
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ProfilePoint {
+  id : String
+  label : String
+  area : ProfileArea
+  address : UInt16
+  quantity : Int
+  encoding : ProfileEncoding
+  writable : Bool
+  scale_numerator : Int
+  scale_denominator : Int
+  offset : Int
+}
+pub fn ProfilePoint::address(Self) -> UInt16
+pub fn ProfilePoint::area(Self) -> ProfileArea
+pub fn ProfilePoint::contains(Self, UInt16) -> Bool
+pub fn ProfilePoint::contains_range(Self, UInt16, Int) -> Bool
+pub fn ProfilePoint::encoding(Self) -> ProfileEncoding
+pub fn ProfilePoint::end_exclusive(Self) -> Int
+pub fn ProfilePoint::engineering_to_raw(Self, Int) -> Result[Int, ModbusError]
+pub fn ProfilePoint::function_code(Self) -> Byte
+pub fn ProfilePoint::id(Self) -> String
+pub fn ProfilePoint::label(Self) -> String
+pub fn ProfilePoint::new(String, String, ProfileArea, UInt16, Int, ProfileEncoding, writable? : Bool, scale_numerator? : Int, scale_denominator? : Int, offset? : Int) -> Result[Self, ModbusError]
+pub fn ProfilePoint::offset(Self) -> Int
+pub fn ProfilePoint::quantity(Self) -> Int
+pub fn ProfilePoint::raw_to_engineering(Self, Int) -> Int
+pub fn ProfilePoint::read_request(Self, Byte) -> Result[Frame, ModbusError]
+pub fn ProfilePoint::register_count(Self) -> Int
+pub fn ProfilePoint::scale_denominator(Self) -> Int
+pub fn ProfilePoint::scale_numerator(Self) -> Int
+pub fn ProfilePoint::summary(Self) -> String
+pub fn ProfilePoint::writable(Self) -> Bool
+pub fn ProfilePoint::write_request(Self, Byte, Int) -> Result[Frame, ModbusError]
+
+pub(all) struct ProfileRegistry {
+  profiles : Array[DeviceProfile]
+  max_profiles : Int
+}
+pub fn ProfileRegistry::add(Self, DeviceProfile) -> Result[Unit, ModbusError]
+pub fn ProfileRegistry::by_name(Self, String) -> DeviceProfile?
+pub fn ProfileRegistry::by_unit(Self, Byte) -> DeviceProfile?
+pub fn ProfileRegistry::count(Self) -> Int
+pub fn ProfileRegistry::new(max_profiles? : Int) -> Result[Self, ModbusError]
+pub fn ProfileRegistry::remove_by_name(Self, String) -> Result[DeviceProfile, ModbusError]
+pub fn ProfileRegistry::replace(Self, DeviceProfile) -> Result[Unit, ModbusError]
+pub fn ProfileRegistry::snapshot(Self) -> Array[DeviceProfile]
+
+pub(all) enum ProfileValue {
+  BitValue(Bool)
+  U16(UInt16)
+  I16(Int)
+  U32(UInt)
+  I32(Int)
+  U64(UInt64)
+  Words(Array[UInt16])
+} derive(@debug.Debug)
+pub fn ProfileValue::as_int(Self) -> Result[Int, ModbusError]
+pub fn ProfileValue::summary(Self) -> String
+pub fn ProfileValue::word_count(Self) -> Int
+
+pub(all) struct ProtocolGuard {
+  policy : ProtocolGuardPolicy
+  peers : Array[PeerGuardState]
+  events : Array[GuardEvent]
+  max_peers : Int
+  max_events : Int
+  mut sequence : Int
+}
+pub fn ProtocolGuard::admit(Self, String, Frame, Int) -> Result[GuardDecision, ModbusError]
+pub fn ProtocolGuard::clear_events(Self) -> Unit
+pub fn ProtocolGuard::decision_counts(Self) -> Array[Int]
+pub fn ProtocolGuard::event_count(Self) -> Int
+pub fn ProtocolGuard::new(ProtocolGuardPolicy, max_peers? : Int, max_events? : Int) -> Result[Self, ModbusError]
+pub fn ProtocolGuard::peer_count(Self) -> Int
+pub fn ProtocolGuard::peer_stats(Self, String) -> Result[(Int, Int), ModbusError]
+pub fn ProtocolGuard::policy(Self) -> ProtocolGuardPolicy
+pub fn ProtocolGuard::recent_events(Self, Int) -> Result[Array[GuardEvent], ModbusError]
+
+pub(all) struct ProtocolGuardPolicy {
+  max_frame_bytes : Int
+  max_frames : Int
+  window : Int
+  duplicate_window : Int
+  allow_broadcast : Bool
+  functions : Array[Byte]
+}
+pub fn ProtocolGuardPolicy::add_function(Self, Byte) -> Result[Unit, ModbusError]
+pub fn ProtocolGuardPolicy::allow_broadcast(Self) -> Bool
+pub fn ProtocolGuardPolicy::duplicate_window(Self) -> Int
+pub fn ProtocolGuardPolicy::function_allowed(Self, Byte) -> Bool
+pub fn ProtocolGuardPolicy::max_frame_bytes(Self) -> Int
+pub fn ProtocolGuardPolicy::max_frames(Self) -> Int
+pub fn ProtocolGuardPolicy::new(max_frame_bytes? : Int, max_frames? : Int, window? : Int, duplicate_window? : Int, allow_broadcast? : Bool) -> Result[Self, ModbusError]
+pub fn ProtocolGuardPolicy::window(Self) -> Int
 
 pub(all) struct ProtocolLimits {
   max_adu : Int
@@ -1280,6 +3205,161 @@ pub fn ProtocolMetrics::record_response(Self, Int, Int, Bool) -> Result[Unit, Mo
 pub fn ProtocolMetrics::requests(Self) -> Int
 pub fn ProtocolMetrics::responses(Self) -> Int
 pub fn ProtocolMetrics::throughput(Self, Int) -> Float
+
+pub(all) enum QualityDecision {
+  QualityAccepted
+  QualitySubstituted
+  QualityRejected
+  QualityDeferred
+} derive(Eq, @debug.Debug)
+
+pub(all) struct QualityFinding {
+  rule_id : String
+  point_id : String
+  check_kind : QualityTest
+  decision : QualityDecision
+  value : Int
+  timestamp : Int
+  message : String
+}
+pub fn QualityFinding::check_kind(Self) -> QualityTest
+pub fn QualityFinding::decision(Self) -> QualityDecision
+pub fn QualityFinding::message(Self) -> String
+pub fn QualityFinding::new(QualityRule, QualityDecision, Int, Int, String) -> Result[Self, ModbusError]
+pub fn QualityFinding::point_id(Self) -> String
+pub fn QualityFinding::rule_id(Self) -> String
+pub fn QualityFinding::timestamp(Self) -> Int
+pub fn QualityFinding::value(Self) -> Int
+
+pub(all) struct QualityPipeline {
+  rules : Array[QualityRule]
+  findings : Array[QualityFinding]
+  max_findings : Int
+}
+pub fn QualityPipeline::add_rule(Self, QualityRule) -> Result[Unit, ModbusError]
+pub fn QualityPipeline::evaluate(Self, String, Int, Int, previous? : Int?, previous_timestamp? : Int?) -> Result[QualityDecision, ModbusError]
+pub fn QualityPipeline::finding_count(Self) -> Int
+pub fn QualityPipeline::findings_for(Self, String) -> Array[QualityFinding]
+pub fn QualityPipeline::new(max_findings? : Int) -> Result[Self, ModbusError]
+pub fn QualityPipeline::rejected(Self) -> Int
+pub fn QualityPipeline::rule(Self, String) -> QualityRule?
+pub fn QualityPipeline::rule_count(Self) -> Int
+pub fn QualityPipeline::substituted(Self) -> Int
+pub fn QualityPipeline::summary(Self, String) -> QualitySummary
+
+pub(all) struct QualityRule {
+  id : String
+  point_id : String
+  check_kind : QualityTest
+  lower : Int?
+  upper : Int?
+  limit : Int
+  allowed : Array[Int]
+  mut enabled : Bool
+}
+pub fn QualityRule::allow_value(Self, Int) -> Result[Unit, ModbusError]
+pub fn QualityRule::check_kind(Self) -> QualityTest
+pub fn QualityRule::enabled(Self) -> Bool
+pub fn QualityRule::evaluate(Self, Int, Int, Int?, Int?) -> Result[QualityFinding, ModbusError]
+pub fn QualityRule::id(Self) -> String
+pub fn QualityRule::limit(Self) -> Int
+pub fn QualityRule::lower(Self) -> Int?
+pub fn QualityRule::new(String, String, QualityTest, lower? : Int, upper? : Int, limit? : Int) -> Result[Self, ModbusError]
+pub fn QualityRule::point_id(Self) -> String
+pub fn QualityRule::set_enabled(Self, Bool) -> Unit
+pub fn QualityRule::upper(Self) -> Int?
+
+pub(all) struct QualitySummary {
+  accepted : Int
+  substituted : Int
+  rejected : Int
+  deferred : Int
+}
+pub fn QualitySummary::accepted(Self) -> Int
+pub fn QualitySummary::deferred(Self) -> Int
+pub fn QualitySummary::rejected(Self) -> Int
+pub fn QualitySummary::substituted(Self) -> Int
+
+pub(all) enum QualityTest {
+  RangeTest
+  FreshnessTest
+  StepTest
+  DuplicateTest
+  EnumTest
+  RequiredTest
+} derive(Eq, @debug.Debug)
+
+pub(all) struct RateLimiter {
+  max_delta : Int
+  mut previous : Int?
+}
+pub fn RateLimiter::apply(Self, Int) -> Int
+pub fn RateLimiter::max_delta(Self) -> Int
+pub fn RateLimiter::new(Int) -> Result[Self, ModbusError]
+pub fn RateLimiter::reset(Self) -> Unit
+
+pub(all) struct RateWindow {
+  width : Int
+  limit : Int
+  timestamps : Array[Int]
+}
+pub fn RateWindow::allow(Self, Int) -> Bool
+pub fn RateWindow::count(Self, Int) -> Int
+pub fn RateWindow::limit(Self) -> Int
+pub fn RateWindow::new(Int, Int) -> Result[Self, ModbusError]
+pub fn RateWindow::prune(Self, Int) -> Unit
+pub fn RateWindow::remaining(Self, Int) -> Int
+pub fn RateWindow::reset(Self) -> Unit
+pub fn RateWindow::width(Self) -> Int
+
+pub(all) enum ReadingQuality {
+  Good
+  OutOfRange
+  Stale
+  Disconnected
+  BadFormat
+  Substituted
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ReconciliationDiff {
+  point_id : String
+  kind : ReconciliationKind
+  expected : Int?
+  observed : Int?
+  detail : String
+}
+pub fn ReconciliationDiff::detail(Self) -> String
+pub fn ReconciliationDiff::expected(Self) -> Int?
+pub fn ReconciliationDiff::kind(Self) -> ReconciliationKind
+pub fn ReconciliationDiff::new(String, ReconciliationKind, expected? : Int, observed? : Int, detail? : String) -> Result[Self, ModbusError]
+pub fn ReconciliationDiff::observed(Self) -> Int?
+pub fn ReconciliationDiff::point_id(Self) -> String
+
+pub(all) enum ReconciliationKind {
+  MissingPoint
+  AddedPoint
+  ValueChanged
+  QualityChanged
+  TimestampRegressed
+  SnapshotComplete
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ReconciliationReport {
+  device_id : String
+  compared : Int
+  differences : Int
+  missing : Int
+  added : Int
+  changed : Int
+  equivalent : Bool
+}
+pub fn ReconciliationReport::added(Self) -> Int
+pub fn ReconciliationReport::changed(Self) -> Int
+pub fn ReconciliationReport::compared(Self) -> Int
+pub fn ReconciliationReport::device_id(Self) -> String
+pub fn ReconciliationReport::differences(Self) -> Int
+pub fn ReconciliationReport::equivalent(Self) -> Bool
+pub fn ReconciliationReport::missing(Self) -> Int
 
 pub(all) struct RegisterBank {
   start : UInt16
@@ -1393,10 +3473,205 @@ pub fn RegisterWriter::push_u64(Self, UInt64, RegisterWordOrder) -> Result[Unit,
 pub fn RegisterWriter::remaining(Self) -> Int
 pub fn RegisterWriter::to_array(Self) -> Array[UInt16]
 
+pub(all) enum ReliabilityFailure {
+  TimeoutFailure
+  ChecksumFailure
+  ProtocolFailure
+  TransportFailure
+  DeviceException
+  ValidationFailure
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ReliabilityFleetSummary {
+  devices : Int
+  healthy : Int
+  degraded : Int
+  open_circuits : Int
+  average_success_rate : Int
+  average_latency : Int
+}
+pub fn ReliabilityFleetSummary::average_latency(Self) -> Int
+pub fn ReliabilityFleetSummary::average_success_rate(Self) -> Int
+pub fn ReliabilityFleetSummary::degraded(Self) -> Int
+pub fn ReliabilityFleetSummary::devices(Self) -> Int
+pub fn ReliabilityFleetSummary::healthy(Self) -> Int
+pub fn ReliabilityFleetSummary::open_circuits(Self) -> Int
+
+pub(all) struct ReliabilitySample {
+  timestamp : Int
+  latency : Int
+  success : Bool
+  failure : ReliabilityFailure?
+  operation : String
+}
+pub fn ReliabilitySample::failure(Self) -> ReliabilityFailure?
+pub fn ReliabilitySample::latency(Self) -> Int
+pub fn ReliabilitySample::new(Int, Int, Bool, String, failure? : ReliabilityFailure) -> Result[Self, ModbusError]
+pub fn ReliabilitySample::operation(Self) -> String
+pub fn ReliabilitySample::success(Self) -> Bool
+pub fn ReliabilitySample::timestamp(Self) -> Int
+
+pub(all) struct ReliabilityWindow {
+  width : Int
+  max_samples : Int
+  samples : Array[ReliabilitySample]
+  mut evicted : Int
+}
+pub fn ReliabilityWindow::append(Self, ReliabilitySample) -> Result[Unit, ModbusError]
+pub fn ReliabilityWindow::average_latency(Self) -> Int
+pub fn ReliabilityWindow::clear(Self) -> Unit
+pub fn ReliabilityWindow::evicted(Self) -> Int
+pub fn ReliabilityWindow::failure_count(Self, ReliabilityFailure) -> Int
+pub fn ReliabilityWindow::failures(Self) -> Int
+pub fn ReliabilityWindow::latest(Self) -> ReliabilitySample?
+pub fn ReliabilityWindow::length(Self) -> Int
+pub fn ReliabilityWindow::new(Int, max_samples? : Int) -> Result[Self, ModbusError]
+pub fn ReliabilityWindow::prune(Self, Int) -> Result[Int, ModbusError]
+pub fn ReliabilityWindow::success_rate(Self) -> Int
+pub fn ReliabilityWindow::successes(Self) -> Int
+pub fn ReliabilityWindow::width(Self) -> Int
+
+pub(all) struct ReplayItem {
+  record_id : Int
+  mut due_at : Int
+  bytes : Array[Byte]
+  mut attempts : Int
+  mut sent : Bool
+}
+pub fn ReplayItem::attempts(Self) -> Int
+pub fn ReplayItem::bytes(Self) -> Array[Byte]
+pub fn ReplayItem::due_at(Self) -> Int
+pub fn ReplayItem::is_due(Self, Int) -> Bool
+pub fn ReplayItem::mark_sent(Self) -> Result[Unit, ModbusError]
+pub fn ReplayItem::new(CaptureRecord, Int) -> Result[Self, ModbusError]
+pub fn ReplayItem::record_id(Self) -> Int
+pub fn ReplayItem::reset(Self, Int) -> Result[Unit, ModbusError]
+pub fn ReplayItem::sent(Self) -> Bool
+
+pub(all) struct ReplayPlan {
+  items : Array[ReplayItem]
+  max_items : Int
+  mut started_at : Int?
+}
+pub fn ReplayPlan::add(Self, CaptureRecord, Int) -> Result[Unit, ModbusError]
+pub fn ReplayPlan::completed(Self) -> Int
+pub fn ReplayPlan::length(Self) -> Int
+pub fn ReplayPlan::mark_sent(Self, Int) -> Result[Unit, ModbusError]
+pub fn ReplayPlan::new(max_items? : Int) -> Result[Self, ModbusError]
+pub fn ReplayPlan::next_due(Self, Int) -> ReplayItem?
+pub fn ReplayPlan::pending(Self) -> Int
+pub fn ReplayPlan::reset(Self, Int) -> Result[Unit, ModbusError]
+pub fn ReplayPlan::snapshot(Self) -> Array[ReplayItem]
+pub fn ReplayPlan::start(Self, Int) -> Result[Unit, ModbusError]
+
+pub(all) struct ResourceLease {
+  id : String
+  resource : String
+  owner : String
+  acquired_at : Int
+  mut expires_at : Int
+  mut state : LeaseState
+  mut renewals : Int
+  priority : Int
+}
+pub fn ResourceLease::acquired_at(Self) -> Int
+pub fn ResourceLease::active(Self, Int) -> Bool
+pub fn ResourceLease::expire(Self, Int) -> Result[Unit, ModbusError]
+pub fn ResourceLease::expires_at(Self) -> Int
+pub fn ResourceLease::id(Self) -> String
+pub fn ResourceLease::new(String, String, String, Int, Int, priority? : Int) -> Result[Self, ModbusError]
+pub fn ResourceLease::owner(Self) -> String
+pub fn ResourceLease::priority(Self) -> Int
+pub fn ResourceLease::renew(Self, Int, Int) -> Result[Unit, ModbusError]
+pub fn ResourceLease::renewals(Self) -> Int
+pub fn ResourceLease::resource(Self) -> String
+pub fn ResourceLease::revoke(Self) -> Result[Unit, ModbusError]
+pub fn ResourceLease::state(Self) -> LeaseState
+
 pub(all) enum ResponseValue {
   Normal(Frame)
   Exception(Frame, ExceptionCode)
 }
+
+pub(all) struct RetryPolicy {
+  max_attempts : Int
+  initial_backoff : Int
+  max_backoff : Int
+  multiplier : Int
+}
+pub fn RetryPolicy::backoff(Self, Int) -> Result[Int, ModbusError]
+pub fn RetryPolicy::can_retry(Self, Int) -> Bool
+pub fn RetryPolicy::initial_backoff(Self) -> Int
+pub fn RetryPolicy::max_attempts(Self) -> Int
+pub fn RetryPolicy::max_backoff(Self) -> Int
+pub fn RetryPolicy::multiplier(Self) -> Int
+pub fn RetryPolicy::new(Int, Int, Int, multiplier? : Int) -> Result[Self, ModbusError]
+pub fn RetryPolicy::summary(Self) -> String
+
+pub(all) struct RuntimeConfig {
+  schema : ConfigSchema
+  entries : Array[ConfigEntry]
+  mut revision : Int
+}
+pub fn RuntimeConfig::apply(Self, Array[ConfigOperation], source? : String) -> Result[Int, ModbusError]
+pub fn RuntimeConfig::entry(Self, String) -> ConfigEntry?
+pub fn RuntimeConfig::export_lines(Self, redact? : Bool) -> Array[String]
+pub fn RuntimeConfig::get(Self, String) -> ConfigValue?
+pub fn RuntimeConfig::length(Self) -> Int
+pub fn RuntimeConfig::new(ConfigSchema) -> Self
+pub fn RuntimeConfig::remove(Self, String) -> Result[Unit, ModbusError]
+pub fn RuntimeConfig::revision(Self) -> Int
+pub fn RuntimeConfig::schema(Self) -> ConfigSchema
+pub fn RuntimeConfig::set(Self, String, ConfigValue, source? : String) -> Result[Unit, ModbusError]
+pub fn RuntimeConfig::snapshot(Self) -> Array[ConfigEntry]
+pub fn RuntimeConfig::validate(Self) -> Result[Unit, ModbusError]
+
+pub(all) struct ScaleTransform {
+  raw_min : Int
+  raw_max : Int
+  engineering_min : Int
+  engineering_max : Int
+  unit : EngineeringUnit
+  deadband : Int
+  clamp : Bool
+  precision : Int
+}
+pub fn ScaleTransform::apply_deadband(Self, Int, Int) -> Int
+pub fn ScaleTransform::clamp_engineering(Self, Int) -> Int
+pub fn ScaleTransform::clamp_raw(Self, Int) -> Int
+pub fn ScaleTransform::deadband(Self) -> Int
+pub fn ScaleTransform::engineering_in_range(Self, Int) -> Bool
+pub fn ScaleTransform::engineering_max(Self) -> Int
+pub fn ScaleTransform::engineering_min(Self) -> Int
+pub fn ScaleTransform::engineering_to_raw(Self, Int) -> Result[Int, ModbusError]
+pub fn ScaleTransform::format(Self, Int) -> String
+pub fn ScaleTransform::new(Int, Int, Int, Int, unit? : EngineeringUnit, deadband? : Int, clamp? : Bool, precision? : Int) -> Result[Self, ModbusError]
+pub fn ScaleTransform::normalize(Self, Int) -> Result[Int, ModbusError]
+pub fn ScaleTransform::precision(Self) -> Int
+pub fn ScaleTransform::raw_in_range(Self, Int) -> Bool
+pub fn ScaleTransform::raw_max(Self) -> Int
+pub fn ScaleTransform::raw_min(Self) -> Int
+pub fn ScaleTransform::raw_to_engineering(Self, Int) -> Result[Int, ModbusError]
+pub fn ScaleTransform::summary(Self) -> String
+pub fn ScaleTransform::unit(Self) -> EngineeringUnit
+
+pub(all) struct ScaledReading {
+  point_id : String
+  raw : Int
+  value : Int
+  unit : EngineeringUnit
+  quality : ReadingQuality
+  timestamp : Int
+}
+pub fn ScaledReading::new(String, Int, ScaleTransform, Int) -> Result[Self, ModbusError]
+pub fn ScaledReading::point_id(Self) -> String
+pub fn ScaledReading::quality(Self) -> ReadingQuality
+pub fn ScaledReading::raw(Self) -> Int
+pub fn ScaledReading::summary(Self) -> String
+pub fn ScaledReading::timestamp(Self) -> Int
+pub fn ScaledReading::unit(Self) -> EngineeringUnit
+pub fn ScaledReading::value(Self) -> Int
+pub fn ScaledReading::with_quality(Self, ReadingQuality) -> Self
 
 pub(all) struct Scenario {
   name : String
@@ -1409,6 +3684,143 @@ pub fn Scenario::mode(Self) -> Mode
 pub fn Scenario::name(Self) -> String
 pub fn Scenario::new(String, Mode) -> Self
 pub fn Scenario::run(Self, Simulation) -> Array[SimulationResult]
+
+pub(all) enum ScenarioFault {
+  NoFault
+  DropNext
+  DelayNext(Int)
+  CorruptByte(Int)
+  ForceException(Byte)
+  Repeat(Int)
+} derive(Eq, @debug.Debug)
+
+pub(all) enum ScenarioOutcome {
+  ScenarioSuccess
+  ScenarioTimeout
+  ScenarioException
+  ScenarioCorrupt
+  ScenarioDropped
+  ScenarioDelayed
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ScenarioResult {
+  step_id : String
+  outcome : ScenarioOutcome
+  started_at : Int
+  finished_at : Int
+  response : Frame?
+  error : ModbusError?
+  detail : String
+}
+pub fn ScenarioResult::detail(Self) -> String
+pub fn ScenarioResult::duration(Self) -> Int
+pub fn ScenarioResult::error(Self) -> ModbusError?
+pub fn ScenarioResult::finished_at(Self) -> Int
+pub fn ScenarioResult::new(String, ScenarioOutcome, Int, Int, response? : Frame, error? : ModbusError, detail? : String) -> Result[Self, ModbusError]
+pub fn ScenarioResult::outcome(Self) -> ScenarioOutcome
+pub fn ScenarioResult::response(Self) -> Frame?
+pub fn ScenarioResult::started_at(Self) -> Int
+pub fn ScenarioResult::step_id(Self) -> String
+
+pub(all) struct ScenarioRunner {
+  scenario : ModbusScenario
+  results : Array[ScenarioResult]
+  mut cursor : Int
+  mut now : Int
+}
+pub fn ScenarioRunner::cursor(Self) -> Int
+pub fn ScenarioRunner::new(ModbusScenario, start_at? : Int) -> Result[Self, ModbusError]
+pub fn ScenarioRunner::now(Self) -> Int
+pub fn ScenarioRunner::outcome_counts(Self) -> Array[Int]
+pub fn ScenarioRunner::passed(Self) -> Bool
+pub fn ScenarioRunner::result_count(Self) -> Int
+pub fn ScenarioRunner::results(Self) -> Array[ScenarioResult]
+pub fn ScenarioRunner::run_all(Self) -> Result[Array[ScenarioResult], ModbusError]
+pub fn ScenarioRunner::run_next(Self) -> Result[ScenarioResult, ModbusError]
+
+pub(all) struct ScenarioStep {
+  id : String
+  timestamp : Int
+  request : Frame
+  expected_function : Byte
+  expected_outcome : ScenarioOutcome
+  mut fault : ScenarioFault
+  note : String
+}
+pub fn ScenarioStep::expected_function(Self) -> Byte
+pub fn ScenarioStep::expected_outcome(Self) -> ScenarioOutcome
+pub fn ScenarioStep::fault(Self) -> ScenarioFault
+pub fn ScenarioStep::id(Self) -> String
+pub fn ScenarioStep::new(String, Int, Frame, ScenarioOutcome, note? : String) -> Result[Self, ModbusError]
+pub fn ScenarioStep::note(Self) -> String
+pub fn ScenarioStep::request(Self) -> Frame
+pub fn ScenarioStep::timestamp(Self) -> Int
+pub fn ScenarioStep::with_fault(Self, ScenarioFault) -> Unit
+
+pub(all) struct ScheduledJob {
+  id : String
+  request : Frame
+  priority : JobPriority
+  period : Int
+  deadline : Int
+  policy : RetryPolicy
+  mut due_at : Int
+  mut attempts : Int
+  mut state : JobState
+  mut last_error : ModbusError?
+  mut last_started : Int?
+  mut last_finished : Int?
+  tag : String
+}
+pub fn ScheduledJob::age(Self, Int) -> Int
+pub fn ScheduledJob::attempts(Self) -> Int
+pub fn ScheduledJob::cancel(Self) -> Result[Unit, ModbusError]
+pub fn ScheduledJob::complete(Self, Int) -> Result[Unit, ModbusError]
+pub fn ScheduledJob::deadline(Self) -> Int
+pub fn ScheduledJob::due_at(Self) -> Int
+pub fn ScheduledJob::fail(Self, ModbusError, Int) -> Result[Bool, ModbusError]
+pub fn ScheduledJob::id(Self) -> String
+pub fn ScheduledJob::is_due(Self, Int) -> Bool
+pub fn ScheduledJob::is_expired(Self, Int) -> Bool
+pub fn ScheduledJob::is_periodic(Self) -> Bool
+pub fn ScheduledJob::last_error(Self) -> ModbusError?
+pub fn ScheduledJob::latency(Self) -> Int?
+pub fn ScheduledJob::new(String, Frame, Int, period? : Int, priority? : JobPriority, deadline? : Int, policy? : RetryPolicy, tag? : String) -> Result[Self, ModbusError]
+pub fn ScheduledJob::period(Self) -> Int
+pub fn ScheduledJob::priority(Self) -> JobPriority
+pub fn ScheduledJob::request(Self) -> Frame
+pub fn ScheduledJob::reset(Self, Int) -> Result[Unit, ModbusError]
+pub fn ScheduledJob::start(Self, Int) -> Result[Unit, ModbusError]
+pub fn ScheduledJob::state(Self) -> JobState
+pub fn ScheduledJob::tag(Self) -> String
+
+pub(all) struct SchedulerSnapshot {
+  total : Int
+  ready : Int
+  in_flight : Int
+  waiting : Int
+  completed : Int
+  failed : Int
+  cancelled : Int
+}
+pub fn SchedulerSnapshot::healthy(Self) -> Bool
+pub fn SchedulerSnapshot::summary(Self) -> String
+
+pub(all) struct SecurityAudit {
+  sequence : Int
+  timestamp : Int
+  principal : String
+  role : AccessRole
+  operation : AccessOperation
+  unit_id : Byte
+  function : Byte
+  allowed : Bool
+  reason : String
+}
+pub fn SecurityAudit::allowed(Self) -> Bool
+pub fn SecurityAudit::new(Int, Int, String, AccessRole, AccessOperation, Frame, Bool, String) -> Result[Self, ModbusError]
+pub fn SecurityAudit::sequence(Self) -> Int
+pub fn SecurityAudit::summary(Self) -> String
 
 pub(all) struct SerialConfig {
   path : String
@@ -1450,6 +3862,181 @@ pub(all) struct ServerConfig {
   max_pending_bytes : Int
 }
 
+pub(all) struct ServiceBridgeRule {
+  id : String
+  source_unit : Byte
+  target_unit : Byte
+  function : Byte
+  source_start : UInt16
+  span : Int
+  target_start : UInt16
+  action : BridgeAction
+  priority : Int
+  mut enabled : Bool
+  tag : String
+}
+pub fn ServiceBridgeRule::action(Self) -> BridgeAction
+pub fn ServiceBridgeRule::enabled(Self) -> Bool
+pub fn ServiceBridgeRule::function(Self) -> Byte
+pub fn ServiceBridgeRule::id(Self) -> String
+pub fn ServiceBridgeRule::matches(Self, Frame) -> Bool
+pub fn ServiceBridgeRule::new(String, Byte, Byte, Byte, UInt16, Int, UInt16, BridgeAction, priority? : Int, tag? : String) -> Result[Self, ModbusError]
+pub fn ServiceBridgeRule::priority(Self) -> Int
+pub fn ServiceBridgeRule::rewrite(Self, Frame) -> Result[Frame, ModbusError]
+pub fn ServiceBridgeRule::set_enabled(Self, Bool) -> Unit
+pub fn ServiceBridgeRule::source_start(Self) -> UInt16
+pub fn ServiceBridgeRule::source_unit(Self) -> Byte
+pub fn ServiceBridgeRule::span(Self) -> Int
+pub fn ServiceBridgeRule::tag(Self) -> String
+pub fn ServiceBridgeRule::target_start(Self) -> UInt16
+pub fn ServiceBridgeRule::target_unit(Self) -> Byte
+
+pub(all) struct ServiceEvent {
+  id : String
+  kind : ServiceEventKind
+  source : String
+  timestamp : Int
+  payload : Array[Byte]
+  mut delivery : EventDelivery
+  mut attempts : Int
+}
+pub fn ServiceEvent::attempts(Self) -> Int
+pub fn ServiceEvent::delivery(Self) -> EventDelivery
+pub fn ServiceEvent::id(Self) -> String
+pub fn ServiceEvent::kind(Self) -> ServiceEventKind
+pub fn ServiceEvent::mark_delivered(Self) -> Unit
+pub fn ServiceEvent::mark_failed(Self, Int) -> Result[Unit, ModbusError]
+pub fn ServiceEvent::new(String, ServiceEventKind, String, Int, Array[Byte]) -> Result[Self, ModbusError]
+pub fn ServiceEvent::payload(Self) -> Array[Byte]
+pub fn ServiceEvent::source(Self) -> String
+pub fn ServiceEvent::timestamp(Self) -> Int
+
+pub(all) struct ServiceEventBus {
+  queue : Array[ServiceEvent]
+  dead_letters : Array[ServiceEvent]
+  subscriptions : Array[EventSubscription]
+  max_queue : Int
+  max_dead_letters : Int
+  max_subscriptions : Int
+}
+pub fn ServiceEventBus::ack(Self, ServiceEvent, Bool, dead_letter_after? : Int) -> Result[Unit, ModbusError]
+pub fn ServiceEventBus::claim(Self, String) -> Result[ServiceEvent, ModbusError]
+pub fn ServiceEventBus::clear_dead_letters(Self) -> Unit
+pub fn ServiceEventBus::dead_letter_count(Self) -> Int
+pub fn ServiceEventBus::new(max_queue? : Int, max_dead_letters? : Int, max_subscriptions? : Int) -> Result[Self, ModbusError]
+pub fn ServiceEventBus::peek_kind(Self, ServiceEventKind) -> Array[ServiceEvent]
+pub fn ServiceEventBus::publish(Self, ServiceEvent) -> Result[Unit, ModbusError]
+pub fn ServiceEventBus::queue_count(Self) -> Int
+pub fn ServiceEventBus::subscribe(Self, EventSubscription) -> Result[Unit, ModbusError]
+pub fn ServiceEventBus::subscription_count(Self) -> Int
+pub fn ServiceEventBus::unsubscribe(Self, String) -> Result[EventSubscription, ModbusError]
+
+pub(all) enum ServiceEventKind {
+  FrameReceivedEvent
+  FrameSentEvent
+  AlarmRaisedEvent
+  AlarmClearedEvent
+  CommandUpdatedEvent
+  DeviceHealthEvent
+  MaintenanceDueEvent
+  GatewayDeniedEvent
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ServiceGatewayPolicy {
+  id : String
+  source : String
+  destination : String
+  rules : Array[ServiceBridgeRule]
+  default_action : BridgeAction
+  max_rules : Int
+  mut revision : Int
+}
+pub fn ServiceGatewayPolicy::add_rule(Self, ServiceBridgeRule) -> Result[Unit, ModbusError]
+pub fn ServiceGatewayPolicy::default_action(Self) -> BridgeAction
+pub fn ServiceGatewayPolicy::destination(Self) -> String
+pub fn ServiceGatewayPolicy::evaluate(Self, Frame) -> Result[BridgeDecision, ModbusError]
+pub fn ServiceGatewayPolicy::export_rules(Self) -> Array[String]
+pub fn ServiceGatewayPolicy::id(Self) -> String
+pub fn ServiceGatewayPolicy::new(String, String, String, default_action? : BridgeAction, max_rules? : Int) -> Result[Self, ModbusError]
+pub fn ServiceGatewayPolicy::remove_rule(Self, String) -> Result[ServiceBridgeRule, ModbusError]
+pub fn ServiceGatewayPolicy::revision(Self) -> Int
+pub fn ServiceGatewayPolicy::rule(Self, String) -> ServiceBridgeRule?
+pub fn ServiceGatewayPolicy::rule_count(Self) -> Int
+pub fn ServiceGatewayPolicy::source(Self) -> String
+pub fn ServiceGatewayPolicy::validate(Self) -> Array[ModbusError]
+
+pub(all) struct ServiceMetric {
+  name : String
+  kind : MetricKind
+  value : Int
+  timestamp : Int
+  labels : Array[(String, String)]
+}
+pub fn ServiceMetric::kind(Self) -> MetricKind
+pub fn ServiceMetric::label(Self, String) -> String?
+pub fn ServiceMetric::label_count(Self) -> Int
+pub fn ServiceMetric::name(Self) -> String
+pub fn ServiceMetric::new(String, MetricKind, Int, Int) -> Result[Self, ModbusError]
+pub fn ServiceMetric::timestamp(Self) -> Int
+pub fn ServiceMetric::value(Self) -> Int
+pub fn ServiceMetric::with_label(Self, String, String) -> Result[Unit, ModbusError]
+
+pub(all) struct ServicePlan {
+  id : String
+  asset_id : String
+  title : String
+  kind : MaintenanceKind
+  interval : Int
+  grace : Int
+  estimated_minutes : Int
+  mut enabled : Bool
+  mut last_completed : Int?
+  owner : String
+}
+pub fn ServicePlan::asset_id(Self) -> String
+pub fn ServicePlan::due_at(Self) -> Int?
+pub fn ServicePlan::enabled(Self) -> Bool
+pub fn ServicePlan::estimated_minutes(Self) -> Int
+pub fn ServicePlan::grace(Self) -> Int
+pub fn ServicePlan::id(Self) -> String
+pub fn ServicePlan::interval(Self) -> Int
+pub fn ServicePlan::is_due(Self, Int) -> Result[Bool, ModbusError]
+pub fn ServicePlan::is_overdue(Self, Int) -> Result[Bool, ModbusError]
+pub fn ServicePlan::kind(Self) -> MaintenanceKind
+pub fn ServicePlan::last_completed(Self) -> Int?
+pub fn ServicePlan::mark_completed(Self, Int) -> Result[Unit, ModbusError]
+pub fn ServicePlan::new(String, String, String, MaintenanceKind, Int, grace? : Int, estimated_minutes? : Int, owner? : String) -> Result[Self, ModbusError]
+pub fn ServicePlan::owner(Self) -> String
+pub fn ServicePlan::priority(Self, Int) -> Result[MaintenancePriority, ModbusError]
+pub fn ServicePlan::set_enabled(Self, Bool) -> Unit
+pub fn ServicePlan::title(Self) -> String
+
+pub(all) struct ServiceRecord {
+  id : String
+  plan_id : String
+  asset_id : String
+  started_at : Int
+  finished_at : Int
+  technician : String
+  result : String
+  readings : Array[Int]
+  parts : Array[String]
+}
+pub fn ServiceRecord::add_part(Self, String) -> Result[Unit, ModbusError]
+pub fn ServiceRecord::add_reading(Self, Int) -> Unit
+pub fn ServiceRecord::asset_id(Self) -> String
+pub fn ServiceRecord::average_reading(Self) -> Result[Int, ModbusError]
+pub fn ServiceRecord::duration(Self) -> Int
+pub fn ServiceRecord::finished_at(Self) -> Int
+pub fn ServiceRecord::id(Self) -> String
+pub fn ServiceRecord::new(String, String, String, Int, Int, String, String) -> Result[Self, ModbusError]
+pub fn ServiceRecord::part_count(Self) -> Int
+pub fn ServiceRecord::plan_id(Self) -> String
+pub fn ServiceRecord::reading_count(Self) -> Int
+pub fn ServiceRecord::result(Self) -> String
+pub fn ServiceRecord::started_at(Self) -> Int
+pub fn ServiceRecord::technician(Self) -> String
+
 pub struct Simulation {
   device : Device
   mode : Mode
@@ -1475,6 +4062,55 @@ pub(all) enum SimulationResult {
   Dropped
   Rejected(ModbusError)
 }
+
+pub(all) struct SnapshotValue {
+  point_id : String
+  value : Int
+  quality : ReadingQuality
+  timestamp : Int
+}
+pub fn SnapshotValue::is_good(Self) -> Bool
+pub fn SnapshotValue::new(String, Int, Int, quality? : ReadingQuality) -> Result[Self, ModbusError]
+pub fn SnapshotValue::point_id(Self) -> String
+pub fn SnapshotValue::quality(Self) -> ReadingQuality
+pub fn SnapshotValue::timestamp(Self) -> Int
+pub fn SnapshotValue::value(Self) -> Int
+
+pub(all) struct TagSample {
+  point_id : String
+  timestamp : Int
+  value : Int
+  quality : ReadingQuality
+}
+pub fn TagSample::is_good(Self) -> Bool
+pub fn TagSample::new(String, Int, Int, quality? : ReadingQuality) -> Result[Self, ModbusError]
+pub fn TagSample::point_id(Self) -> String
+pub fn TagSample::quality(Self) -> ReadingQuality
+pub fn TagSample::summary(Self) -> String
+pub fn TagSample::timestamp(Self) -> Int
+pub fn TagSample::value(Self) -> Int
+
+pub(all) struct TagSeries {
+  point_id : String
+  samples : Array[TagSample]
+  max_samples : Int
+  mut dropped : Int
+}
+pub fn TagSeries::aggregate(Self, Int, Int, Aggregation) -> Result[Int, ModbusError]
+pub fn TagSeries::append(Self, TagSample) -> Result[Unit, ModbusError]
+pub fn TagSeries::at(Self, Int) -> Result[TagSample, ModbusError]
+pub fn TagSeries::average(Self, Int, Int) -> Result[Int, ModbusError]
+pub fn TagSeries::between(Self, Int, Int) -> Result[Array[TagSample], ModbusError]
+pub fn TagSeries::clear(Self) -> Unit
+pub fn TagSeries::dropped(Self) -> Int
+pub fn TagSeries::first(Self) -> TagSample?
+pub fn TagSeries::good_count(Self) -> Int
+pub fn TagSeries::last(Self) -> TagSample?
+pub fn TagSeries::length(Self) -> Int
+pub fn TagSeries::new(String, max_samples? : Int) -> Result[Self, ModbusError]
+pub fn TagSeries::point_id(Self) -> String
+pub fn TagSeries::snapshot(Self) -> Array[TagSample]
+pub fn TagSeries::summary(Self) -> String
 
 pub(all) struct TcpConfig {
   host : String
@@ -1522,6 +4158,132 @@ pub(all) enum ThresholdState {
   Above
 } derive(Eq, @debug.Debug)
 
+pub(all) struct TokenBucket {
+  capacity : Int
+  refill_interval : Int
+  mut tokens : Int
+  mut last_refill : Int
+}
+pub fn TokenBucket::capacity(Self) -> Int
+pub fn TokenBucket::new(Int, Int, Int) -> Result[Self, ModbusError]
+pub fn TokenBucket::refill(Self, Int) -> Unit
+pub fn TokenBucket::reset(Self, Int) -> Result[Unit, ModbusError]
+pub fn TokenBucket::take(Self, Int, Int) -> Bool
+pub fn TokenBucket::tokens(Self, Int) -> Int
+
+pub(all) enum TopologyHealth {
+  Healthy
+  Degraded
+  Unreachable
+  Maintenance
+  UnknownHealth
+} derive(Eq, @debug.Debug)
+
+pub(all) struct TopologyHealthReport {
+  node_count : Int
+  link_count : Int
+  healthy : Int
+  degraded : Int
+  unavailable : Int
+  average_load : Int
+  invalid_edges : Int
+}
+pub fn TopologyHealthReport::average_load(Self) -> Int
+pub fn TopologyHealthReport::degraded(Self) -> Int
+pub fn TopologyHealthReport::healthy(Self) -> Int
+pub fn TopologyHealthReport::invalid_edges(Self) -> Int
+pub fn TopologyHealthReport::link_count(Self) -> Int
+pub fn TopologyHealthReport::new(NetworkTopology) -> Self
+pub fn TopologyHealthReport::node_count(Self) -> Int
+pub fn TopologyHealthReport::summary(Self) -> String
+pub fn TopologyHealthReport::unavailable(Self) -> Int
+
+pub(all) struct TopologyLink {
+  id : String
+  from : String
+  to : String
+  latency : Int
+  capacity : Int
+  mut utilization : Int
+  bidirectional : Bool
+  transport : String
+}
+pub fn TopologyLink::available(Self) -> Bool
+pub fn TopologyLink::capacity(Self) -> Int
+pub fn TopologyLink::connects(Self, String) -> Bool
+pub fn TopologyLink::cost(Self) -> Int
+pub fn TopologyLink::from(Self) -> String
+pub fn TopologyLink::id(Self) -> String
+pub fn TopologyLink::is_bidirectional(Self) -> Bool
+pub fn TopologyLink::latency(Self) -> Int
+pub fn TopologyLink::new(String, String, String, Int, Int, bidirectional? : Bool, transport? : String) -> Result[Self, ModbusError]
+pub fn TopologyLink::other(Self, String) -> String?
+pub fn TopologyLink::set_utilization(Self, Int) -> Result[Unit, ModbusError]
+pub fn TopologyLink::to(Self) -> String
+pub fn TopologyLink::transport(Self) -> String
+pub fn TopologyLink::utilization(Self) -> Int
+
+pub(all) struct TopologyNode {
+  id : String
+  label : String
+  kind : TopologyNodeKind
+  unit_id : Byte?
+  mut health : TopologyHealth
+  mut load : Int
+  zone : String
+  tags : Array[String]
+}
+pub fn TopologyNode::add_tag(Self, String) -> Result[Unit, ModbusError]
+pub fn TopologyNode::has_tag(Self, String) -> Bool
+pub fn TopologyNode::health(Self) -> TopologyHealth
+pub fn TopologyNode::id(Self) -> String
+pub fn TopologyNode::is_available(Self) -> Bool
+pub fn TopologyNode::kind(Self) -> TopologyNodeKind
+pub fn TopologyNode::label(Self) -> String
+pub fn TopologyNode::load(Self) -> Int
+pub fn TopologyNode::new(String, String, TopologyNodeKind, unit_id? : Byte, zone? : String) -> Result[Self, ModbusError]
+pub fn TopologyNode::set_health(Self, TopologyHealth) -> Unit
+pub fn TopologyNode::set_load(Self, Int) -> Result[Unit, ModbusError]
+pub fn TopologyNode::tag_count(Self) -> Int
+pub fn TopologyNode::unit_id(Self) -> Byte?
+pub fn TopologyNode::zone(Self) -> String
+
+pub(all) enum TopologyNodeKind {
+  SiteNode
+  DeviceNode
+  GatewayNode
+  ServiceNode
+} derive(Eq, @debug.Debug)
+
+pub(all) struct TopologyRoute {
+  source : String
+  destination : String
+  nodes : Array[String]
+  links : Array[String]
+  cost : Int
+  reachable : Bool
+}
+pub fn TopologyRoute::cost(Self) -> Int
+pub fn TopologyRoute::destination(Self) -> String
+pub fn TopologyRoute::hops(Self) -> Int
+pub fn TopologyRoute::links(Self) -> Array[String]
+pub fn TopologyRoute::new(String, String, Array[String], Array[String], Int) -> Self
+pub fn TopologyRoute::nodes(Self) -> Array[String]
+pub fn TopologyRoute::not_reachable(String, String) -> Self
+pub fn TopologyRoute::reachable(Self) -> Bool
+pub fn TopologyRoute::source(Self) -> String
+pub fn TopologyRoute::summary(Self) -> String
+
+pub(all) struct TransactionBatch {
+  transactions : Array[ModbusTransaction]
+  max_transactions : Int
+}
+pub fn TransactionBatch::add(Self, ModbusTransaction) -> Result[Unit, ModbusError]
+pub fn TransactionBatch::count(Self) -> Int
+pub fn TransactionBatch::failed(Self) -> Int
+pub fn TransactionBatch::new(max_transactions? : Int) -> Result[Self, ModbusError]
+pub fn TransactionBatch::successful(Self) -> Int
+
 pub(all) struct TransactionFrame {
   transaction_id : UInt16
   request : Frame
@@ -1530,6 +4292,43 @@ pub(all) struct TransactionFrame {
 pub fn TransactionFrame::complete(Self, Frame) -> Self
 pub fn TransactionFrame::is_complete(Self) -> Bool
 pub fn TransactionFrame::new(UInt16, Frame) -> Self
+
+pub(all) struct TransactionItem {
+  id : String
+  request : Frame
+  compensation : Frame?
+  mut state : TransactionState
+  order : Int
+}
+pub fn TransactionItem::compensation(Self) -> Frame?
+pub fn TransactionItem::id(Self) -> String
+pub fn TransactionItem::mark(Self, TransactionState) -> Unit
+pub fn TransactionItem::new(String, Frame, Int, compensation? : Frame) -> Result[Self, ModbusError]
+pub fn TransactionItem::order(Self) -> Int
+pub fn TransactionItem::request(Self) -> Frame
+pub fn TransactionItem::state(Self) -> TransactionState
+
+pub(all) struct TransactionOutcome {
+  item_id : String
+  state : TransactionState
+  response : Frame?
+  error : ModbusError?
+  timestamp : Int
+}
+pub fn TransactionOutcome::error(Self) -> ModbusError?
+pub fn TransactionOutcome::item_id(Self) -> String
+pub fn TransactionOutcome::new(String, TransactionState, Int, response? : Frame, error? : ModbusError) -> Result[Self, ModbusError]
+pub fn TransactionOutcome::response(Self) -> Frame?
+pub fn TransactionOutcome::state(Self) -> TransactionState
+pub fn TransactionOutcome::timestamp(Self) -> Int
+
+pub(all) enum TransactionState {
+  TransactionOpen
+  TransactionPrepared
+  TransactionCommitted
+  TransactionRolledBack
+  TransactionFailed
+} derive(Eq, @debug.Debug)
 
 pub(all) struct TransportCapabilities {
   mode : Mode
@@ -1543,6 +4342,81 @@ pub(all) enum TransportKind {
   SerialAscii
   ModbusTcp
 } derive(Eq, @debug.Debug)
+
+pub(all) struct TransportMetricWindow {
+  transport : MetricsTransport
+  window : Int
+  mut requests : Int
+  mut successes : Int
+  mut failures : Int
+  mut bytes_sent : Int
+  mut bytes_received : Int
+  mut latency_total : Int
+  mut latency_max : Int
+  mut last_timestamp : Int
+}
+pub fn TransportMetricWindow::average_latency(Self) -> Int
+pub fn TransportMetricWindow::bytes_received(Self) -> Int
+pub fn TransportMetricWindow::bytes_sent(Self) -> Int
+pub fn TransportMetricWindow::failures(Self) -> Int
+pub fn TransportMetricWindow::maximum_latency(Self) -> Int
+pub fn TransportMetricWindow::new(MetricsTransport, Int) -> Result[Self, ModbusError]
+pub fn TransportMetricWindow::record(Self, Int, Bool, Int, Int, Int) -> Result[Unit, ModbusError]
+pub fn TransportMetricWindow::requests(Self) -> Int
+pub fn TransportMetricWindow::reset(Self) -> Unit
+pub fn TransportMetricWindow::success_rate(Self) -> Int
+pub fn TransportMetricWindow::successes(Self) -> Int
+pub fn TransportMetricWindow::transport(Self) -> MetricsTransport
+pub fn TransportMetricWindow::window(Self) -> Int
+
+pub(all) struct TransportMetricsRegistry {
+  windows : Array[TransportMetricWindow]
+  max_windows : Int
+}
+pub fn TransportMetricsRegistry::count(Self) -> Int
+pub fn TransportMetricsRegistry::export_lines(Self) -> Array[String]
+pub fn TransportMetricsRegistry::new(max_windows? : Int, window? : Int) -> Result[Self, ModbusError]
+pub fn TransportMetricsRegistry::record(Self, MetricsTransport, Int, Bool, Int, Int, Int) -> Result[Unit, ModbusError]
+pub fn TransportMetricsRegistry::total_failures(Self) -> Int
+pub fn TransportMetricsRegistry::total_requests(Self) -> Int
+pub fn TransportMetricsRegistry::window(Self, MetricsTransport) -> TransportMetricWindow?
+
+pub(all) enum TrendDirection {
+  RisingTrend
+  FallingTrend
+  StableTrend
+  InsufficientTrend
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ValueAnomaly {
+  rule_id : String
+  timestamp : Int
+  value : Int
+  kind : AnomalyKind
+  severity : Int
+  detail : String
+}
+pub fn ValueAnomaly::detail(Self) -> String
+pub fn ValueAnomaly::kind(Self) -> AnomalyKind
+pub fn ValueAnomaly::new(String, Int, Int, AnomalyKind, Int, String) -> Result[Self, ModbusError]
+pub fn ValueAnomaly::rule_id(Self) -> String
+pub fn ValueAnomaly::severity(Self) -> Int
+pub fn ValueAnomaly::timestamp(Self) -> Int
+pub fn ValueAnomaly::value(Self) -> Int
+
+pub(all) struct ValueHistogram {
+  lower : Int
+  upper : Int
+  width : Int
+  bins : Array[Int]
+  mut outside : Int
+}
+pub fn ValueHistogram::add(Self, Int) -> Unit
+pub fn ValueHistogram::bins(Self) -> Array[Int]
+pub fn ValueHistogram::new(Int, Int, Int) -> Result[Self, ModbusError]
+pub fn ValueHistogram::outside(Self) -> Int
+pub fn ValueHistogram::percentile(Self, Int) -> Result[Int, ModbusError]
+pub fn ValueHistogram::total(Self) -> Int
 
 pub struct VirtualLink {
   mode : Mode
@@ -1566,6 +4440,15 @@ pub fn VirtualLink::round_trip(Self, Device, UInt16, Frame) -> Result[DeviceResp
 pub fn VirtualLink::send_request(Self, UInt16, Frame) -> Result[Unit, ModbusError]
 pub fn VirtualLink::send_response(Self, UInt16, Frame) -> Result[Unit, ModbusError]
 pub fn VirtualLink::sent_count(Self) -> Int
+
+pub(all) enum WorkOrderState {
+  Planned
+  Assigned
+  InProgress
+  Blocked
+  Completed
+  Cancelled
+} derive(Eq, @debug.Debug)
 
 // Type aliases
 

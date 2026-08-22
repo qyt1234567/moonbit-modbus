@@ -383,3 +383,472 @@ test "telemetry ring and alarm boundaries" {
   monitor.reset()
   inspect(monitor.last_value() is None, content="true")
 }
+
+///|
+test "topology route and health boundaries" {
+  let topology = NetworkTopology::new(max_nodes=4, max_links=4).unwrap()
+  ignore(
+    topology.add_node(
+      TopologyNode::new("gateway", "Gateway", GatewayNode).unwrap(),
+    ),
+  )
+  ignore(
+    topology.add_node(
+      TopologyNode::new("device", "Device", DeviceNode, unit_id=1).unwrap(),
+    ),
+  )
+  ignore(
+    topology.add_link(
+      TopologyLink::new("link", "gateway", "device", 5, 100).unwrap(),
+    ),
+  )
+  let route = topology.route("gateway", "device").unwrap()
+  inspect(route.reachable(), content="true")
+  inspect(route.hops(), content="1")
+  inspect(
+    topology.add_node(
+      TopologyNode::new("device", "Duplicate", DeviceNode).unwrap(),
+    )
+    is Err(InvalidData),
+    content="true",
+  )
+  ignore(topology.set_node_health("gateway", Healthy))
+  ignore(topology.set_node_health("device", Unreachable))
+  inspect(topology.unhealthy_nodes().length(), content="1")
+}
+
+///|
+test "poll group coalescing and budgets" {
+  let plan = PollGroupPlan::new().unwrap()
+  let first = PollPoint::new(
+    "temperature",
+    "plc-a",
+    1,
+    PollHoldingRegisters,
+    10,
+    2,
+    100,
+    priority=2,
+  ).unwrap()
+  let second = PollPoint::new(
+    "pressure",
+    "plc-a",
+    1,
+    PollHoldingRegisters,
+    12,
+    2,
+    100,
+    priority=1,
+  ).unwrap()
+  ignore(plan.add_point(first))
+  ignore(plan.add_point(second))
+  inspect(plan.point_count(), content="2")
+  inspect(plan.group_count(), content="1")
+  inspect(plan.groups()[0].quantity(), content="4")
+  let budget = PollBudget::new(1, 4).unwrap()
+  inspect(plan.budgeted(budget).length(), content="1")
+  inspect(
+    PollPoint::new("bad", "plc-a", 1, PollHoldingRegisters, 65535, 2, 100)
+    is Err(InvalidAddress),
+    content="true",
+  )
+}
+
+///|
+test "reliability breaker and sliding window" {
+  let window = ReliabilityWindow::new(100).unwrap()
+  ignore(window.append(ReliabilitySample::new(1, 10, true, "read").unwrap()))
+  ignore(
+    window.append(
+      ReliabilitySample::new(2, 20, false, "read", failure=TimeoutFailure).unwrap(),
+    ),
+  )
+  inspect(window.success_rate(), content="50")
+  inspect(window.failure_count(TimeoutFailure), content="1")
+  let circuit = CircuitGuard::new("plc-a", 2, 10).unwrap()
+  inspect(circuit.allow(0).unwrap(), content="true")
+  ignore(circuit.record_failure(1))
+  ignore(circuit.record_failure(2))
+  inspect(circuit.state() == OpenCircuit, content="true")
+  inspect(circuit.allow(5).unwrap(), content="false")
+  inspect(circuit.allow(12).unwrap(), content="true")
+}
+
+///|
+test "quality pipeline edge decisions" {
+  let rule = QualityRule::new(
+    "range",
+    "temperature",
+    RangeTest,
+    lower=10,
+    upper=20,
+  ).unwrap()
+  let pipeline = QualityPipeline::new().unwrap()
+  ignore(pipeline.add_rule(rule))
+  inspect(
+    pipeline.evaluate("temperature", 15, 1).unwrap() == QualityAccepted,
+    content="true",
+  )
+  inspect(
+    pipeline.evaluate("temperature", 25, 2).unwrap() == QualityRejected,
+    content="true",
+  )
+  inspect(pipeline.rejected(), content="1")
+  inspect(
+    QualityRule::new("invalid", "temperature", RangeTest, lower=20, upper=10)
+    is Err(InvalidData),
+    content="true",
+  )
+}
+
+///|
+test "protocol guard duplicate and oversize boundaries" {
+  let policy = ProtocolGuardPolicy::new(max_frame_bytes=8, max_frames=2).unwrap()
+  let admission = ProtocolGuard::new(policy).unwrap()
+  let frame = read_holding(1, 0, 1)
+  inspect(
+    admission.admit("peer-a", frame, 1).unwrap() == AdmitFrame,
+    content="true",
+  )
+  inspect(
+    admission.admit("peer-a", frame, 2).unwrap() == DuplicateFrame,
+    content="true",
+  )
+  let other = Frame::new(1, 3, [0, 0, 0, 1, 0, 0, 0])
+  inspect(
+    admission.admit("peer-a", other, 3).unwrap() == OversizeFrame,
+    content="true",
+  )
+  inspect(admission.peer_stats("peer-a").unwrap().1, content="2")
+}
+
+///|
+test "deterministic scenario replay" {
+  let scenario = scenario_boundary_suite(1, 3).unwrap()
+  let runner = ScenarioRunner::new(scenario).unwrap()
+  let results = runner.run_all().unwrap()
+  inspect(results.length(), content="3")
+  inspect(runner.passed(), content="true")
+  debug_inspect(runner.outcome_counts(), content="[1, 0, 0, 1, 0, 1]")
+}
+
+///|
+test "migration apply and rollback" {
+  let snapshot = MigrationSnapshot::new(1, 0).unwrap()
+  ignore(snapshot.put("host", "localhost"))
+  let plan = MigrationPlan::new("upgrade", 1, 2).unwrap()
+  let step = MigrationStep::new(
+    "add-port",
+    AddSetting,
+    "port",
+    "502",
+    0,
+    rollback_value="0",
+  ).unwrap()
+  ignore(plan.add_step(step))
+  let upgraded = plan.apply(snapshot).unwrap()
+  inspect(upgraded.version(), content="2")
+  inspect(upgraded.get("port") == Some("502"), content="true")
+  let restored = plan.rollback(upgraded).unwrap()
+  inspect(restored.version(), content="1")
+  inspect(restored.get("port") == Some("0"), content="true")
+}
+
+///|
+test "lease ownership and expiry" {
+  let manager = LeaseManager::new(default_duration=10).unwrap()
+  let lease = manager.acquire("serial-a", "worker-a", 0).unwrap()
+  inspect(
+    manager.acquire("serial-a", "worker-b", 1) is Err(Busy),
+    content="true",
+  )
+  ignore(manager.renew(lease.id(), "worker-a", 5, duration=20))
+  inspect(manager.owned_by("worker-a", 10).unwrap().length(), content="1")
+  ignore(manager.release(lease.id(), "worker-a"))
+  inspect(manager.active_resources(10).unwrap().length(), content="0")
+}
+
+///|
+test "transport and contract observability" {
+  let metrics = TransportMetricsRegistry::new().unwrap()
+  ignore(metrics.record(MetricsTcp, 1, true, 4, 10, 12))
+  ignore(metrics.record(MetricsTcp, 2, false, 8, 10, 0))
+  inspect(metrics.total_requests(), content="2")
+  inspect(metrics.total_failures(), content="1")
+  let contracts = standard_frame_contracts()
+  let request = read_holding(1, 0, 1)
+  let response = Frame::new(1, 3, [2, 0, 1])
+  inspect(
+    contracts.check(request, response).unwrap() == ContractPass,
+    content="true",
+  )
+  inspect(
+    contracts.check(request, Frame::new(2, 3, [2, 0, 1])).unwrap() ==
+    ContractUnitMismatch,
+    content="true",
+  )
+}
+
+///|
+test "profile admission scaling and overlap boundaries" {
+  let point = ProfilePoint::new(
+    "temperature",
+    "Temperature",
+    HoldingRegisters,
+    10,
+    1,
+    Signed16,
+    writable=true,
+    scale_numerator=2,
+    offset=3,
+  ).unwrap()
+  inspect(point.register_count(), content="1")
+  inspect(point.contains_range(10, 1), content="true")
+  inspect(point.contains(11), content="false")
+  inspect(point.raw_to_engineering(5), content="13")
+  inspect(point.engineering_to_raw(13).unwrap(), content="5")
+  inspect(
+    ProfilePoint::new("empty", "Empty", HoldingRegisters, 0, 0, Signed16)
+    is Err(InvalidQuantity),
+    content="true",
+  )
+  inspect(
+    ProfilePoint::new(
+      "input",
+      "Input",
+      InputRegisters,
+      0,
+      1,
+      Signed16,
+      writable=true,
+    )
+    is Err(Unsupported),
+    content="true",
+  )
+  let profile = DeviceProfile::new("meter", "M-1", 1).unwrap()
+  ignore(profile.add_point(point))
+  let overlap = ProfilePoint::new(
+    "overlap",
+    "Overlap",
+    HoldingRegisters,
+    10,
+    1,
+    Signed16,
+  ).unwrap()
+  inspect(profile.add_point(overlap) is Err(InvalidAddress), content="true")
+  inspect(profile.validate() is Ok(_), content="true")
+}
+
+///|
+test "alarm delayed lifecycle and timestamp ordering" {
+  let rule = AlarmRule::new(
+    "high-temp",
+    "temperature",
+    AtOrAbove,
+    0,
+    100,
+    Critical,
+    activation_delay=5,
+    clear_delay=3,
+  ).unwrap()
+  let instance = AlarmInstance::new(rule)
+  ignore(instance.evaluate(100, 10, 1))
+  inspect(instance.state() == Pending, content="true")
+  ignore(instance.evaluate(100, 14, 2))
+  inspect(instance.state() == Pending, content="true")
+  ignore(instance.evaluate(100, 15, 3))
+  inspect(instance.state() == Active, content="true")
+  ignore(instance.acknowledge("operator"))
+  inspect(instance.state() == Acknowledged, content="true")
+  ignore(instance.evaluate(90, 16, 4))
+  inspect(instance.state() == Clearing, content="true")
+  ignore(instance.evaluate(90, 18, 5))
+  inspect(instance.state() == Clearing, content="true")
+  ignore(instance.evaluate(90, 19, 6))
+  inspect(instance.state() == Normal, content="true")
+  ignore(instance.evaluate(200, 18, 7))
+  inspect(instance.state() == Normal, content="true")
+  inspect(instance.acknowledge("operator") is Err(InvalidData), content="true")
+}
+
+///|
+test "capture ring overflow filtering and corruption" {
+  let ring = CaptureRing::new(max_records=2).unwrap()
+  let frame = read_holding(1, 0, 1)
+  ignore(ring.push_frame(1, Rtu, 0, Received, frame))
+  ignore(ring.push_frame(2, Rtu, 0, Transmitted, frame))
+  let corrupt = encode_rtu(frame)
+  corrupt[corrupt.length() - 1] = corrupt[corrupt.length() - 1] ^ 1
+  ignore(ring.push(3, Rtu, 0, Received, corrupt))
+  inspect(ring.length(), content="2")
+  inspect(ring.lost(), content="1")
+  inspect(ring.decoded_count(), content="1")
+  inspect(ring.corrupt_count(), content="1")
+  inspect(ring.latest().unwrap().id(), content="3")
+  let filter = CaptureFilter::new().with_direction(Received)
+  inspect(ring.query(filter).length(), content="1")
+  inspect(
+    CaptureFilter::new().between(5, 4) is Err(InvalidData),
+    content="true",
+  )
+  ring.clear()
+  inspect(ring.length(), content="0")
+  inspect(ring.lost(), content="0")
+}
+
+///|
+test "command request validation priority and audit" {
+  let command = DeviceCommand::new(
+    "write-1",
+    "meter-1",
+    1,
+    WriteRegisterCommand,
+    6,
+    12,
+    1,
+    "operator",
+    "setpoint",
+    0,
+  ).unwrap()
+  ignore(command.add_argument(CommandArgument::new("value", "4660").unwrap()))
+  let request = command.request().unwrap()
+  inspect(request.pdu.function.to_int(), content="6")
+  inspect(request.pdu.data[2].to_int(), content="18")
+  inspect(request.pdu.data[3].to_int(), content="52")
+  let missing = DeviceCommand::new(
+    "missing",
+    "meter-1",
+    1,
+    WriteRegisterCommand,
+    6,
+    12,
+    1,
+    "operator",
+    "setpoint",
+    0,
+  ).unwrap()
+  inspect(missing.request() is Err(InvalidData), content="true")
+  let center = CommandCenter::new(max_queue=1).unwrap()
+  ignore(center.submit(command, 1))
+  let dispatched = center.next(2).unwrap()
+  inspect(dispatched.state() == Dispatched, content="true")
+  let execution = CommandExecution::new(
+    "write-1",
+    Acknowledged,
+    2,
+    4,
+    response=Frame::new(1, 6, [0, 12, 18, 52]),
+  ).unwrap()
+  ignore(center.finish(dispatched, execution))
+  inspect(center.queue_count(), content="0")
+  inspect(center.completed_count(), content="1")
+  inspect(center.audit_count(), content="3")
+  inspect(center.recent(2).unwrap().length(), content="2")
+}
+
+///|
+test "event bus retry and dead letter boundaries" {
+  let bus = ServiceEventBus::new(
+    max_queue=1,
+    max_dead_letters=1,
+    max_subscriptions=1,
+  ).unwrap()
+  let subscription = EventSubscription::new(
+    "collector",
+    source="sensor-a",
+    kind=FrameReceivedEvent,
+  ).unwrap()
+  ignore(bus.subscribe(subscription))
+  inspect(
+    bus.subscribe(
+      EventSubscription::new("collector", source="sensor-a").unwrap(),
+    )
+    is Err(CapacityExceeded),
+    content="true",
+  )
+  let event = ServiceEvent::new("event-1", FrameReceivedEvent, "sensor-a", 0, [
+    1, 2,
+  ]).unwrap()
+  ignore(bus.publish(event))
+  let claimed = bus.claim("collector").unwrap()
+  inspect(claimed.attempts(), content="0")
+  ignore(bus.ack(claimed, false, dead_letter_after=2))
+  inspect(bus.queue_count(), content="1")
+  let retried = bus.claim("collector").unwrap()
+  ignore(bus.ack(retried, false, dead_letter_after=2))
+  inspect(bus.queue_count(), content="0")
+  inspect(bus.dead_letter_count(), content="1")
+  inspect(bus.claim("missing") is Err(InvalidData), content="true")
+}
+
+///|
+test "capacity ledger hard limit release and expiry" {
+  let ledger = CapacityLedger::new(max_reservations=2).unwrap()
+  ignore(
+    ledger.add_limit(
+      CapacityLimit::new(InFlightRequests, "requests", 2, 3).unwrap(),
+    ),
+  )
+  let first = ledger.reserve(InFlightRequests, 2, 0).unwrap()
+  let second = ledger.reserve(InFlightRequests, 1, 1).unwrap()
+  inspect(ledger.pressure().length(), content="1")
+  inspect(
+    ledger.reserve(InFlightRequests, 1, 2) is Err(CapacityExceeded),
+    content="true",
+  )
+  ignore(ledger.release(first.id()))
+  inspect(ledger.release(first.id()) is Err(Busy), content="true")
+  inspect(ledger.expire(10, 5).unwrap(), content="1")
+  inspect(ledger.limit(InFlightRequests).unwrap().used(), content="0")
+  inspect(second.released(), content="true")
+}
+
+///|
+test "device snapshot quality and service lifecycle" {
+  let service = DeviceService::new(
+    "poller-1",
+    "meter-1",
+    PollingService,
+    "serial://ttyS1",
+  ).unwrap()
+  ignore(service.start(1))
+  inspect(service.state() == ServiceRunning, content="true")
+  ignore(service.drain())
+  ignore(service.stop(2))
+  ignore(service.restart(3))
+  inspect(service.restart_count(), content="1")
+  let snapshot = DeviceSnapshot::new("meter-1", 10, 1).unwrap()
+  let good = SnapshotValue::new("temperature", 20, 10).unwrap()
+  let bad = SnapshotValue::new("pressure", 0, 10, quality=Disconnected).unwrap()
+  ignore(snapshot.add(good))
+  inspect(snapshot.add(good) is Err(InvalidData), content="true")
+  inspect(snapshot.finish(3) is Err(Incomplete), content="true")
+  ignore(snapshot.add(bad))
+  ignore(snapshot.finish(2))
+  inspect(snapshot.complete(), content="true")
+  inspect(snapshot.good_count(), content="1")
+  inspect(snapshot.quality() == Substituted, content="true")
+}
+
+///|
+test "historian ordering windows and aggregation" {
+  let series = TagSeries::new("temperature", max_samples=2).unwrap()
+  ignore(series.append(TagSample::new("temperature", 1, 10).unwrap()))
+  ignore(
+    series.append(
+      TagSample::new("temperature", 2, 20, quality=OutOfRange).unwrap(),
+    ),
+  )
+  inspect(
+    series.append(TagSample::new("temperature", 0, 5).unwrap())
+    is Err(InvalidData),
+    content="true",
+  )
+  inspect(series.average(1, 2).unwrap(), content="10")
+  inspect(series.aggregate(1, 2, MaximumValue).unwrap(), content="20")
+  ignore(series.append(TagSample::new("temperature", 3, 30).unwrap()))
+  inspect(series.length(), content="2")
+  inspect(series.dropped(), content="1")
+  inspect(series.first().unwrap().timestamp(), content="2")
+  inspect(series.between(3, 2) is Err(InvalidData), content="true")
+}

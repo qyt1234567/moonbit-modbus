@@ -8,7 +8,9 @@
 - 功能码覆盖：线圈、离散输入、保持寄存器、输入寄存器的读写，以及掩码写、读写组合、诊断、事件计数器、文件记录、设备识别和 FIFO。
 - 流式处理：有界增量解析器支持分段输入、多帧输入和坏帧恢复，避免无界缓存。
 - 设备与内存：寄存器/线圈 bank、地址空间、schema、文件记录存储、设备状态和异常统计。
-- 集成组件：客户端重试与超时、请求规划、轮询计划、批处理、网关映射、服务器池和虚拟传输链路。
+- 应用层服务：设备 profile、缩放校准、质量管线、告警引擎、历史聚合、维护工单、设备库存和快照对账。
+- 集成组件：客户端重试与超时、请求规划、轮询分组合并、命令中心、事务批处理、网关策略、租约和事件总线。
+- 运行保障：协议准入防护、容量账本、可靠性熔断、确定性故障场景、健康汇总、指标导出和配置迁移回滚。
 - 工程质量：无第三方运行时依赖，支持 native、wasm 和 wasm-gc 目标；公共接口生成 `.mbti` 文件并由 CI 校验。
 
 ## 快速开始
@@ -67,8 +69,10 @@ moon run --target native cmd/bench
 2. `codec.mbt`、`checksum.mbt`、`parser.mbt` 和 `frame_text.mbt` 负责 PDU/ADU 编解码、校验和流式解析。
 3. `functions.mbt`、`responses.mbt`、`coils.mbt`、`register_codec.mbt` 和 `file_records.mbt` 提供功能码与数据表示。
 4. `banks.mbt`、`device.mbt`、`register_schema.mbt` 和 `address_space.mbt` 组成可测试的设备内存层。
-5. `client.mbt`、`transport.mbt`、`polling.mbt`、`gateway.mbt`、`server_pool.mbt` 和 `simulation.mbt` 提供系统集成能力。
-6. `conformance.mbt`、`preflight.mbt`、`quality.mbt`、`metrics.mbt` 和 `benchmark_core.mbt` 提供一致性检查、运行指标和可复现基准。
+5. `client.mbt`、`transport.mbt`、`polling.mbt`、`poll_groups.mbt`、`gateway.mbt`、`gateway_policy.mbt`、`server_pool.mbt` 和 `simulation.mbt` 提供系统集成能力。
+6. `profiles.mbt`、`scaling.mbt`、`quality_pipeline.mbt`、`alarms.mbt`、`historian.mbt`、`maintenance.mbt`、`device_inventory.mbt` 和 `device_services.mbt` 提供设备应用层能力。
+7. `commands.mbt`、`transaction_batch.mbt`、`scheduler.mbt`、`lease_manager.mbt`、`event_bus.mbt`、`protocol_guard.mbt` 和 `capacity.mbt` 负责控制面编排与资源边界。
+8. `reliability.mbt`、`analytics.mbt`、`fleet_health.mbt`、`observability.mbt`、`transport_metrics.mbt`、`scenarios.mbt`、`data_migration.mbt` 和 `frame_contracts.mbt` 提供运维、验证和可观测性。
 
 核心层只依赖 MoonBit 标准能力；真实串口和 TCP socket 可在上层适配，而不改变协议模型和测试夹具。
 
@@ -84,7 +88,8 @@ moon run --target native cmd/bench
 - CRC/LRC、ASCII/TCP/RTU 错帧、分段输入、多帧输入和截断输入；
 - 线圈 bit packing、寄存器字节序、32/64 位数值、游标越界和写入器容量；
 - 设备读写、异常响应、busy 状态、文件记录、设备识别、客户端事务和网关映射；
-- schema、轮询、批处理、预检、指标、虚拟传输和文本帧工具。
+- schema、轮询分组、批处理、事务回滚、配置迁移、租约、协议准入、事件死信、设备快照对账和文本帧工具；
+- 拓扑路径、可靠性熔断、告警迟滞、质量边界、维护到期、确定性故障注入和容量超限。
 
 本地质量门槛：
 

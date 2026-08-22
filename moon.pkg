@@ -1,1 +1,4 @@
 // MoonBit Modbus public package.
+import {
+  "moonbitlang/core/string",
+}
