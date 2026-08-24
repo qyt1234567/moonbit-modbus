@@ -20,15 +20,15 @@ The command runs four workloads with 1,000 iterations each:
 
 ## Host measurement
 
-Measured on 2026-08-19 with five consecutive invocations of the same command. The measurement includes Moon's CLI startup and native program launch, so it is an end-to-end regression signal rather than an isolated function throughput claim.
+Measured on 2026-08-24 with five consecutive invocations of the same command. The measurement includes Moon's CLI startup and native program launch, so it is an end-to-end regression signal rather than an isolated function throughput claim.
 
 ```text
-MoonBit: moon 0.1.20260807 / moonc v0.10.7
+MoonBit: moon 0.1.20260819 / moonc v0.10.9
 CPU: AMD Ryzen 7 5800H with Radeon Graphics
 OS: Microsoft Windows 11 家庭版
-runs_ms: 328.77, 237.33, 242.95, 238.43, 236.24
-min_ms: 236.24
-median_ms: 238.43
+runs_ms: 431.58, 252.56, 260.72, 285.07, 274.70
+min_ms: 252.56
+median_ms: 274.70
 ```
 
 To reproduce the timing on another host, run the command five times with a stopwatch and record the toolchain and CPU alongside the result. The deterministic counters should remain unchanged across hosts.
